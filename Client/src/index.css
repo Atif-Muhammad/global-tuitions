@@ -1,0 +1,181 @@
+/* input.css */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Readex+Pro:wght@160..700&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Readex+Pro:wght@160..700&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Button Class */
+.btn-custom {
+  @apply inline-block text-center self-start py-2 px-4 xl:px-5 bg-black 
+    border-white border-[2px] hover:shadow-black rounded-lg 
+    text-slate-50 shadow-md duration-500 
+    text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px];
+}
+
+.popular-courses-slider {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@layer utilities {
+  /* Reusable 'input-field' class */
+  .input-field {
+    @apply py-2 w-[230px] md:w-[80%] lg:w-[75%] xl:w-[65%] 2xl:w-[330px] 
+         rounded-lg bg-transparent border-[1px] border-black 
+         placeholder-gray-600 text-[10px] lg:text-[15px] pl-5 xl:pl-7 
+         2xl:pl-9 focus:outline-none focus:border-black focus:text-left;
+  }
+  /* join us classes end  */
+
+  .card-grid {
+    @apply grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-8 md:gap-12 lg:gap-16   px-10 
+   w-full max-w-[1450px] mx-auto;
+  }
+  .main-cards {
+    @apply w-full h-auto py-8 justify-center items-center;
+  }
+
+  /* full screen carsda start */
+  .full-main {
+    @apply max-w-[350px] md:max-w-[650px] lg:max-w-[1000px];
+  }
+
+  /* find courses section start  */
+
+  .find-main {
+    @apply w-full h-auto py-5 px-8;
+  }
+  .find-main2 {
+    @apply flex md:flex-row flex-col justify-between items-center;
+  }
+  .find-img-div {
+    @apply md:w-1/2 w-full flex justify-center px-10;
+  }
+  .find-img {
+    @apply w-full  object-cover;
+  }
+  .find-div-2 {
+    @apply md:w-[55%] w-full lg:px-20 md:px-16 px-9 flex items-center   not applyed;
+  }
+  .find-div-1-main {
+    @apply md:w-[55%] w-full lg:px-20 md:px-16 px-9 flex items-center;
+  }
+  .find-div-2-main {
+    @apply flex flex-col gap-5 md:justify-center justify-start;
+  }
+  .find-div-heading {
+    @apply font-extrabold font-readex xl:text-[60px] 2xl:text-[80px] lg:text-[50px] md:text-[35px] text-[30px];
+  }
+  .find-div-p {
+    @apply md:w-full w-11/12 tracking-tighter leading-8 lg:leading-[50px]  xl:leading-[60px] 2xl:leading-[80px];
+  }
+  .find-heading-span1 {
+    @apply inline-block mr-3;
+  }
+  .find-heading-img1 {
+    @apply 2xl:w-56 xl:w-40 lg:w-40 md:w-24 w-16  md:mt-[-5px] mt-[-10px] flex;
+  }
+  .find-heading-span2 {
+    @apply inline-block lg:mt-[-20px] leading-[35px] lg:leading-[50px] xl:leading-[60px]  2xl:leading-[80px];
+  }
+  .find-heading-span3 {
+    @apply inline-block;
+  }
+  .find-heading-img2 {
+    @apply lg:w-40 md:w-28 w-16 md:mt-[-5px] mt-[-10px] flex;
+  }
+  .find-paragraph {
+    @apply text-[12px] lg:text-[20px] leading-loose xl:text-[20px] 2xl:text-[23px];
+  }
+  .find-buttons-div {
+    @apply flex flex-row gap-3;
+  }
+}
+
+/* Custom scrollbar styles */
+.scrollbar-custom::-webkit-scrollbar {
+  width: 5px; /* Width of the scrollbar */
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background-color: black; /* Color of the scrollbar thumb */
+  border-radius: 8px; /* Rounded corners for the scrollbar thumb */
+}
+
+.scrollbar-custom::-webkit-scrollbar-track {
+  background-color: transparent; /* Background color of the track */
+}
+
+/* In your global styles, or in a custom CSS file */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 5px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: #000; /* Black color */
+  border-radius: 10px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background-color: #f0f0f0; /* Light background color for track */
+}
+
+.redCard {
+  display: flex;
+  padding: 2rem;
+  flex-direction: row;
+  border-radius: 0.5rem;
+  width: auto;
+  min-width: 100%;
+  background-image: linear-gradient(to top right, #ef4444, #ef7833);
+  background-color: #ef4444;
+  box-shadow: 0 25px 50px -12px #ef4444;
+  height: 90%;
+}
+
+.whiteCard{
+  display: flex; 
+  padding: 2rem; 
+  flex-direction: row; 
+  border-radius: 0.5rem; 
+  width: auto; 
+  min-width: 100%; 
+  background-image: linear-gradient(to top right, #fff, #b1b1b1); 
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); 
+  height: 90%;
+}
+
+.limeCard{
+  display: flex; 
+  padding: 2rem; 
+  flex-direction: row; 
+  border-radius: 0.5rem; 
+  width: auto; 
+  min-width: 100%; 
+  background-image: linear-gradient(to top right, #67E8F6, #A0E640); 
+  box-shadow: 0 25px 50px -12px #67E8F6; 
+  height: 90%;
+}
+
+.blueCard{
+  display: flex; 
+  padding: 2rem; 
+  flex-direction: row; 
+  border-radius: 0.5rem; 
+  width: auto; 
+  min-width: 100%; 
+  background-image: linear-gradient(to top right, #084a8c, #72458f); 
+  box-shadow: 0 25px 50px -12px #084a8c; 
+  height: 90%;
+}
+
+.blueCardText {
+  color: white;
+  font-size: 4.5rem /* 72px */;
+  line-height: 1;
+  overflow-wrap: break-word;
+  box-shadow: 0 25px 50px -12px #72458f; 
+}

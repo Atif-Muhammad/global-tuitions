@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /checkout/
+Allow: /
+Sitemap: https://www.globaltuition.com/sitemap.xml

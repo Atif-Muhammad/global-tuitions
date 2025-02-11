@@ -1,0 +1,28 @@
+services:
+  client:
+    build: 
+      context: ./Client
+      dockerfile: Dockerfile
+    ports:
+      - 5173:5000     
+  admin:
+    build: 
+      context: ./Admin
+      dockerfile: Dockerfile
+    ports:
+      - 5174:5000    
+
+  backend:
+    container_name: backend-container
+    build: 
+      context: ./Backend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URI="mongodb+srv://ignipulse:globalTuitions@gloabl.p3t51.mongodb.net/Global-Tuitions?retryWrites=true&w=majority"
+      - PORT=3000
+      - ADMIN_EMAIL=atif.ignipulse@gmail.com
+      - ADMIN_PASS=uyiu grxx nood hmsg
+      - JWT_EXP=7d
+      - SECRET_KEY=privateKey
