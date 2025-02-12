@@ -71,5 +71,5 @@ app.use('/offers', offers)
 
 
 app.get('/ping', (req, res) => {
-    res.status(200).send("pong.")
+    res.status(200).json({msg: "pong....."})
 })
