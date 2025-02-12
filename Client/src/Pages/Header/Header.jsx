@@ -257,7 +257,7 @@ const Header = () => {
           </div>
 
           {/* Buttons for large screens */}
-          <div className="lg:w-[27%] hidden lg:flex items-center justify-end gap-6 text-[17px] lg:text-[20px] xl:text-[24px]">
+          <div className="lg:w-[27%] hidden lg:flex items-center justify-end gap-3 text-[17px] lg:text-[20px] xl:text-[24px]">
             {/* Search bar for large screens */}
             <div className="relative w-full hidden lg:flex items-center justify-center">
               <div className="w-full">
@@ -275,7 +275,7 @@ const Header = () => {
                 />
 
                 {show && (
-                  <div className="absolute z-10 -left-2 top-14 w-[20rem] h-fit bg-[#7acc82] border-2">
+                  <div className="absolute z-10 -left-2 top-14 w-[20rem] max-h-[35vh] overflow-scroll overflow-x-hidden  h-fit bg-[#7acc82] border-2">
                     {filteredCourses.length > 0 ? (
                       filteredCourses.map((course, index) => (
                         <NavLink
@@ -305,12 +305,15 @@ const Header = () => {
               <>
                 <NavLink
                   to="/signin"
-                  className="btnbutton"
+                  className=" text-sm py-2 px-3 bg-black border text-white text-center rounded-lg border-white w-1/3"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Sign in
                 </NavLink>
-                <NavLink to="/signup" className="btnbutton">
+                <NavLink
+                  to="/signup"
+                  className=" text-sm py-2 px-3 bg-black border text-white text-center rounded-lg border-white w-1/3"
+                >
                   Sign Up
                 </NavLink>
               </>
@@ -403,11 +406,11 @@ const Header = () => {
                   value={search}
                   onChange={checkCourseName}
                   placeholder="Search For Courses"
-                  className="inline-block border-[1px] border-b-4 drop-shadow-lg border-black rounded-lg py-2 hover:bg-slate-100 duration-500 pl-8 focus:outline-none"
+                  className="inline-block border-[1px] border-b-4 drop-shadow-lg border-black rounded-lg py-2 hover:bg-slate-100 duration-500 pl-8 focus:outline-none w-full"
                 />
 
                 {show && (
-                  <div className="absolute z-10 top-[14rem] w-[20rem] h-fit bg-[#7acc82] border-2">
+                  <div className="absolute z-10 left-0 top-20 w-full  max-h-[35vh] overflow-scroll overflow-x-hidden  h-fit bg-[#7acc82] border-2">
                     {filteredCourses.length > 0 ? (
                       filteredCourses.map((course, index) => (
                         <NavLink
@@ -428,17 +431,23 @@ const Header = () => {
                   </div>
                 )}
               </div>
-              <NavLink to="/profile" className="hover:text-white duration-300">
+              <NavLink
+                to="/profile"
+                className="hover:text-white duration-300 border-b py-2"
+              >
                 Profile
               </NavLink>
-              <NavLink to="/courses" className="hover:text-white duration-300">
+              <NavLink
+                to="/courses"
+                className="hover:text-white duration-300 border-b py-2"
+              >
                 Course
               </NavLink>
               {freeCourses.length > 0 && (
                 <NavLink
                   to="/freeCourses"
                   className={({ isActive }) =>
-                    `hover:text-white duration-300 border-[#68c072] ${
+                    `hover:text-white duration-300  border-b py-2 ${
                       isActive ? "text-white" : ""
                     }`
                   }
@@ -450,7 +459,7 @@ const Header = () => {
                 <NavLink
                   to="/offers"
                   className={({ isActive }) =>
-                    `hover:text-white duration-300 border-[#68c072] ${
+                    `hover:text-white duration-300  border-b py-2 ${
                       isActive ? "text-white" : ""
                     }`
                   }
@@ -458,13 +467,16 @@ const Header = () => {
                   Offers
                 </NavLink>
               )}
-              <NavLink to="/inquiry" className="hover:text-white duration-300">
+              <NavLink
+                to="/inquiry"
+                className="hover:text-white duration-300 border-b py-2"
+              >
                 Inquiry
               </NavLink>
             </div>
 
             {/* Mobile buttons */}
-            <div className="flex flex-col gap-3 mt-4">
+            <div className="flex justify-end gap-3 mt-4 border-b py-2">
               {!btns ? (
                 <>
                   <NavLink to="/signin" className="btnbutton">

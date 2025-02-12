@@ -4,7 +4,7 @@ import Usersidebar from "../../Pages/userProfile/Usersidebar";
 
 const ProfileLayout = () => {
   return (
-    <div className="flex flex-col bg-[#c4fad9] md:flex-row h-full w-full">
+    <div className="flex flex-col bg-[#c4fad9] md:flex-row  overflow-y-hidden w-full">
       {/* Sidebar */}
       <Usersidebar />
 
