@@ -70,6 +70,6 @@ app.use('/dashboard', dashborad)
 app.use('/offers', offers)
 
 
-app.get('/ping', (req, res) => {
-    res.status(200).json({msg: "pong....."})
+app.get('/healthCheck', (req, res) => {
+    res.status(200).json({msg: "Healthy....."})
 })
