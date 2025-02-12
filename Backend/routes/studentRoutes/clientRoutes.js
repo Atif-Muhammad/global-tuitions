@@ -158,9 +158,7 @@ router.post("/signin", async (req, res) => {
               if (sentMail.accepted != null) {
                 res
                   .cookie("jwtToken", token, { httpOnly: true, sameSite: "strict"})
-                  .send("Successfully logged in-cookies sent");
-                  // res.setHeader('Set-Cookie', `jwtToken=${token}; HttpOnly; SameSite=strict; path=/; Domain:18.130.130.10`).send("Successfully logged in-cookies sent");;
-              } else {
+                  .send("Successfully logged in-cookies sent");} else {
                 res.sendStatus(404)
               }
             } catch (error) {
