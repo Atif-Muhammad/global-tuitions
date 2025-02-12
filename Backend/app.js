@@ -18,14 +18,7 @@ const offers = require('./routes/offers')
 const allowedOrigins = ["http://18.132.41.132:5173", "http://18.132.41.132:5174"];
 
 app.use(cors({
-    origin: (origin, callback) => {
-        // console.log(origin)
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true); 
-        } else {
-            callback(new Error('Not allowed by CORS')); 
-        }
-    },
+    origin: "*",
     credentials: true, 
 }));
 
