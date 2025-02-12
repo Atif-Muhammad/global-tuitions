@@ -143,12 +143,12 @@ const Settings = () => {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto font-urbanist p-6 bg-gray-50">
+    <div className="w-full max-w-4xl mx-auto h-screen flex items-center justify-center flex-col font-urbanist p-6 bg-gray-50">
       <ToastContainer />
-      <h2 className="text-3xl font-semibold mb-8">Account Settings</h2>
+      <h2 className="text-3xl font-semibold mb-8 ">Account Settings</h2>
 
       {/* Change Password Section */}
-      <div className="flex justify-between items-center mb-6 p-4 bg-white rounded-lg shadow-md">
+      <div className="flex justify-between w-full items-center mb-6 p-4 bg-white rounded-lg shadow-md">
         <p className="text-xl font-semibold">Change Password</p>
         <button
           className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-500 transition"
@@ -159,7 +159,7 @@ const Settings = () => {
       </div>
 
       {/* Change Username Section */}
-      <div className="flex justify-between items-center mb-6 p-4 bg-white rounded-lg shadow-md">
+      <div className="flex justify-between w-full items-center mb-6 p-4 bg-white rounded-lg shadow-md">
         <p className="text-xl font-semibold">Change Username</p>
         <button
           className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-500 transition"
@@ -170,7 +170,7 @@ const Settings = () => {
       </div>
 
       {/* Delete Account Section */}
-      <div className="flex justify-between items-center mb-6 p-4 bg-white rounded-lg shadow-md">
+      <div className="flex justify-between w-full items-center mb-6 p-4 bg-white rounded-lg shadow-md">
         <p className="text-xl font-semibold text-red-600">Delete Account</p>
         <button
           className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-500 transition"
