@@ -15,7 +15,7 @@ const subscribeRoutes = require('./routes/subscribeRoutes')
 const dashborad = require('./routes/dashboard')
 const offers = require('./routes/offers')
 
-const allowedOrigins = ["http://18.132.41.132:5173", "http://18.132.41.132:5174"];
+const allowedOrigins = ["http://51.24.30.180:5173", "http://51.24.30.180:5174"];
 
 app.use(cors({
     origin: (origin, callback) => {
@@ -70,6 +70,6 @@ app.use('/dashboard', dashborad)
 app.use('/offers', offers)
 
 
-app.get('/healthCheck', (req, res) => {
-    res.status(200).json({msg: "Healthy....."})
+app.get('/ping', (req, res) => {
+    res.status(200).json({msg: "pong....."})
 })

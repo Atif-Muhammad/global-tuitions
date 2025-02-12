@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "http://18.132.41.132:3000";
+const baseUrl = "http://51.24.30.180:3000";
 
 // get enabled categories
 const get_enabled_categories = async () => {
