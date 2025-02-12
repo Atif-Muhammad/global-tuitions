@@ -8,8 +8,8 @@ export default defineConfig({
     react(),
     removeConsole()
   ],
-  server:{
-    port: 3000
-  },
-  base: '/'
+  // server:{
+  //   port: 3000
+  // },
+  // base: '/'
 })
