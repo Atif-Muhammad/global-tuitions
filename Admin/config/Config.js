@@ -1,7 +1,7 @@
 import { data } from "autoprefixer";
 import axios from "axios";
 
-const BASE_URL = "http://18.132.41.132:3000";
+const BASE_URL = "http://51.24.30.180:3000";
 
 const API_URLS = {
   // Catagory API's
