@@ -35,7 +35,7 @@ const FindFreeCoursesandDiscountsoffer = () => {
         // console.log("::::",res);
         const today = new Date();
         const normalizedToday = normalizeDate(today);
-        // console.log("today date:", normalizedToday);
+
         const freeCourses = res.filter(
           (course) =>
             course.category_id?.category_name === "Free Courses" &&

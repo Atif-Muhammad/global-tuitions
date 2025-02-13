@@ -43,7 +43,6 @@ const Subscribe = () => {
 
   return (
     <div>
-      {/* ToastContainer for React Toastify */}
       <ToastContainer />
 
       {/* Join Us Section */}
