@@ -34,6 +34,11 @@ const Header = () => {
     role: "",
     btns: false,
   });
+  const links = [
+    { link: "/", text: "Home" },
+    { link: "/courses", text: "Course" },
+    { link: "/inquiry", text: "Inquiry" },
+  ];
 
   const { userExists } = useContext(valueContext);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -196,188 +201,185 @@ const Header = () => {
             </NavLink>
           </div>
 
-          {/* Desktop links */}
-          <div className="lg:w-[30%] hidden lg:flex items-center justify-center">
-            <div className="flex flex-row gap-6 font-bold uppercase text-[14px] md:text-[12px] lg:text-[18px]">
+          <div className="lg:w-1/3  h-full hidden lg:flex items-center justify-start gap-x-4">
+            {links.map((link, index) => (
               <NavLink
-                to="/"
+                to={link.link}
+                key={index}
                 className={({ isActive }) =>
-                  `hover:text-white duration-300 border-[#77bd7f] ${
-                    isActive ? "text-white" : ""
+                  `duration-300 font-semibold tracking-wide text-md px-2 ${
+                    isActive
+                      ? "border-b-black border-b-2 "
+                      : "border-b-transparent border-b-2"
                   }`
                 }
               >
-                Home
+                {link.text}
               </NavLink>
+            ))}
+            {freeCourses.length > 0 && (
               <NavLink
-                to="/courses"
+                to="/freeCourses"
                 className={({ isActive }) =>
-                  `hover:text-white duration-300 border-[#77bd7f] ${
-                    isActive ? "text-white" : ""
+                  `duration-300 font-semibold tracking-wide text-md px-2 ${
+                    isActive
+                      ? "border-b-black border-b-2 "
+                      : "border-b-transparent border-b-2"
                   }`
                 }
               >
-                Course
+                Free
               </NavLink>
+            )}
+            {offers.length > 0 && (
               <NavLink
-                to="/inquiry"
+                to="/offers"
                 className={({ isActive }) =>
-                  `hover:text-white duration-300 border-[#68c072] ${
-                    isActive ? "text-white" : ""
+                  `duration-300 font-semibold tracking-wide text-md px-2 ${
+                    isActive
+                      ? "border-b-black border-b-2 "
+                      : "border-b-transparent border-b-2"
                   }`
                 }
               >
-                Inquiry
+                Offers
               </NavLink>
-              {freeCourses.length > 0 && (
-                <NavLink
-                  to="/freeCourses"
-                  className={({ isActive }) =>
-                    `hover:text-white duration-300 border-[#68c072] ${
-                      isActive ? "text-white" : ""
-                    }`
-                  }
-                >
-                  Free
-                </NavLink>
-              )}
-              {offers.length > 0 && (
-                <NavLink
-                  to="/offers"
-                  className={({ isActive }) =>
-                    `hover:text-white duration-300 border-[#68c072] ${
-                      isActive ? "text-white" : ""
-                    }`
-                  }
-                >
-                  Offers
-                </NavLink>
-              )}
-            </div>
+            )}
           </div>
 
           {/* Buttons for large screens */}
-          <div className="lg:w-[27%] hidden lg:flex items-center justify-end gap-3 text-[17px] lg:text-[20px] xl:text-[24px]">
+          <div className="lg:w-[34%] hidden lg:flex w-1/3 items-center h-full gap-x-2">
             {/* Search bar for large screens */}
-            <div className="relative w-full hidden lg:flex items-center justify-center">
-              <div className="w-full">
-                <span className="absolute right-3 top-1/4 flex z-20 text-md">
-                  <FaSearch size={20} className="text-black cursor-pointer" />
-                </span>
+            <div className="h-full w-2/3 relative flex items-center">
+              <div className="relative w-full">
                 <input
                   type="search"
                   onFocus={() => setshow(true)}
                   onBlur={handleBlur}
                   value={search}
                   onChange={checkCourseName}
-                  placeholder="Search For Courses"
-                  className="inline-block border-[1px] border-b-4 drop-shadow-lg border-black rounded-lg py-2 hover:bg-slate-100 duration-500 px-3 focus:outline-none text-sm w-full"
+                  placeholder="Search for Courses..."
+                  className="outline-none w-full border border-gray-300 rounded-lg py-2 pl-10 pr-4 shadow-md focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-300 ease-in-out"
                 />
-
-                {show && (
-                  <div className="absolute z-10 -left-2 top-14 w-[20rem] max-h-[35vh] overflow-scroll overflow-x-hidden  h-fit bg-[#7acc82] border-2">
-                    {filteredCourses.length > 0 ? (
-                      filteredCourses.map((course, index) => (
-                        <NavLink
-                          to="/Course_detail"
-                          state={course._id}
-                          onClick={() => handleRedirect(course.course_name)}
-                          className="w-full px-2 py-2 text-sm tracking-wide flex items-center justify-start hover:bg-[#A4DCAA] cursor-pointer border-b-2"
-                          key={index}
-                        >
-                          {console.log(course._id)}
-                          {course.course_name}
-                        </NavLink>
-                      ))
-                    ) : (
-                      <div className="w-full px-2 py-2 text-sm flex items-center justify-start hover:bg-[#A4DCAA] cursor-pointer border-b-2">
-                        "No matching courses
-                      </div>
-                    )}
-                  </div>
-                )}
+                <svg
+                  className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 21l-4.35-4.35M15 11a4 4 0 10-8 0 4 4 0 008 0z"
+                  />
+                </svg>
               </div>
-            </div>
-            {loading ? (
-              <></>
-            ) : // <p>Loading...</p> // Placeholder or spinner during the loading state
-            !btns ? (
-              <>
-                <NavLink
-                  to="/signin"
-                  className=" text-sm py-2 px-3 bg-black border text-white text-center rounded-lg border-white w-1/3"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Sign in
-                </NavLink>
-                <NavLink
-                  to="/signup"
-                  className=" text-sm py-2 px-3 bg-black border text-white text-center rounded-lg border-white w-1/3"
-                >
-                  Sign Up
-                </NavLink>
-              </>
-            ) : (
-              <div className="flex gap-6">
-                <p
-                  className=" btnbutton text-[23px] cursor-pointer"
-                  onClick={handleView}
-                >
-                  {menu ? (
-                    <FaTimes /> // Cross icon when menu is open
-                  ) : (
-                    <p>
-                      <CgProfile />
-                    </p>
-                  )}
-                </p>
-                {menu && (
-                  <div
-                    ref={menuRef}
-                    className="bg-white font-urbanist shadow-lg z-10 absolute h-auto w-64 right-16 top-16 flex flex-col items-center justify-between py-6 px-4 rounded-lg border border-gray-200"
-                  >
-                    {/* Profile Picture */}
-                    <div className="pic bg-gray-300 w-20 h-20 rounded-full flex items-center justify-center mb-4">
-                      <span className="text-gray-500 text-sm">Your Pic</span>
-                    </div>
-
-                    {/* User Information */}
-                    <div className="email text-gray-700 text-sm font-medium mb-1">
-                      {userInfo?.email || "No Email"}
-                    </div>
-                    <div className="name text-gray-900 text-lg font-semibold mb-4">
-                      {userInfo?.name || "Guest User"}
-                    </div>
-
-                    {/* Buttons */}
-                    <NavLink
-                      // onClick={handleView}
-                      to="/profile"
-                      className="w-full text-lg text-center hover:bg-gray-100 text-gray-700 border border-gray-300 py-2 rounded-md mb-2 transition duration-300"
-                      onClick={handleEditProfile}
-                    >
-                      View Profile
-                    </NavLink>
-                    {userInfo?.role === "Admin" && (
+              {show && (
+                <div className="absolute z-20 left-0 top-12 w-full max-h-[50vh] overflow-y-auto bg-white border border-gray-300 shadow-lg rounded-lg mt-2">
+                  {filteredCourses.length > 0 ? (
+                    filteredCourses.map((course, index) => (
                       <NavLink
-                        to="http://51.24.30.180:5174/"
-                        target="_blank"
+                        to="/Course_detail"
+                        state={course}
+                        onClick={() => handleRedirect(course.course_name)}
+                        className="w-full px-4 py-3 flex items-center text-gray-800 hover:bg-green-100 transition-all duration-300 ease-in-out border-b"
+                        key={index}
+                      >
+                        {course.course_name}
+                      </NavLink>
+                    ))
+                  ) : (
+                    <div className="w-full px-4 py-3 text-gray-600 flex items-center">
+                      No matching courses found
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+            <div className="h-full w-1/3 flex items-center justify-end">
+              {loading ? (
+                <></>
+              ) : !btns ? (
+                <div className="flex items-center w-full justify-center gap-x-1">
+                  <NavLink
+                    to="/signin"
+                    className=" text-sm py-2 px-3 bg-black border text-white text-center rounded-lg border-white w-1/2"
+                  >
+                    Sign in
+                  </NavLink>
+                  <NavLink
+                    to="/signup"
+                    className=" text-sm py-2 px-3 bg-black border text-white text-center rounded-lg border-white w-1/2"
+                  >
+                    Sign Up
+                  </NavLink>
+                </div>
+              ) : (
+                <div className="flex gap-6">
+                  <p
+                    className={`${
+                      menu ? "bg-black" : "bg-black/80"
+                    } text-white p-3 rounded-full text-[23px] cursor-pointer`}
+                    onClick={handleView}
+                  >
+                    {menu ? (
+                      <FaTimes />
+                    ) : (
+                      <p>
+                        <CgProfile />
+                      </p>
+                    )}
+                  </p>
+                  {menu && (
+                    <div
+                      ref={menuRef}
+                      className="bg-white font-urbanist shadow-lg z-10 absolute h-auto w-64 right-16 top-16 flex flex-col items-center justify-between py-6 px-4 rounded-lg border border-gray-200"
+                    >
+                      {/* Profile Picture */}
+                      <div className="pic bg-gray-300 w-20 h-20 rounded-full flex items-center justify-center mb-4">
+                        <span className="text-gray-500 text-sm">Your Pic</span>
+                      </div>
+
+                      {/* User Information */}
+                      <div className="email text-gray-700 text-sm font-medium mb-1">
+                        {userInfo?.email || "No Email"}
+                      </div>
+                      <div className="name text-gray-900 text-lg font-semibold mb-4">
+                        {userInfo?.name || "Guest User"}
+                      </div>
+
+                      {/* Buttons */}
+                      <NavLink
+                        // onClick={handleView}
+                        to="/profile"
                         className="w-full text-lg text-center hover:bg-gray-100 text-gray-700 border border-gray-300 py-2 rounded-md mb-2 transition duration-300"
                         onClick={handleEditProfile}
                       >
-                        Admin Panel
+                        View Profile
                       </NavLink>
-                    )}
-                    <button
-                      onClick={() => setShowLogoutModal(true)}
-                      className="w-full text-lg bg-red-600 hover:bg-red-700 text-white py-2 rounded-md transition duration-300"
-                    >
-                      Logout
-                    </button>
-                  </div>
-                )}
-              </div>
-            )}
+                      {userInfo?.role === "Admin" && (
+                        <NavLink
+                          to="http://51.24.30.180:5174/"
+                          target="_blank"
+                          className="w-full text-lg text-center hover:bg-gray-100 text-gray-700 border border-gray-300 py-2 rounded-md mb-2 transition duration-300"
+                          onClick={handleEditProfile}
+                        >
+                          Admin Panel
+                        </NavLink>
+                      )}
+                      <button
+                        onClick={() => setShowLogoutModal(true)}
+                        className="w-full text-lg bg-red-600 hover:bg-red-700 text-white py-2 rounded-md transition duration-300"
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Mobile menu icon */}
