@@ -208,7 +208,7 @@ const Signin = () => {
                     >
                       Email Address
                     </label>
-                    <Field
+                    <input
                       type="email"
                       id="email"
                       name="email"
@@ -229,7 +229,7 @@ const Signin = () => {
                     >
                       Password
                     </label>
-                    <Field
+                    <input
                       type="password"
                       id="password"
                       name="password"
