@@ -5,7 +5,7 @@ import { IoMdClose } from "react-icons/io";
 import { NavLink, useLocation } from "react-router-dom";
 import Config from "../../../Config/Config";
 import { CgProfile } from "react-icons/cg";
-import { FaTimes } from "react-icons/fa"; // Import the cross icon
+import { FaTimes } from "react-icons/fa";
 import { TbLogout } from "react-icons/tb";
 import valueContext from "../../Context/context";
 
@@ -87,7 +87,6 @@ const Header = () => {
     getOffers();
     getFreeCourses();
     getCourses();
-    // console.log(res.data)
   };
 
   const getOffers = () => {
@@ -181,7 +180,6 @@ const Header = () => {
   };
 
   const handleBlur = (e) => {
-    // Delay hiding the dropdown to allow NavLink click to register
     setTimeout(() => {
       setshow(false);
     }, 150);
