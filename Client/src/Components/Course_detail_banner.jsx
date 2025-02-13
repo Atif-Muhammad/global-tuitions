@@ -14,7 +14,6 @@ const Course_detail_banner = (props) => {
   const location = useLocation();
   const id = location.state || props.id;
   console.log("from state: ", id);
-  // console.log("from props:", props.id)
 
   useEffect(() => {
     console.log("in details", id);
@@ -28,7 +27,7 @@ const Course_detail_banner = (props) => {
   }, [id]);
 
   const handleDownloadPDF = async () => {
-    const page = pageRef.current; // The DOM element to capture
+    const page = pageRef.current;
     const canvas = await html2canvas(page, { scale: 2 });
     const imgData = canvas.toDataURL("image/png");
     const pdf = new jsPDF("p", "mm", "a4");

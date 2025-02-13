@@ -5,7 +5,7 @@ import { FaBookmark } from "react-icons/fa6";
 import { MdPlayArrow } from "react-icons/md";
 
 const Card = (props) => {
-  const descriptionRef = useRef(null); // Reference to the description section
+  const descriptionRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
@@ -64,20 +64,19 @@ const Card = (props) => {
               ) : (
                 <p className="text-2xl font-medium">
                   {new Date(
-                          `1970-01-01T${props.course?.time}:00`
-                        ).toLocaleString("en-US", {
-                          hour: "numeric",
-                          minute: "numeric",
-                          hour12: true,
-                        })}{" "}
-                  ,
-                  {"  "}
+                    `1970-01-01T${props.course?.time}:00`
+                  ).toLocaleString("en-US", {
+                    hour: "numeric",
+                    minute: "numeric",
+                    hour12: true,
+                  })}{" "}
+                  ,{"  "}
                   {new Date(props.course?.date).toLocaleDateString("en-US", {
-                          timeZone: "UTC",
-                          month: "long", // Full month name (e.g., "June")
-                          day: "numeric", // Numeric day (e.g., "3")
-                          year: "numeric", // Full year (e.g., "2024")
-                        })}
+                    timeZone: "UTC",
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric",
+                  })}
                 </p>
               )}
               <FaBookmark />
