@@ -36,8 +36,6 @@ const Signup = () => {
   });
 
   const handleSubmit = (values, { setSubmitting }) => {
-    // e.preventDefault();
-    // console.log(values)
     Config.signup(values)
       .then((res) => {
         // console.log(res)
@@ -84,7 +82,6 @@ const Signup = () => {
         />
       </Helmet>
 
-      {/* Toast Container for handling toast notifications */}
       <ToastContainer
         position="top-right"
         autoClose={5000}
