@@ -94,16 +94,16 @@ const Signup = () => {
         pauseOnHover
       />
 
-      <div className="min-h-screen flex items-center pb-4 justify-center bg-[#a4dcaa]/80">
+<div className="h-[90vh] flex items-center  justify-center bg-[#a4dcaa]/80">
         {/* Card Container with margin-top for better spacing */}
         <div className="w-full max-w-lg bg-[#a4dcaa] rounded-xl shadow-2xl shadow-black  border border-gray-200 mt-10">
           {/* Header Section */}
-          <div className="text-center  rounded-t-xl py-4 bg-black text-white mb-8">
+          <div className="text-center  rounded-t-xl py-4 bg-black text-white flex flex-col gap-y-2">
             <h1 className="text-4xl font-extrabold">Create Your Account</h1>
-            <p className=" mt-2">Sign up to get started with your journey.</p>
+            <p className="">Sign up to get started with your journey.</p>
           </div>
 
-          <div className="p-10">
+          <div className="py-6 px-14">
             {/* Form Section */}
             <Formik
               initialValues={{
@@ -116,7 +116,7 @@ const Signup = () => {
               onSubmit={handleSubmit}
             >
               {({ isSubmitting }) => (
-                <Form className="space-y-6">
+                <Form className="space-y-2">
                   {/* Name Input */}
                   <div>
                     <label
@@ -135,7 +135,7 @@ const Signup = () => {
                     <ErrorMessage
                       name="name"
                       component="div"
-                      className="text-red-500 text-sm mt-1"
+                      className="text-red-500 text-sm w-full flex justify-end"
                     />
                   </div>
 
@@ -157,7 +157,7 @@ const Signup = () => {
                     <ErrorMessage
                       name="email"
                       component="div"
-                      className="text-red-500 text-sm mt-1"
+                      className="text-red-500 text-sm w-full flex justify-end"
                     />
                   </div>
 
@@ -179,7 +179,7 @@ const Signup = () => {
                     <ErrorMessage
                       name="password"
                       component="div"
-                      className="text-red-500 text-sm mt-1"
+                      className="text-red-500 text-sm w-full flex justify-end"
                     />
                   </div>
 
@@ -198,37 +198,23 @@ const Signup = () => {
                   {/* Submit Button */}
                   <button
                     type="submit"
-                    className={`w-full py-3 bg-blue-500 flex justify-center text-white rounded-lg font-bold shadow-md hover:bg-blue-600 transition duration-300`}
+                    className={`w-full py-3 bg-black flex justify-center text-white rounded-lg font-bold shadow-md hover:bg-black/90 transition duration-300`}
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? <Buttonloader /> : <>Create Account</>}
                   </button>
 
-                  {/* Divider */}
-                  <div className="flex items-center justify-center space-x-2 mt-4">
-                    <div className="h-[1px] w-full bg-gray-500"></div>
-                    <span className="text-gray-700 font-medium">OR</span>
-                    <div className="h-[1px] w-full bg-gray-500"></div>
-                  </div>
-
-                  {/* Google Sign-Up */}
-                  <button
-                    type="button"
-                    className="w-full py-3 border border-gray-300 bg-gray-100 rounded-lg font-medium text-gray-600 flex items-center justify-center hover:bg-gray-200 transition duration-300"
-                  >
-                    <FaGoogle className="mr-3 text-red-500" />
-                    Sign up with Google
-                  </button>
+                 
                 </Form>
               )}
             </Formik>
             {/* Footer Section */}
-            <div className="text-center mt-8">
+            <div className="text-center py-2">
               <p className="text-sm text-gray-700">
                 Already have an account?{" "}
                 <NavLink
-                  href="/signin"
-                  className="text-blue-500 font-semibold hover:underline"
+                  to="/signin"
+                  className="text-white font-semibold"
                 >
                   Sign in here
                 </NavLink>
