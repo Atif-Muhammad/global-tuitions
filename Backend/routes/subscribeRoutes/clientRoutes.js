@@ -21,12 +21,32 @@ router.post("/subscribe", async (req, res) => {
                 pass: process.env.ADMIN_PASS,
             },
         });
+        
         // create email message
         const mailOptions = {
             from: process.env.ADMIN_EMAIL,
             to: req.body.data.email,
-            subject: "Thank you!",
-            text: "Thank you for you query, we will get back to you soon. regards imperial tuitions",
+            subject: "You’re Subscribed! Get Ready for Exclusive Updates",
+            html: `
+            <h2>Dear Student,</h2>
+            <p>
+            Thank you for subscribing to <strong>Global Tuitions</strong>! 🎉 You’re now part of our learning community, and we’re excited to keep you updated with the latest courses, expert insights, and special offers.
+            </p>
+            <p>Here’s what you can expect:</p>
+            <ul>
+            <li>✔️ Regular updates on new courses and subjects 📚</li>
+            <li>✔️ Exclusive offers and discounts 💡</li>
+            <li>✔️ Important announcements and learning tips 🚀</li>
+            </ul>
+            <p>
+            Stay tuned—your learning journey starts here! If you ever have any questions, feel free to reach out at <a href="mailto:sixpmmediaofficial@gmail.com" style="color: #1e73be; text-decoration: none;">sixpmmediaofficial@gmail.com</a>.
+            </p>
+            <p>
+            <strong>Happy Learning!</strong><br>
+            <strong>SIX PM Media</strong><br>
+            <a href="http://51.24.30.180/5173">Visit our Website</a>
+            </p>
+            `,
         };
 
         

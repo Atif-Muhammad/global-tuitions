@@ -93,7 +93,7 @@ router.post("/postInquiry", async (req, res) => {
     from: process.env.ADMIN_EMAIL,
     to: req.body.data.email,
     subject: "Thank you!",
-    text: "Thank you for you query, we will get back to you soon. regards imperial tuitions",
+    text: "Thank you for you query, we will get back to you soon. regards SIXPM media",
   };
 
   try {

@@ -65,7 +65,7 @@ router.post("/inquiry/reply", async (req, res) => {
         const mailOptions = {
             from: process.env.ADMIN_EMAIL,
             to: response.email,
-            subject: "Thank you!",
+            subject: "Thank You for Your Inquiry – Here’s What You Need to Know!",
             text: message,
         };
 

@@ -32,7 +32,7 @@ const Subscribe = () => {
           setLoading(false);
         }
       })
-      .catch(() => {
+      .catch((error) => {
         toast.error("An error occurred. Please try again.", {
           position: "top-right",
           autoClose: 2000,
