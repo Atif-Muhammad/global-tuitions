@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Config from "../../Config/Config"; // Import Config with the postInq function
+import Config from "../../Config/Config"; 
 import { useLocation, useNavigate } from "react-router-dom";
 import ContactusImg from "./../assets/images/contactus-img.png";
 import DOMPurify from "dompurify";
 import ReCAPTCHA from "react-google-recaptcha";
-
-// React-Toastify
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Buttonloader from "../Pages/buttonLoader/Buttonloader";
