@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet-async";
 const Course_detail = () => {
   const location = useLocation();
   const course = location.state;
-  console.log("in banner:", course);
+  // console.log("in banner:", course);
   return (
     <div>
       <Helmet>

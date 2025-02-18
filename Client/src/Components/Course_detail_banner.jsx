@@ -13,10 +13,10 @@ const Course_detail_banner = (props) => {
 
   const location = useLocation();
   const id = location.state || props.id;
-  console.log("from state: ", id);
+  // console.log("from state: ", id);
 
   useEffect(() => {
-    console.log("in details", id);
+    // console.log("in details", id);
     Config.get_enabled_contents(id)
       .then((res) => {
         setCourse(res);

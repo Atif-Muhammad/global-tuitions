@@ -160,7 +160,7 @@ const Header = () => {
 
   const checkCourseName = (e) => {
     setSearch(e.target.value);
-
+    // console.log(e.target.value)
     // refine the courses array
     setFilteredCourses(
       courses.filter((course) =>
@@ -173,7 +173,7 @@ const Header = () => {
   };
 
   const handleRedirect = (course_name) => {
-    console.log(course_name);
+    // console.log("course: ",course_name);
     setshow(false);
     setSearch(course_name);
     setCourseName(course_name);
@@ -280,7 +280,7 @@ const Header = () => {
                     filteredCourses.map((course, index) => (
                       <NavLink
                         to="/Course_detail"
-                        state={course}
+                        state={course._id}
                         onClick={() => handleRedirect(course.course_name)}
                         className="w-full px-4 py-3 flex items-center text-gray-800 hover:bg-green-100 transition-all duration-300 ease-in-out border-b"
                         key={index}
