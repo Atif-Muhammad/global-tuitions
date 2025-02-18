@@ -131,9 +131,9 @@ const Course_detail_banner = (props) => {
                               "en-US",
                               {
                                 timeZone: "UTC",
-                                month: "long", // Full month name (e.g., "June")
-                                day: "numeric", // Numeric day (e.g., "3")
-                                year: "numeric", // Full year (e.g., "2024")
+                                month: "long", 
+                                day: "numeric", 
+                                year: "numeric", 
                               }
                             )}{" "}
                           </p>
