@@ -4,7 +4,9 @@ import Config from "../../../Config/Config";
 import SkeletonCard from "../Skeletons/SkeletonCard";
 import NoSkeleton from "../Skeletons/NoSkeleton";
 import { Helmet } from "react-helmet-async";
+
 const CoursesPage = () => {
+  
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all"); // Default to "All Categories"
   const [selectedLevels, setSelectedLevels] = useState({

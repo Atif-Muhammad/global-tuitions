@@ -274,143 +274,150 @@ const FreeCoursesdetail = ({ isOpen, onClose, data }) => {
                   </div>
 
                   <div className="space-y-4 font-urbanist">
-                    {data?.course_contents.map((course_content, index) => (
-                      <div
-                        key={index}
-                        className="  border-b-2 border-black/40 py-2 "
-                      >
-                        <div>
-                          <p className="text-[20px]  font-bold text-black">
-                            Topic:
-                          </p>
-                          {editSection === "course_contents" &&
-                          editIndex === index ? (
-                            <input
-                              type="text"
-                              value={
-                                editContent.topic !== undefined
-                                  ? editContent.topic
-                                  : course_content.topic
-                              }
-                              onChange={(e) => handleInputChange(e, "topic")}
-                              className="border border-gray-400 rounded-lg  p-2 w-full"
-                            />
-                          ) : (
-                            <p className="text-gray-800 font-urbanist px-6  text-[20px]">
-                              {course_content.topic}
+                    {data?.course_contents
+                      .sort((a, b) => a.sort_value - b.sort_value)
+                      .map((course_content, index) => (
+                        <div
+                          key={index}
+                          className="  border-b-2 border-black/40 py-2 "
+                        >
+                          <div>
+                            <p className="text-[20px]  font-bold text-black">
+                              Topic:
                             </p>
-                          )}
-                        </div>
-                        <div>
-                          <p className="text-[20px]   font-bold text-black">
-                            Description:
-                          </p>
-                          {editSection === "course_contents" &&
-                          editIndex === index ? (
-                            <JoditEditor
-                              config={editorConfig}
-                              value={
-                                editContent.content_description !== undefined
-                                  ? editContent.content_description
-                                  : course_content.content_description
-                              }
-                              onBlur={(value) =>
-                                handleInputChange(value, "content_description")
-                              }
-                            />
-                          ) : (
-                            <p
-                              className="text-gray-800 px-6 font-urbanist text-[18px]"
-                              dangerouslySetInnerHTML={{
-                                __html: DOMPurify.sanitize(
-                                  course_content.content_description
-                                ),
-                              }}
-                            ></p>
-                          )}
-                        </div>
+                            {editSection === "course_contents" &&
+                            editIndex === index ? (
+                              <input
+                                type="text"
+                                value={
+                                  editContent.topic !== undefined
+                                    ? editContent.topic
+                                    : course_content.topic
+                                }
+                                onChange={(e) => handleInputChange(e, "topic")}
+                                className="border border-gray-400 rounded-lg  p-2 w-full"
+                              />
+                            ) : (
+                              <p className="text-gray-800 font-urbanist px-6  text-[20px]">
+                                {course_content.topic}
+                              </p>
+                            )}
+                          </div>
+                          <div>
+                            <p className="text-[20px]   font-bold text-black">
+                              Description:
+                            </p>
+                            {editSection === "course_contents" &&
+                            editIndex === index ? (
+                              <JoditEditor
+                                config={editorConfig}
+                                value={
+                                  editContent.content_description !== undefined
+                                    ? editContent.content_description
+                                    : course_content.content_description
+                                }
+                                onBlur={(value) =>
+                                  handleInputChange(
+                                    value,
+                                    "content_description"
+                                  )
+                                }
+                              />
+                            ) : (
+                              <p
+                                className="text-gray-800 px-6 font-urbanist text-[18px]"
+                                dangerouslySetInnerHTML={{
+                                  __html: DOMPurify.sanitize(
+                                    course_content.content_description
+                                  ),
+                                }}
+                              ></p>
+                            )}
+                          </div>
 
-                        <div>
-                          <span className="text-[20px]  font-bold text-black">
-                            Enabled:
-                          </span>
-                          {editSection === "course_contents" &&
-                          editIndex === index ? (
-                            <select
-                              value={
-                                editContent.enabled_flag !== undefined
-                                  ? editContent.enabled_flag
-                                  : course_content.enabled_flag
-                              }
-                              onChange={(e) =>
-                                handleInputChange(e, "enabled_flag")
-                              }
-                              className="border border-gray-400 rounded-lg  p-2 w-full"
-                            >
-                              <option value={true}>True</option>
-                              <option value={false}>False</option>
-                            </select>
-                          ) : (
-                            <span className="text-gray-800 ml-3 font-urbanist text-[18px]">
-                              {course_content.enabled_flag === true
-                                ? "true"
-                                : "false"}
+                          <div>
+                            <span className="text-[20px]  font-bold text-black">
+                              Enabled:
                             </span>
-                          )}
-                        </div>
+                            {editSection === "course_contents" &&
+                            editIndex === index ? (
+                              <select
+                                value={
+                                  editContent.enabled_flag !== undefined
+                                    ? editContent.enabled_flag
+                                    : course_content.enabled_flag
+                                }
+                                onChange={(e) =>
+                                  handleInputChange(e, "enabled_flag")
+                                }
+                                className="border border-gray-400 rounded-lg  p-2 w-full"
+                              >
+                                <option value={true}>True</option>
+                                <option value={false}>False</option>
+                              </select>
+                            ) : (
+                              <span className="text-gray-800 ml-3 font-urbanist text-[18px]">
+                                {course_content.enabled_flag === true
+                                  ? "true"
+                                  : "false"}
+                              </span>
+                            )}
+                          </div>
 
-                        <div>
-                          <span className="text-[20px]  font-bold text-black">
-                            Sort value:
-                          </span>
-                          {editSection === "course_contents" &&
-                          editIndex === index ? (
-                            <input
-                              type="number"
-                              value={
-                                editContent.sort_value !== undefined
-                                  ? editContent.sort_value
-                                  : course_content.sort_value
-                              }
-                              onChange={(e) =>
-                                handleInputChange(e, "sort_value")
-                              }
-                              className="border border-gray-400 rounded-lg  p-2 w-full"
-                            />
-                          ) : (
-                            <span className="text-gray-800 ml-3 font-urbanist text-[18px]">
-                              {course_content.sort_value}
+                          <div>
+                            <span className="text-[20px]  font-bold text-black">
+                              Sort value:
                             </span>
-                          )}
-                        </div>
-                        <div className="w-full mb-2 flex mt-3 gap-4 font-poppins justify-end">
-                          {editSection === "course_contents" &&
-                          editIndex === index ? (
-                            <button
-                              onClick={handleSaveClick}
-                              className="outline-none px-8 py-2 border rounded-full bg-green-500 text-zinc-100"
-                            >
-                              Save
-                            </button>
-                          ) : (
+                            {editSection === "course_contents" &&
+                            editIndex === index ? (
+                              <input
+                                type="number"
+                                value={
+                                  editContent.sort_value !== undefined
+                                    ? editContent.sort_value
+                                    : course_content.sort_value
+                                }
+                                onChange={(e) =>
+                                  handleInputChange(e, "sort_value")
+                                }
+                                className="border border-gray-400 rounded-lg  p-2 w-full"
+                              />
+                            ) : (
+                              <span className="text-gray-800 ml-3 font-urbanist text-[18px]">
+                                {course_content.sort_value}
+                              </span>
+                            )}
+                          </div>
+                          <div className="w-full mb-2 flex mt-3 gap-4 font-poppins justify-end">
+                            {editSection === "course_contents" &&
+                            editIndex === index ? (
+                              <button
+                                onClick={handleSaveClick}
+                                className="outline-none px-8 py-2 border rounded-full bg-green-500 text-zinc-100"
+                              >
+                                Save
+                              </button>
+                            ) : (
+                              <button
+                                onClick={() =>
+                                  handleEditContent(index, course_content)
+                                }
+                                className="outline-none px-3 duration-150 text-[22px] py-2 border rounded-lg  text-zinc-900 hover:bg-black hover:text-white "
+                              >
+                                <CiEdit />
+                              </button>
+                            )}
                             <button
                               onClick={() =>
-                                handleEditContent(index, course_content)
+                                deleteItem("course_contents", index)
                               }
-                              className="outline-none px-3 duration-150 text-[22px] py-2 border rounded-lg  text-zinc-900 hover:bg-black hover:text-white "
+                              className="outline-none px-8 py-2 border rounded-full bg-red-500 text-zinc-100"
                             >
-                              <CiEdit />
+                              Delete
                             </button>
-                          )}
-                          <button
-                            onClick={() => deleteItem("course_contents", index)}
-                            className="outline-none px-8 py-2 border rounded-full bg-red-500 text-zinc-100"
-                          >
-                            Delete
-                          </button>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
                   </div>
                 </div>
                 <div className="sticky bottom-0 left-0 w-full font-urbanist bg-white p-4 shadow-md flex justify-center space-x-4 rounded-b-lg">

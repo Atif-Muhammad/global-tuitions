@@ -419,10 +419,6 @@ const AddFreeCourses = ({ closeModal }) => {
                         ></p>
                       </p>
                       <p>
-                        <strong className="text-[1.3rem]">Minutes:</strong>{" "}
-                        {item.duration}
-                      </p>
-                      <p>
                         <strong className="text-[1.3rem]">Sort value:</strong>{" "}
                         {item.sort}
                       </p>

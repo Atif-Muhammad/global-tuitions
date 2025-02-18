@@ -1,7 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import Config from "../../../Config/Config";
 
 const Footer = () => {
+  const [freeCourses, setFreeCourses] = useState([]);
+
+  const getFreeCourses = async () => {
+    Config.get_enabled_courses()
+      .then((res) => {
+        const data = res.filter((item) => {
+          return (
+            item.category_id?.category_name === "Free Courses" &&
+            item.category_id?.enabled_flag === true &&
+            new Date(item.date) > new Date()
+          );
+        });
+        setFreeCourses(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    getFreeCourses();
+  });
+
   return (
     <div>
       {/* Footer Section */}
@@ -38,13 +62,18 @@ const Footer = () => {
               >
                 Inquiry
               </NavLink>
-              <NavLink
-                to="/freeCourses"
-                className="hover:text-[#A4DCAA] duration-300"
-                activeClassName="text-[#A4DCAA]"
-              >
-                Free
-              </NavLink>
+              {freeCourses.length > 0 && (
+                <NavLink
+                  to="/freeCourses"
+                  className={({ isActive }) =>
+                    `hover:text-[#A4DCAA] duration-300${
+                      isActive ? "border-b-black border-b-2 " : "text-[#A4DCAA]"
+                    }`
+                  }
+                >
+                  Free
+                </NavLink>
+              )}
             </div>
           </div>
         </div>

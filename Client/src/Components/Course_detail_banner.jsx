@@ -126,7 +126,7 @@ const Course_detail_banner = (props) => {
                               minute: "numeric",
                               hour12: true,
                             })}
-                            3{" "}
+                            {" "}
                             {new Date(course?.date).toLocaleDateString(
                               "en-US",
                               {
@@ -194,6 +194,7 @@ const Course_detail_banner = (props) => {
                   </div>
                   {course?.course_contents
                     ?.filter((content) => content.enabled_flag === true)
+                    .sort((a, b) => a.sort_value - b.sort_value)
                     .map((content, index) => (
                       <div
                         key={index}

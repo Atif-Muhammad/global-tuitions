@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
-import { FaSearch } from "react-icons/fa";
 import { RiMenu3Fill } from "react-icons/ri";
 import { IoMdClose } from "react-icons/io";
 import { NavLink, useLocation } from "react-router-dom";
@@ -100,6 +99,7 @@ const Header = () => {
         console.log(err);
       });
   };
+
   const getFreeCourses = async () => {
     Config.get_enabled_courses()
       .then((res) => {
