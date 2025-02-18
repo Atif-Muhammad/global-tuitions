@@ -7,7 +7,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import loader from "../Pages/Loader/Loader";
 import { Suspense } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; // Add this to include the default styles
+import "react-toastify/dist/ReactToastify.css"; 
 import Buttonloader from "../Pages/buttonLoader/Buttonloader";
 
 const Enrollment = () => {
@@ -76,7 +76,7 @@ const Enrollment = () => {
   const checkSession = async () => {
     Config.checkSession()
       .then((res) => {
-        // console.log(res);
+     
         const expiration = res.exp;
         const expiryDate = new Date(expiration * 1000);
         const currentDate = new Date();
@@ -85,7 +85,7 @@ const Enrollment = () => {
           setNoUser(false);
           setName(res?.student_name || "");
           setEmail(res?.email || "");
-          // console.log(res)
+       
         } else {
           setNoUser(true);
         }
@@ -104,13 +104,13 @@ const Enrollment = () => {
 
   const handleCaptchaChange = (value) => {
     setCaptchaValue(value);
-    // console.log("Captcha value:", value);
+
   };
   return (
     <Suspense fallback={loader}>
       <ToastContainer />
 
-      {/* <!-- img and inquiry form both togahter for xl screens  --> */}
+   
       <div className="w-full h-auto">
         <div className="flex md:flex-row flex-col">
           {/* <!-- inquiry section  --> */}
