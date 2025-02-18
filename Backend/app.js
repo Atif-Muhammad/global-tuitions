@@ -15,7 +15,7 @@ const subscribeRoutes = require('./routes/subscribeRoutes')
 const dashborad = require('./routes/dashboard')
 const offers = require('./routes/offers')
 
-const allowedOrigins = ["http://www.igniup.com:5173", "http://www.igniup.com:5174"];
+const allowedOrigins = ["http://51.24.30.180:5173", "http://www.igniup.com:5174"];
 
 app.use(cors({
     origin: (origin, callback) => {
