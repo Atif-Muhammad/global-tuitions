@@ -48,21 +48,8 @@ const Header = () => {
     }
   };
 
-  const handleLogout = async () => {
-    Config.logout()
-      .then((res) => {
-        console.log(res);
-        setBtns(false);
-        setShowLogoutModal(false);
-        checkSession();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
   const checkSession = async () => {
-    try {
-      const res = await Config.checkSession();
+    Config.checkSession().then(res=>{
       const expiration = res.exp;
       const expiryDate = new Date(expiration * 1000);
       const currentDate = new Date();
@@ -78,16 +65,31 @@ const Header = () => {
       } else {
         setUserInfo((prev) => ({ ...prev, btns: false }));
       }
-    } catch {
-      setUserInfo((prev) => ({ ...prev, btns: false }));
-    } finally {
-      setLoading(false); // Loading complete
-    }
+    
+      }).catch(err=>{
+        setUserInfo((prev) => ({ ...prev, btns: false }));
+      }).finally(()=>{
+        setLoading(false);
+      });
+      
     getOffers();
     getFreeCourses();
     getCourses();
   };
 
+  const handleLogout = async () => {
+    Config.logout()
+      .then((res) => {
+        console.log(res);
+        setBtns(false);
+        setShowLogoutModal(false);
+        checkSession();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+ 
   const getOffers = () => {
     Config.getOffers()
       .then((res) => {
