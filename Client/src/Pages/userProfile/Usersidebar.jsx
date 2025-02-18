@@ -3,27 +3,25 @@ import { NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { FaUserCircle } from "react-icons/fa"; // Importing a profile icon from react-icons
 import axios from "axios";
-import Config from "../../../Config/Config"
+import Config from "../../../Config/Config";
 // import API_URLS from '../../config/Config'
 
 const Usersidebar = () => {
-
   const [userInfo, setUserInfo] = useState([]);
 
-  const getDetails = async ()=>{
-    Config.getUserInfo().then((res)=>{
-      
-      setUserInfo(res.data[0])
-    }).catch((err)=>{
-      console.log(err);
-    })
-  }
+  const getDetails = async () => {
+    Config.getUserInfo()
+      .then((res) => {
+        setUserInfo(res.data[0]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-  useEffect(()=>{
-    getDetails()
+  useEffect(() => {
+    getDetails();
   }, []);
-
-
 
   return (
     <div className=" font-urbanist md:sticky top-0 left-0 md:w-1/5  w-full   text-black p-6 flex flex-col">
@@ -80,26 +78,7 @@ const Usersidebar = () => {
         >
           General Inquiry
         </NavLink>
-        <NavLink
-          to="/profile/aboutuser"
-          className={({ isActive }) =>
-            `block py-2 px-4 rounded-lg text-lg ${
-              isActive ? "bg-[#64da93]" : "hover:bg-white"
-            }`
-          }
-        >
-          About Us
-        </NavLink>
-        <NavLink
-          to="/profile/contactuser"
-          className={({ isActive }) =>
-            `block py-2 px-4 rounded-lg text-lg ${
-              isActive ? "bg-[#64da93]" : "hover:bg-white"
-            }`
-          }
-        >
-          Contact Us
-        </NavLink>
+
         <NavLink
           to="/profile/settings"
           className={({ isActive }) =>
