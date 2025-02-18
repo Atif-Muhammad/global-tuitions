@@ -56,7 +56,7 @@ const FindFreeCoursesandDiscountsoffer = () => {
       {(offers.length > 0 || freeCourses.length > 0) && (
         <div>
           {/* <!-- find courses section  --> */}
-          <div className="find-main">
+          <div className="find-mai font-urbanist ">
             <div className="find-main2">
               <div className="find-img-div">
                 <img

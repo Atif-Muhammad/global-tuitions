@@ -6,7 +6,6 @@ import NoSkeleton from "../Skeletons/NoSkeleton";
 import { Helmet } from "react-helmet-async";
 
 const CoursesPage = () => {
-  
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all"); // Default to "All Categories"
   const [selectedLevels, setSelectedLevels] = useState({
@@ -174,13 +173,13 @@ const CoursesPage = () => {
         <div className="flex lg:flex-row md:flex-row flex-col md:justify-start">
           {/* Filter Sidebar */}
           {categories.length > 0 ? (
-            <div className="border-2 sticky top-0  h-full z-30 w-full md:w-[25%] bg-[#FFFFFF] ">
+            <div className="border-2 md:sticky top-0  h-full z-30 w-full md:w-[25%] bg-[#FFFFFF] ">
               <div className="flex flex-col px-4 py-2 gap-2 relative">
                 <p className="font-readex xl:text-[24px] 2xl:text-[27px] lg:text-[20px] md:text-[17px] text-[16px]">
                   Categories
                 </p>
                 <svg
-                  className="absolute top-9 left-6 -z-10"
+                  className="absolute gl:top-9 md:top-6 top-5 md:left-6 -z-10"
                   width="113"
                   height="21"
                   viewBox="0 0 113 21"
@@ -240,7 +239,7 @@ const CoursesPage = () => {
                   Levels
                 </p>
                 <svg
-                  className="absolute top-9 left-1 -z-10"
+                  className="absolute gl:top-9 md:top-6 top-5 md:left-6 -z-10"
                   width="113"
                   height="21"
                   viewBox="0 0 113 21"
