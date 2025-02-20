@@ -361,7 +361,7 @@ const Header = () => {
                       </NavLink>
                       {userInfo?.role === "Admin" && (
                         <NavLink
-                          to="http://51.24.30.180:5174/"
+                          to="http://www.igniup.com:5174/"
                           target="_blank"
                           className="w-full text-lg text-center hover:bg-gray-100 text-gray-700 border border-gray-300 py-2 rounded-md mb-2 transition duration-300"
                           onClick={handleEditProfile}
