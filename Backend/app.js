@@ -15,7 +15,7 @@ const subscribeRoutes = require('./routes/subscribeRoutes')
 const dashborad = require('./routes/dashboard')
 const offers = require('./routes/offers')
 
-const allowedOrigins = ["http://51.24.30.180:5173", "http://51.24.30.180:5174","http://globaltuitions.co.uk", "http://admin.globaltuitions.co.uk:5174"];
+const allowedOrigins = ["http://51.24.30.180:5173", "http://51.24.30.180:5174","http://globaltuitions.co.uk", "http://admin.globaltuitions.co.uk"];
 
 app.use(cors({
     origin: (origin, callback) => {
