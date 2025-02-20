@@ -125,7 +125,7 @@ const Signup = () => {
                     >
                       Full Name
                     </label>
-                    <input
+                    <Field
                       type="text"
                       id="name"
                       name="name"
@@ -147,7 +147,7 @@ const Signup = () => {
                     >
                       Email Address
                     </label>
-                    <input
+                    <Field
                       type="email"
                       id="email"
                       name="email"
@@ -169,7 +169,7 @@ const Signup = () => {
                     >
                       Password
                     </label>
-                    <input
+                    <Field
                       type="password"
                       id="password"
                       name="password"
@@ -186,7 +186,7 @@ const Signup = () => {
                   {/* Remember Me Checkbox */}
                   <div className="flex items-center justify-between">
                     <label className="flex items-center space-x-2">
-                      <input
+                      <Field
                         type="checkbox"
                         name="remember"
                         className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
