@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "http://www.igniup.com:3000";
+const baseUrl = "http://51.24.30.180:3000";
 axios.defaults.withCredentials = true;
 
 // get enabled categories
