@@ -201,7 +201,7 @@ const Header = () => {
             </NavLink>
           </div>
 
-          <div className="lg:w-1/3  h-full hidden lg:flex items-center justify-start gap-x-4">
+          <div className="lg:w-1/3 text-lg  h-full hidden lg:flex items-center justify-start gap-x-4">
             {links.map((link, index) => (
               <NavLink
                 to={link.link}
@@ -302,7 +302,7 @@ const Header = () => {
               {loading ? (
                 <></>
               ) : !btns ? (
-                <div className="flex items-center w-full justify-center gap-x-1">
+                <div className="flex items-center text-lg w-full justify-center gap-x-1">
                   <NavLink
                     to="/signin"
                     className=" text-sm py-2 px-3 bg-black border text-white text-center rounded-lg border-white w-1/2"

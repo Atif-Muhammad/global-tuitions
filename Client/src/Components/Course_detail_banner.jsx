@@ -51,9 +51,9 @@ const Course_detail_banner = (props) => {
         <div ref={pageRef}>
           {/* <!-- Banner Section - Course Detail --> */}
           <div className="bg-[#a4dcaa] py-8 font-readex">
-            <div className="px-6 md:px-8 lg:px-10 xl:px-20 2xl:px-28">
+            <div className="px-6 md:px-8 flex justify-center lg:px-10 xl:px-20 2xl:px-28">
               {/* <!-- Main Container --> */}
-              <div className="flex flex-col lg:flex-row gap-8 lg:justify-between justify-center items-center relative">
+              <div className="flex flex-col max-w-[1250px] lg:flex-row gap-8 lg:justify-between justify-center items-center relative">
                 {/* <!-- HTML for Beginners Section --> */}
                 <div className="lg:w-[45%] md:w-[80%] w-[90%] flex flex-col gap-6">
                   {/* <!-- Title --> */}
@@ -66,7 +66,7 @@ const Course_detail_banner = (props) => {
                     />
                   </div>
                   {/* <!-- Description --> */}
-                  <div className="tracking-tighter  leading-tight text-[px] md:text-[px] lg:text-[20px] xl:text-[px] 2xl:text-[px] font-light">
+                  <div className="lg:w-full leading-relaxed  font-poppins md:text-[16px] xl:text-[18px] 2xl:text-[20px] text-black">
                     <p
                       dangerouslySetInnerHTML={{
                         __html: DOMPurify.sanitize(course?.course_description),
@@ -125,15 +125,14 @@ const Course_detail_banner = (props) => {
                               hour: "numeric",
                               minute: "numeric",
                               hour12: true,
-                            })}
-                            {" "}
+                            })}{" "}
                             {new Date(course?.date).toLocaleDateString(
                               "en-US",
                               {
                                 timeZone: "UTC",
-                                month: "long", 
-                                day: "numeric", 
-                                year: "numeric", 
+                                month: "long",
+                                day: "numeric",
+                                year: "numeric",
                               }
                             )}{" "}
                           </p>
