@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "http://globaltuitions.co.uk:3000/api";
+const baseUrl = "https://globaltuitions.co.uk/api";
 axios.defaults.withCredentials = true;
 
 // get enabled categories

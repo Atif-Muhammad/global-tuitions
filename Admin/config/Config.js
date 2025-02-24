@@ -1,7 +1,7 @@
 import { data } from "autoprefixer";
 import axios from "axios";
 
-const BASE_URL = "http://globaltuitions.co.uk:3000/api";
+const BASE_URL = "https://globaltuitions.co.uk/api";
 axios.defaults.withCredentials = true;
 
 const API_URLS = {
