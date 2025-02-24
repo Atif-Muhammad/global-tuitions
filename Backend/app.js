@@ -15,17 +15,10 @@ const subscribeRoutes = require('./routes/subscribeRoutes')
 const dashborad = require('./routes/dashboard')
 const offers = require('./routes/offers')
 
-const allowedOrigins = ["http://www.igniup.com:5173", "http://www.igniup.com:5174"];
+const allowedOrigins = ["http://51.24.30.180:5173", "http://51.24.30.180:5174","https://globaltuitions.co.uk", "https://admin.globaltuitions.co.uk"];
 
 app.use(cors({
-    origin: (origin, callback) => {
-        // console.log(origin)
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true); 
-        } else {
-            callback(new Error('Not allowed by CORS')); 
-        }
-    },
+    origin: allowedOrigins,
     credentials: true, 
 }));
 
@@ -46,30 +39,30 @@ mongoose.connect(process.env.DATABASE_URI).then(result => {
 
 
 // 1. categories
-app.use('/categories', categoriesRoute);
+app.use('/api/categories', categoriesRoute);
 
 // 2. courses
-app.use('/courses', coursesRoute);
+app.use('/api/courses', coursesRoute);
 
 // 3.  inquiries
-app.use('/inquiries', inquiryRoute);
+app.use('/api/inquiries', inquiryRoute);
 
 // 4. enrollments
-app.use('/enrollments', enrollmentRoute);
+app.use('/api/enrollments', enrollmentRoute);
 
 // 5. students
-app.use('/student', studentRoutes);
+app.use('/api/student', studentRoutes);
 
 // 6. check user session
-app.use('/checkSession', CheckUser);
+app.use('/api/checkSession', CheckUser);
 
-app.use('/subscription', subscribeRoutes)
+app.use('/api/subscription', subscribeRoutes)
 
-app.use('/dashboard', dashborad)
+app.use('/api/dashboard', dashborad)
 
-app.use('/offers', offers)
+app.use('/api/offers', offers)
 
 
-app.get('/ping', (req, res) => {
+app.get('/api/ping', (req, res) => {
     res.status(200).json({msg: "pong....."})
 })
