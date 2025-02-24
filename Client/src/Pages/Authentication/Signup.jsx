@@ -94,7 +94,7 @@ const Signup = () => {
         pauseOnHover
       />
 
-<div className="h-[90vh] flex items-center  justify-center bg-[#a4dcaa]/80">
+      <div className="h-[90vh] flex items-center  justify-center bg-[#a4dcaa]/80">
         {/* Card Container with margin-top for better spacing */}
         <div className="w-full max-w-lg bg-[#a4dcaa] rounded-xl shadow-2xl shadow-black  border border-gray-200 mt-10">
           {/* Header Section */}
@@ -203,8 +203,6 @@ const Signup = () => {
                   >
                     {isSubmitting ? <Buttonloader /> : <>Create Account</>}
                   </button>
-
-                 
                 </Form>
               )}
             </Formik>
@@ -212,10 +210,7 @@ const Signup = () => {
             <div className="text-center py-2">
               <p className="text-sm text-gray-700">
                 Already have an account?{" "}
-                <NavLink
-                  to="/signin"
-                  className="text-white font-semibold"
-                >
+                <NavLink to="/signin" className="text-black font-semibold">
                   Sign in here
                 </NavLink>
               </p>

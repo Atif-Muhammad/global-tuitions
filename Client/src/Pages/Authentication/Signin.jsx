@@ -191,7 +191,7 @@ const Signin = () => {
                Don't have an account?{" "}
                <NavLink
                  to="/signup"
-                 className="text-white font-semibold hover:underline"
+                 className="text-black font-semibold hover:underline"
                  title="Create your free Global Tuition account"
                  aria-label="Create your free Global Tuition account"
                >
