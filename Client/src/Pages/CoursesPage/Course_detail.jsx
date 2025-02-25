@@ -6,7 +6,7 @@ const Course_detail = () => {
   const location = useLocation();
   const course = location.state;
   const id = useParams()
-  // console.log("in banner:", course);
+  // console.log("in banner:", id);
   return (
     <div>
       <Helmet>

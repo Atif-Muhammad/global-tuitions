@@ -44,7 +44,7 @@ function App() {
                   <Route path="/" element={<Index />} />
                   <Route path="*" element={<NotfoundPage />} />
                   <Route path="/courses" element={<CoursesPage />} />
-                  <Route path="/Course_detail" element={<Course_detail />} />
+                  <Route path="/Course_detail/:id" element={<Course_detail />} />
                   <Route path="/inquiry" element={<Inquiry />} />
                   <Route path="/freeCourses" element={<FreeCoursesBanner />} />
                   <Route path="/offers" element={<Offers />} />

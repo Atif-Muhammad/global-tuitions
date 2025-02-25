@@ -17,7 +17,7 @@ const Course_detail_banner = (props) => {
 
   useEffect(() => {
     // console.log("in details", id);
-    Config.get_enabled_contents(id)
+    Config.get_enabled_contents(id.id)
       .then((res) => {
         setCourse(res);
       })

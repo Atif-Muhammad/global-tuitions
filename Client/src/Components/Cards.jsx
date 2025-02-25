@@ -18,7 +18,7 @@ const Card = (props) => {
   };
 
   const handleNavigate = (id)=>{
-    navigate(`/Course_detail/${id}`)
+    navigate(`/Course_detail/${id}`)  
   }
 
   useEffect(() => {
@@ -143,7 +143,7 @@ const Card = (props) => {
           {/* <Link to="/Course_detail" state={props.course._id}>
             <button className="btnbutton">Details</button>
           </Link> */}
-          <button onClick={(props)=> handleNavigate(props.course._id)}>
+          <button onClick={()=> handleNavigate(props.course._id)}>
             <button className="btnbutton">Details</button>
           </button>
         </div>
