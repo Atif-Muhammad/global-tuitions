@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { RiMenu3Fill } from "react-icons/ri";
 import { IoMdClose } from "react-icons/io";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import Config from "../../../Config/Config";
 import { CgProfile } from "react-icons/cg";
 import { FaTimes } from "react-icons/fa";
@@ -9,6 +9,7 @@ import { TbLogout } from "react-icons/tb";
 import valueContext from "../../Context/context";
 
 const Header = () => {
+  const navigate = useNavigate()
   const location = useLocation();
   const [menu, setMenu] = useState(false);
   const menuRef = useRef(null);
