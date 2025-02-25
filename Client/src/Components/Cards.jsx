@@ -1,10 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import DOMPurify from "dompurify";
 import { FaBookmark } from "react-icons/fa6";
 import { MdPlayArrow } from "react-icons/md";
 
 const Card = (props) => {
+  const navigate = useNavigate()
   const descriptionRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -16,8 +17,12 @@ const Card = (props) => {
     setCurrentIndex((prev) => (prev - 1 + 2) % 2);
   };
 
+  const handleNavigate = (id)=>{
+    navigate(`/Course_detail/${id}`)
+  }
+
   useEffect(() => {
-    console.log(":::", props.course);
+    // console.log(":::", props.course);
   }, []);
 
   return (
@@ -135,9 +140,12 @@ const Card = (props) => {
           </p>
         </div>
         <div>
-          <Link to="/Course_detail" state={props.course._id}>
+          {/* <Link to="/Course_detail" state={props.course._id}>
             <button className="btnbutton">Details</button>
-          </Link>
+          </Link> */}
+          <button onClick={(props)=> handleNavigate(props.course._id)}>
+            <button className="btnbutton">Details</button>
+          </button>
         </div>
       </div>
     </div>

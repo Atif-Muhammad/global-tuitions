@@ -1,10 +1,11 @@
 import React from "react";
 import Course_detail_banner from "../../Components/Course_detail_banner";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 const Course_detail = () => {
   const location = useLocation();
   const course = location.state;
+  const id = useParams()
   // console.log("in banner:", course);
   return (
     <div>
@@ -17,7 +18,7 @@ const Course_detail = () => {
 
       <Course_detail_banner
         // course={course}
-        id={course?._id}
+        id={id}
         // skills={course.skills}
       />
     </div>
