@@ -180,6 +180,10 @@ const Header = () => {
     setSearch(course_name);
     setCourseName(course_name);
   };
+  const handleNavigate = (course)=>{
+    handleRedirect(course.course_name)
+    navigate(`/Course_detail/${course._id}`)  
+  }
 
   const handleBlur = (e) => {
     setTimeout(() => {
@@ -280,15 +284,14 @@ const Header = () => {
                 <div className="absolute z-20 left-0 top-12 w-full max-h-[50vh] overflow-y-auto bg-white border border-gray-300 shadow-lg rounded-lg mt-2">
                   {filteredCourses.length > 0 ? (
                     filteredCourses.map((course, index) => (
-                      <NavLink
-                        to="/Course_detail"
-                        state={course._id}
-                        onClick={() => handleRedirect(course.course_name)}
+                      <button
                         className="w-full px-4 py-3 flex items-center text-gray-800 hover:bg-green-100 transition-all duration-300 ease-in-out border-b"
                         key={index}
+                        onClick={()=> handleNavigate(course)}
                       >
                         {course.course_name}
-                      </NavLink>
+                      </button>
+                      
                     ))
                   ) : (
                     <div className="w-full px-4 py-3 text-gray-600 flex items-center">
@@ -415,15 +418,13 @@ const Header = () => {
                   <div className="absolute z-10 left-0 top-20 w-full  max-h-[35vh] overflow-scroll overflow-x-hidden  h-fit bg-[#7acc82] border-2">
                     {filteredCourses.length > 0 ? (
                       filteredCourses.map((course, index) => (
-                        <NavLink
-                          to="/Course_detail"
-                          state={course}
-                          onClick={() => handleRedirect(course.course_name)}
-                          className="w-full px-2 py-3 flex items-center justify-start hover:bg-[#A4DCAA] cursor-pointer border-b-2"
-                          key={index}
-                        >
-                          {course.course_name}
-                        </NavLink>
+                        <button
+                        className="w-full px-4 py-3 flex items-center text-gray-800 hover:bg-green-100 transition-all duration-300 ease-in-out border-b"
+                        key={index}
+                        onClick={()=> handleNavigate(course)}
+                      >
+                        {course.course_name}
+                        </button>
                       ))
                     ) : (
                       <div className="w-full px-2 py-3 flex items-center justify-start hover:bg-[#A4DCAA] cursor-pointer border-b-2">
