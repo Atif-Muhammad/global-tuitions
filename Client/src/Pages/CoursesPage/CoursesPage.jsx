@@ -313,6 +313,7 @@ const CoursesPage = () => {
                     (course) =>
                       course.deleted === false && course.enabled_flag === true
                   )
+                  .sort((a, b) => a.sort_value - b.sort_value)
                   .map((course, index) => <Cards key={index} course={course} />)
               )}
             </div>
