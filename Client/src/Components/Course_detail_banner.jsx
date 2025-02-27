@@ -109,7 +109,6 @@ const Course_detail_banner = (props) => {
               <div className="flex flex-col max-w-[1250px] lg:flex-row gap-8 lg:justify-between justify-center items-center relative">
                 {/* <!-- HTML for Beginners Section --> */}
                 <div className="lg:w-[45%] md:w-[80%] w-[90%] flex flex-col gap-6">
-                  {/* <!-- Title --> */}
                   <div className=" font-extrabold  leading-[0.9] text-[50px] md:text-[60px] lg:text-[70px] xl:text-[80px] 2xl:text-[90px] w-full">
                     <p>{course?.course_name}</p>
                     <img
