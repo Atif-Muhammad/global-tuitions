@@ -38,7 +38,7 @@ const Course_detail_banner = (props) => {
     const imgWidth = pdfWidth;
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-    const websiteURL = "https://yourwebsite.com"; // Apni website ka URL yahan daalain
+    const websiteURL = "https://globaltuitions.co.uk/"; // Apni website ka URL yahan daalain
     pdf.setTextColor(0, 0, 255);
     pdf.textWithLink("Visit Our Website", 10, 10, { url: websiteURL });
 
@@ -87,7 +87,7 @@ const Course_detail_banner = (props) => {
       if (remainingHeight > 0) {
         pdf.addPage();
         pdf.textWithLink("Visit Our Website", 10, 10, { url: websiteURL });
-        yPosition = 20; // Reset position for new page
+        yPosition = 20; 
       }
     }
 
