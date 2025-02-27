@@ -16,7 +16,6 @@ const Course_detail_banner = (props) => {
   // console.log("from state: ", id);
 
   useEffect(() => {
-    // console.log("in details", id);
     Config.get_enabled_contents(id.id)
       .then((res) => {
         setCourse(res);
@@ -42,7 +41,6 @@ const Course_detail_banner = (props) => {
     pdf.setTextColor(0, 0, 255);
     pdf.textWithLink("Visit Our Website", 10, 10, { url: websiteURL });
 
-    // Underline draw karne ke liye line add karein
     const textWidth = pdf.getTextWidth("Visit Our Website");
     pdf.setDrawColor(0, 0, 255); // Blue color for underline
     pdf.line(10, 12, 10 + textWidth, 12); // (startX, startY, endX, endY)
@@ -87,7 +85,7 @@ const Course_detail_banner = (props) => {
       if (remainingHeight > 0) {
         pdf.addPage();
         pdf.textWithLink("Visit Our Website", 10, 10, { url: websiteURL });
-        yPosition = 20; 
+        yPosition = 20;
       }
     }
 
