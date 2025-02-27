@@ -37,7 +37,7 @@ const Course_detail_banner = (props) => {
     const imgWidth = pdfWidth;
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-    const websiteURL = "https://globaltuitions.co.uk/"; // Apni website ka URL yahan daalain
+    const websiteURL = "https://globaltuitions.co.uk/"; 
     pdf.setTextColor(0, 0, 255);
     pdf.textWithLink("Visit Our Website", 10, 10, { url: websiteURL });
 
