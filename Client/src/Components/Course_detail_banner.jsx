@@ -30,18 +30,71 @@ const Course_detail_banner = (props) => {
     const page = pageRef.current;
     const canvas = await html2canvas(page, { scale: 2 });
     const imgData = canvas.toDataURL("image/png");
+
     const pdf = new jsPDF("p", "mm", "a4");
-
     const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+    const pdfHeight = pdf.internal.pageSize.getHeight();
 
-    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-    pdf.save("page.pdf");
+    const imgWidth = pdfWidth;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+    const websiteURL = "https://yourwebsite.com"; // Apni website ka URL yahan daalain
+    pdf.setTextColor(0, 0, 255);
+    pdf.textWithLink("Visit Our Website", 10, 10, { url: websiteURL });
+
+    // Underline draw karne ke liye line add karein
+    const textWidth = pdf.getTextWidth("Visit Our Website");
+    pdf.setDrawColor(0, 0, 255); // Blue color for underline
+    pdf.line(10, 12, 10 + textWidth, 12); // (startX, startY, endX, endY)
+
+    let yPosition = 20; // Initial Y position after website link
+    let remainingHeight = imgHeight;
+    let sourceY = 0;
+
+    while (remainingHeight > 0) {
+      const heightToPrint = Math.min(remainingHeight, pdfHeight - yPosition); // Current page height limit
+
+      const canvasSection = document.createElement("canvas");
+      const ctx = canvasSection.getContext("2d");
+      canvasSection.width = canvas.width;
+      canvasSection.height = (canvas.width * heightToPrint) / imgWidth;
+
+      ctx.drawImage(
+        canvas,
+        0,
+        sourceY,
+        canvas.width,
+        canvasSection.height,
+        0,
+        0,
+        canvas.width,
+        canvasSection.height
+      );
+      const sectionImgData = canvasSection.toDataURL("image/png");
+
+      pdf.addImage(
+        sectionImgData,
+        "PNG",
+        0,
+        yPosition,
+        imgWidth,
+        heightToPrint
+      );
+
+      remainingHeight -= heightToPrint;
+      sourceY += canvasSection.height;
+
+      if (remainingHeight > 0) {
+        pdf.addPage();
+        pdf.textWithLink("Visit Our Website", 10, 10, { url: websiteURL });
+        yPosition = 20; // Reset position for new page
+      }
+    }
+
+    pdf.save("course-details.pdf");
   };
 
   const pageRef = useRef();
-
-  // if (!course) return <Loader />;
 
   return (
     <>
