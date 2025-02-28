@@ -96,7 +96,7 @@ const Signup = () => {
 
       <div className="h-[90vh] flex items-center  justify-center bg-[#a4dcaa]/80">
         {/* Card Container with margin-top for better spacing */}
-        <div className="w-full max-w-lg bg-[#a4dcaa] rounded-xl shadow-2xl shadow-black  border border-gray-200 mt-10">
+        <div className="w-full max-w-lg font-urbanist bg-[#a4dcaa] rounded-xl shadow-2xl shadow-black  border border-gray-200 mt-10">
           {/* Header Section */}
           <div className="text-center  rounded-t-xl py-4 bg-black text-white flex flex-col gap-y-2">
             <h1 className="text-4xl font-extrabold">Create Your Account</h1>

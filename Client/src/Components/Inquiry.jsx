@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Config from "../../Config/Config"; 
+import Config from "../../Config/Config";
 import { useLocation, useNavigate } from "react-router-dom";
 import ContactusImg from "./../assets/images/contactus-img.png";
 import DOMPurify from "dompurify";
@@ -162,7 +162,7 @@ const Inquiry = () => {
           </div>
 
           {isCourse ? (
-            <div className="flex flex-col gap-5 px-5 sm:px-8 md:px-12 lg:px-14 xl:px-16 2xl:px-20 py-7 sm:py-8 md:py-10 lg:py-12 xl:py-14 w-full md:w-1/2">
+            <div className="flex flex-col gap-5 font-urbanist px-5 sm:px-8 md:px-12 lg:px-14 xl:px-16 2xl:px-20 py-7 sm:py-8 md:py-10 lg:py-12 xl:py-14 w-full md:w-1/2">
               <div className="flex justify-start flex-col gap-y-4">
                 <div className="text-[30px] sm:text-[40px] md:text-[50px] lg:text-[60px] xl:text-[70px] 2xl:text-[80px] font-extrabold  leading-[0.9] font-readex">
                   <p>{course?.course_name}</p>
@@ -188,7 +188,7 @@ const Inquiry = () => {
               </div>
             </div>
           ) : (
-            <div className="px-5 sm:px-8 md:px-12 lg:px-14 xl:px-16 2xl:px-20 py-7 sm:py-8 md:py-10 lg:py-12 xl:py-14 w-full md:w-1/2">
+            <div className="px-5 sm:px-8 font-urbanist md:px-12 lg:px-14 xl:px-16 2xl:px-20 py-7 sm:py-8 md:py-10 lg:py-12 xl:py-14 w-full md:w-1/2">
               <div className="flex justify-start">
                 <div className="text-[30px] sm:text-[40px] md:text-[50px] lg:text-[60px] xl:text-[70px] font-extrabold font-readex">
                   <p>Contact Us</p>
