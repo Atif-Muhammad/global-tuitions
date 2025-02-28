@@ -41,7 +41,7 @@ const Course_detail_banner = (props) => {
     pdf.setTextColor(0, 0, 255);
     pdf.textWithLink("Visit Our Website", 10, 10, { url: websiteURL });
 
-    const textWidth = pdf.getTextWidth("globaltuitions.co.uk/");
+    const textWidth = pdf.getTextWidth("globaltuitions.co.uk");
     pdf.setDrawColor(0, 0, 255); // Blue color for underline
     pdf.line(10, 12, 10 + textWidth, 12); // (startX, startY, endX, endY)
 
