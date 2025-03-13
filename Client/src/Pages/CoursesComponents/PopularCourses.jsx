@@ -89,7 +89,7 @@ const PopularCourses = () => {
             </div>
 
             {/* Custom Navigation Buttons */}
-            <div className="absolute top-[55%] lg:left-[1.5%] xl:left-[4%] md:left-[1%] -translate-y-[50%] z-10">
+            <div className="absolute top-[55%] lg:left-[1.5%] xl:left-[2.5%] md:left-[1%] -translate-y-[50%] z-10">
               <button
                 className={`swiper-button-prev-custom p-3 text-white rounded-full shadow  transition-all duration-300 ${
                   isPrevDisabled ? "bg-gray-600 " : "bg-black"
@@ -101,7 +101,7 @@ const PopularCourses = () => {
               </button>
             </div>
 
-            <div className="absolute top-[55%] lg:right-[1.5%] xl:right-[4%] md:right-[1%] right-0 -translate-y-[50%] z-10">
+            <div className="absolute top-[55%] lg:right-[1.5%] xl:right-[2.5%] md:right-[1%] right-0 -translate-y-[50%] z-10">
               <button
                 className={`swiper-button-next-custom p-3 text-white rounded-full shadow  transition-all duration-300 ${
                   isNextDisabled ? "bg-gray-600 " : "bg-black"
