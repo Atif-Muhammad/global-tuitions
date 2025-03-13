@@ -167,7 +167,7 @@ const Inquiry = () => {
                 <div className="text-[30px] sm:text-[40px] md:text-[50px] lg:text-[60px] xl:text-[70px] 2xl:text-[80px] font-extrabold  leading-[0.9] font-readex">
                   <p>{course?.course_name}</p>
                 </div>
-                <div className="gap-y-2 flex flex-col text-[10px] sm:text-[10px] md:text-[10px] lg:text-[10px] xl:text-[10px] 2xl:text-[20px] font-semibold  leading-[0.9] font-readex">
+                <div className="gap-y-2 flex flex-col text-[10px] md:text-[13px] lg:text-[16px] xl:text-[18px] 2xl:text-[22px] font-semibold  leading-[0.9] font-readex">
                   {course?.price ? (
                     <p>price: {course?.price}£</p>
                   ) : (

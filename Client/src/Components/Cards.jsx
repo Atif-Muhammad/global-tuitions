@@ -35,7 +35,7 @@ const Card = (props) => {
             transition: "transform 0.7s ease-in-out",
           }}
         >
-          <div className="w-full h-72 bg-custom-green rounded-t-xl">
+          <div className="w-full h-72 bg-custombg rounded-t-xl">
             <div className="flex justify-between bg-black text-white rounded-t-lg items-center p-3.5">
               <h3 className="text-2xl font-medium">
                 Duration:{" "}
@@ -45,7 +45,7 @@ const Card = (props) => {
               </h3>
               <FaBookmark />
             </div>
-            <div className="flex  items-center  h-48 ">
+            <div className="flex  items-center   h-48 ">
               <h3 className=" px-2 md:text-3xl  text-[32px] font-bold">
                 {props.course?.course_name}
               </h3>
@@ -59,7 +59,7 @@ const Card = (props) => {
             transition: "transform 0.7s ease-in-out",
           }}
         >
-          <div className="w-full h-72 bg-custom-green rounded-t-xl  ">
+          <div className="w-full h-72 bg-custombg rounded-t-xl  ">
             <div className="flex justify-between items-center p-3.5 bg-black text-white rounded-t-lg">
               {props.course?.price ? (
                 <h3 className="text-2xl font-bold">
@@ -143,7 +143,7 @@ const Card = (props) => {
           {/* <Link to="/Course_detail" state={props.course._id}>
             <button className="btnbutton">Details</button>
           </Link> */}
-          <button onClick={()=> handleNavigate(props.course._id)}>
+          <button onClick={() => handleNavigate(props.course._id)}>
             <button className="btnbutton">Details</button>
           </button>
         </div>

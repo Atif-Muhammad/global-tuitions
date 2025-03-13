@@ -39,7 +39,9 @@ const Course_detail_banner = (props) => {
 
     const websiteURL = "https://globaltuitions.co.uk/";
     pdf.setTextColor(0, 0, 255);
-    pdf.textWithLink("Visit Our Website", 10, 10, { url: websiteURL });
+    pdf.textWithLink("globaltuitions.co.uk", 10, 10, {
+      url: websiteURL,
+    });
 
     const textWidth = pdf.getTextWidth("globaltuitions.co.uk");
     pdf.setDrawColor(0, 0, 255); // Blue color for underline
@@ -84,7 +86,9 @@ const Course_detail_banner = (props) => {
 
       if (remainingHeight > 0) {
         pdf.addPage();
-        pdf.textWithLink("Visit Our Website", 10, 10, { url: websiteURL });
+        pdf.textWithLink("globaltuitions.co.uk", 10, 10, {
+          url: websiteURL,
+        });
         yPosition = 20;
       }
     }
@@ -101,7 +105,7 @@ const Course_detail_banner = (props) => {
       ) : (
         <div ref={pageRef}>
           {/* <!-- Banner Section - Course Detail --> */}
-          <div className="bg-[#a4dcaa] py-8 font-readex">
+          <div className="bg-custombg py-8 font-readex">
             <div className="px-6 md:px-8 flex justify-center lg:px-10 xl:px-20 2xl:px-28">
               {/* <!-- Main Container --> */}
               <div className="flex flex-col max-w-[1250px] lg:flex-row gap-8 lg:justify-between justify-center items-center relative">

@@ -286,13 +286,12 @@ const Header = () => {
                   {filteredCourses.length > 0 ? (
                     filteredCourses.map((course, index) => (
                       <button
-                        className="w-full px-4 py-3 flex items-center text-gray-800 hover:bg-green-100 transition-all duration-300 ease-in-out border-b"
+                        className="w-full px-4 py-3 flex text-left text-gray-800 hover:bg-green-100 transition-all duration-300 ease-in-out border-b"
                         key={index}
-                        onClick={()=> handleNavigate(course)}
+                        onClick={() => handleNavigate(course)}
                       >
                         {course.course_name}
                       </button>
-                      
                     ))
                   ) : (
                     <div className="w-full px-4 py-3 text-gray-600 flex items-center">
@@ -306,16 +305,16 @@ const Header = () => {
               {loading ? (
                 <></>
               ) : !btns ? (
-                <div className="flex items-center text-lg w-full justify-center gap-x-1">
+                <div className="flex items-center  w-full justify-center gap-x-1">
                   <NavLink
                     to="/signin"
-                    className=" text-sm py-2 px-3 bg-black border text-white text-center rounded-lg border-white w-1/2"
+                    className="  text-[12px] py-2 px-2.5 bg-black border text-white text-center rounded-lg border-white "
                   >
                     Sign in
                   </NavLink>
                   <NavLink
                     to="/signup"
-                    className=" text-sm py-2 px-3 bg-black border text-white text-center rounded-lg border-white w-1/2"
+                    className=" text-[12px] py-2 px-2.5 bg-black border text-white text-center rounded-lg border-white "
                   >
                     Sign Up
                   </NavLink>
@@ -420,11 +419,11 @@ const Header = () => {
                     {filteredCourses.length > 0 ? (
                       filteredCourses.map((course, index) => (
                         <button
-                        className="w-full px-4 py-3 flex items-center text-gray-800 hover:bg-green-100 transition-all duration-300 ease-in-out border-b"
-                        key={index}
-                        onClick={()=> handleNavigate(course)}
-                      >
-                        {course.course_name}
+                          className="w-full px-4 py-3 flex items-center text-gray-800 hover:bg-green-100 transition-all duration-300 ease-in-out border-b"
+                          key={index}
+                          onClick={() => handleNavigate(course)}
+                        >
+                          {course.course_name}
                         </button>
                       ))
                     ) : (

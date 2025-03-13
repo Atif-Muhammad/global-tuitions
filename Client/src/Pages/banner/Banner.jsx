@@ -21,7 +21,7 @@ const Banner = () => {
       </Helmet>
 
       {/* <!-- banner section  --> */}
-      <div className="bg-[#A4DCAA] w-full h-auto lg:rounded-bl-[300px] md:rounded-bl-[200px]">
+      <div className="bg-custombg w-full h-auto lg:rounded-bl-[300px] md:rounded-bl-[200px]">
         <div className="flex md:flex-row flex-col-reverse py-5 h-auto">
           <div className="md:w-[60%] w-full flex items-center">
             <div className="flex flex-col gap-5 md:justify-center justify-center px-5 md:px-[100px] lg:px-[120px] xl:px-[140px] 2xl:px-[170px]">

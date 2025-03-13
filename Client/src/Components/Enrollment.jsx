@@ -110,11 +110,10 @@ const Enrollment = () => {
     <Suspense fallback={loader}>
       <ToastContainer />
 
-   
       <div className="w-full h-auto">
-        <div className="flex md:flex-row flex-col">
+        <div className="flex lg:flex-row flex-col ">
           {/* <!-- inquiry section  --> */}
-          <div className="bg-[#73a979] xl:px-16 2xl:px-20 md:px-12 lg:px-14 px-10 md:py-8 lg:py-10 py-7 xl:py-12 2xl:py-14 font-readex w-full md:w-1/2">
+          <div className="bg-[#73a979] xl:px-16 2xl:px-20 md:px-12 lg:px-14 px-10 md:py-8 lg:py-10 py-7 xl:py-12 2xl:py-14 font-readex w-full lg:w-1/2">
             <form
               onSubmit={handleSubmit}
               className="flex flex-col gap-5 justify-start"
@@ -249,7 +248,7 @@ const Enrollment = () => {
             </form>
           </div>
           {/* <!-- contact us section  --> */}
-          <div className="flex flex-col gap-2 xl:px-16 2xl:px-20 md:px-12 lg:px-14 px-10 md:py-8 lg:py-10 py-7 xl:py-12 2xl:py-14 w-full md:w-1/2">
+          <div className="flex flex-col gap-2 xl:px-16 2xl:px-20 md:px-12 lg:px-14 px-10 md:py-8 lg:py-10 py-7 xl:py-12 2xl:py-14 w-full lg:w-1/2">
             {/* <!-- contact us heading  --> */}
             <div className="flex justify-start">
               <div className="lg:text-[70px] md:text-[60px] text-[40px] xl:text-[80px] 2xl:text-[90px] font-extrabold font-readex leading-tight lg:leading-[90px] tracking-tighter">

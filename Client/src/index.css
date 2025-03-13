@@ -8,7 +8,7 @@
 
 /* Custom Button Class */
 .btn-custom {
-  @apply inline-block text-center self-start py-2 px-4 xl:px-5 bg-black 
+  @apply inline-block text-center self-start py-2 px-4 xl:px-5 w-full bg-black 
     border-white border-[2px] hover:shadow-black rounded-lg 
     text-slate-50 shadow-md duration-500 
     text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px];
@@ -23,10 +23,8 @@
 @layer utilities {
   /* Reusable 'input-field' class */
   .input-field {
-    @apply py-2 w-[230px] md:w-[80%] lg:w-[75%] xl:w-[65%] 2xl:w-[330px] 
-         rounded-lg bg-transparent border-[1px] border-black 
-         placeholder-gray-600 text-[10px] lg:text-[15px] pl-5 xl:pl-7 
-         2xl:pl-9 focus:outline-none focus:border-black focus:text-left;
+    @apply py-2 w-full rounded-lg bg-transparent border-[2px] border-black 
+         placeholder-gray-600 text-[10px] lg:text-[15px] pl-5  focus:outline-none focus:border-black focus:text-left;
   }
   /* join us classes end  */
 

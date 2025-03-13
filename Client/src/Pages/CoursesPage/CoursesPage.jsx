@@ -44,20 +44,19 @@ const CoursesPage = () => {
 
   // Handle category selection
   const handleCategoryChange = (cid) => {
-    setSelectedCategory((prev) => (prev === cid ? "all" : cid)); // Toggle category, default to "all"
+    setSelectedCategory(cid === selectedCategory ? "all" : cid);
     setSelectedLevels({
       all: true,
       beginner: false,
       intermediate: false,
       advanced: false,
     });
-    setCurrentPage(1); // Reset to the first page when the category changes
+    setCurrentPage(1);
   };
 
   const handleLevelChange = (level) => {
     setSelectedLevels((prev) => {
       if (level === "all") {
-        // If "All Levels" is selected, reset all levels and only select "All"
         return {
           all: true,
           beginner: false,
@@ -66,7 +65,6 @@ const CoursesPage = () => {
         };
       }
 
-      // If the clicked level is already selected, unselect it and default to "All Levels"
       if (prev[level]) {
         return {
           all: true,
@@ -76,7 +74,6 @@ const CoursesPage = () => {
         };
       }
 
-      // Select only the clicked level and unselect all others
       return {
         all: false,
         beginner: level === "beginner",
@@ -84,6 +81,7 @@ const CoursesPage = () => {
         advanced: level === "advance",
       };
     });
+    setCurrentPage(1); // ✅ Reset page number
   };
 
   // Filter categories and courses based on the selected category and levels
@@ -305,8 +303,6 @@ const CoursesPage = () => {
                 [...Array(6)].map((_, index) => <SkeletonCard key={index} />)
               ) : currentCourses.length === 0 ? (
                 <NoSkeleton message={"Courses Not Available"} />
-              ) : currentCourses.length === 0 ? (
-                <NoSkeleton message={"Courses Not Available"} />
               ) : (
                 currentCourses
                   .filter(
@@ -335,7 +331,7 @@ const CoursesPage = () => {
                 }}
                 className={`px-4 py-2 border ${
                   currentPage === index + 1
-                    ? "bg-black text-white"
+                    ? "bg-black text-white font-bold"
                     : "bg-gray-200"
                 }`}
               >
