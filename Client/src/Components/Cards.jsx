@@ -22,8 +22,8 @@ const Card = (props) => {
   };
 
   useEffect(() => {
-    // console.log(":::", props.course);
-  }, []);
+    setCurrentIndex(0); 
+  }, [props.course]);
 
   return (
     <div class="relative overflow-hidden font-urbanist bg-white w-full h-full flex flex-col  p-0 rounded-xl shadow-black shadow-lg ">

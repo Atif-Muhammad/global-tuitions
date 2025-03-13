@@ -17,6 +17,22 @@ router.get('/course', async (req, res)=>{
     }
 });
 
+router.get('/landingCourses', async (req, res)=>{
+  try {
+    const courses = await coursesModel.find({ $and: [{ enabled_flag: true }, { deleted: false }] },{
+      course_name: 1, date: 1, time:1, price: 1, course_description: 1, rating: 1, course_level:1, course_duration: 1, popular:1, category_id: 1, course_contents:1
+    })
+    .populate({
+      path: "category_id",
+      select: "category_name enabled_flag"
+    })
+    .sort({ sort_value: 1 });
+    res.send(courses)
+  } catch (error) {
+    res.send(error)
+  }
+});
+
 router.get("/enabled", async (req, res) => {
   const order_val = req.query.order;
   try {

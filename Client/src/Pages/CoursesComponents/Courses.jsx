@@ -9,8 +9,9 @@ const Courses = () => {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    Config.get_enabled_courses()
+    Config.get_courses_for_front_page()
       .then((res) => {
+        // console.log(res)
         const data = res.filter((item) => {
           return (
             item.category_id?.category_name != "Free Courses" &&

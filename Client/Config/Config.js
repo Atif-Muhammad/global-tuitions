@@ -19,6 +19,18 @@ const get_enabled_categories = async () => {
     return error;
   }
 };
+
+const get_courses_for_front_page = async()=>{
+  
+  try {
+    const response = await axios.get(`${baseUrl}/courses/landingCourses`);
+    if (response.statusText === "OK") {
+      return response.data;
+    }
+  } catch (error) {
+    return error;
+  }
+}
 // get enabled courses
 const get_enabled_courses = async () => {
   try {
@@ -238,7 +250,7 @@ const getOffers = async ()=>{
 const APIS = {
   // categories
   get_enabled_categories,
-
+  get_courses_for_front_page,
   // courses
   get_enabled_courses,
   get_enabled_popular_courses,
