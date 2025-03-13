@@ -5,6 +5,7 @@ export default {
   theme: {
     extend: {
       colors: {
+        custombg : "#A4DCAA",
         "custom-green": "#A4DCAA",
         "custom-blue": "#22b3b8",
       },

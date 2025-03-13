@@ -80,7 +80,7 @@ const PopularCourses = () => {
       {courses.length > 0 && (
         <div>
           {/* Popular Courses Section */}
-          <div className="bg-[#A4DCAA] pb-9 relative">
+          <div className="bg-custombg pb-9 relative">
             {/* Heading */}
             <div className="w-full h-auto flex justify-center items-center md:py-7 py-5 bg-[#A4DCAA]">
               <div className="lg:text-[55px] md:text-[45px] text-[35px] font-extrabold font-readex uppercase text-center">
