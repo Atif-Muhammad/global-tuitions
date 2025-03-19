@@ -22,7 +22,7 @@ const Card = (props) => {
   };
 
   useEffect(() => {
-    setCurrentIndex(0); 
+    setCurrentIndex(0);
   }, [props.course]);
 
   return (
@@ -133,10 +133,18 @@ const Card = (props) => {
       {/* Footer */}
       <div className="flex flex-row justify-between  items-center w-full overflow-hidden px-2 py-5">
         <div>
-          <p className="text-2xl font-bold">
-            {props.course?.category_id?.category_name ||
+          {/* <p className="text-2xl font-bold">
+            {/* props.course?.category_id?.category_name ||
               props.course?.category_name ||
-              "Unknown Category"}
+              "Unknown Category" */}
+          {/* {props.course?.course_level} level */}
+          {/* </p> */}
+          <p className="text-2xl font-bold">
+            {props.course?.course_level
+              ? props.course.course_level.charAt(0).toUpperCase() +
+                props.course.course_level.slice(1)
+              : "Unknown Level"}{" "}
+            Level
           </p>
         </div>
         <div>
