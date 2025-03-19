@@ -144,7 +144,6 @@ const Card = (props) => {
               ? props.course.course_level.charAt(0).toUpperCase() +
                 props.course.course_level.slice(1)
               : "Unknown Level"}{" "}
-            Level
           </p>
         </div>
         <div>
