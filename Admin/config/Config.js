@@ -1,7 +1,10 @@
 import { data } from "autoprefixer";
 import axios from "axios";
 
-const BASE_URL = "https://globaltuitions.co.uk/api";
+// const BASE_URL = "https://globaltuitions.co.uk/api";
+// axios.defaults.withCredentials = true;
+
+const BASE_URL = "http://localhost:3000/api";
 axios.defaults.withCredentials = true;
 
 const API_URLS = {
@@ -14,6 +17,7 @@ const API_URLS = {
 
   // Courses API's
   Courses: `${BASE_URL}/courses/admin`,
+  course_details: `${BASE_URL}/courses/admin/course/courseDetails`,
   Course_Popular: `${BASE_URL}/courses/admin/course/update/popular`,
   Post_Course: `${BASE_URL}/courses/admin/addCourse`,
   Put_Course: `${BASE_URL}/courses/admin/course/update`,
@@ -82,6 +86,17 @@ const getAllCourses = async () => {
     return error;
   }
 };
+
+const getCourseDets = async (id)=>{
+  console.log(id)
+  try {
+    const response = axios.get(`${BASE_URL}/courses/admin/courseDetails?course=${id}`, {withCredentials: true});
+    return response
+  } catch (error) {
+    return error
+  }
+
+}
 
 const delFreeCourse = async (id) => {
   try {
@@ -556,6 +571,7 @@ const APIs = {
   getAllCategories,
   // get all courses
   getAllCourses,
+  getCourseDets,
   // set pupular course
   setPopular,
   // update category

@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
 import DOMPurify from "dompurify";
@@ -9,8 +9,9 @@ import JoditEditor from "jodit-react";
 import editorConfig from "../EditorConfig";
 import { toast, ToastContainer } from "react-toastify";
 
-const Coursesdetail = ({ isOpen, onClose, data }) => {
-  const [courseData, setCourseData] = useState(data);
+const Coursesdetail = ({ isOpen, onClose, courseId, skls }) => {
+  const [courseData, setCourseData] = useState([]);
+  const [skills, setSkills] = useState(skls)
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [editIndex, setEditIndex] = useState(null); // Track which item is being edited
   const [editContent, setEditContent] = useState({}); // Store editable content data
@@ -19,6 +20,23 @@ const Coursesdetail = ({ isOpen, onClose, data }) => {
   const [isAddIncludeInputVisible, setIsAddIncludeInputVisible] =
     useState(false); // For adding new course includes
   const [isAddContentModalOpen, setIsAddContentModalOpen] = useState(false); // Track add content modal visibility
+
+  const fetchContents = async ()=>{
+    await Config.getCourseDets(courseId).then(res=>{
+      // console.log(res.data)
+      if(res.status === 200){
+        setCourseData(res.data)
+      }
+    }).catch(err=>{
+      console.log(err)
+    })
+  }
+
+  useEffect(()=>{
+    console.log(skills)
+    fetchContents();
+  }, [])
+
   const [newContent, setNewContent] = useState({
     topic: "",
     content_description: "",
@@ -44,12 +62,12 @@ const Coursesdetail = ({ isOpen, onClose, data }) => {
   const handleSaveClick = () => {
     if (editSection === "skills") {
       // Update the course includes array
-      data.skills[editIndex] = editContent.skills;
+      skills[editIndex] = editContent.skills;
     }
     if (editSection === "course_contents") {
       // Update the course contents array
-      data.course_contents[editIndex] = {
-        ...data.course_contents[editIndex],
+      courseData[editIndex] = {
+        ...courseData[editIndex],
         ...editContent,
       };
     }
@@ -94,7 +112,7 @@ const Coursesdetail = ({ isOpen, onClose, data }) => {
 
   const handleAddContent = () => {
     // Add new content to course_contents array
-    data.course_contents.push(newContent);
+    courseData.push(newContent);
     setIsAddContentModalOpen(false); // Close modal
     setNewContent({
       topic: "",
@@ -128,7 +146,7 @@ const Coursesdetail = ({ isOpen, onClose, data }) => {
       const updatedData = { ...prevData };
 
       if (section === "skills") {
-        updatedData.skills = prevData.skills.filter((_, i) => i !== index);
+        updatedData.skills = prevData.skills?.filter((_, i) => i !== index);
       } else if (section === "course_contents") {
         updatedData.course_contents = prevData.course_contents.filter(
           (_, i) => i !== index
@@ -179,7 +197,7 @@ const Coursesdetail = ({ isOpen, onClose, data }) => {
               </div>
               <div className="w-full flex items-center justify-center">
                 <p className="text-gray-800 mb-5 font-bold text-4xl">
-                  {data.course_name}
+                  {courseData.course_name}
                 </p>
               </div>
               <div className="space-y-4 p-7">
@@ -187,7 +205,7 @@ const Coursesdetail = ({ isOpen, onClose, data }) => {
                   <p className="text-3xl font-bold mt-5 mb-6 font-poppins  text-gray-800">
                     Skills:
                   </p>
-                  {data?.skills.map((inc, index) => (
+                  {skills?.map((inc, index) => (
                     <div
                       key={index}
                       className="flex border-b-2 py-2 items-center justify-between"
@@ -275,8 +293,7 @@ const Coursesdetail = ({ isOpen, onClose, data }) => {
                   </div>
 
                   <div className="space-y-4 font-urbanist">
-                    {data?.course_contents
-                      .sort((a, b) => a.sort_value - b.sort_value)
+                    {courseData?.sort((a, b) => a.sort_value - b.sort_value)
                       .map((course_content, index) => (
                         <div
                           key={index}

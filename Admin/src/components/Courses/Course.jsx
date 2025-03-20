@@ -25,7 +25,7 @@ const Course = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [editCourse, setEditCourse] = useState({});
   const [courseDetails, setCourseDetails] = useState(null);
-  const [selectedCourse, setSelectedCourse] = useState();
+  const [selectedCourse, setSelectedCourse] = useState({});
   const [uniqueCategories, setUniqueCategories] = useState([]);
   const [categories, setCategories] = useState([]);
   const [inqModel, setInquiryModel] = useState(false);
@@ -90,6 +90,7 @@ const Course = () => {
   };
 
   const openModal = (course) => {
+    console.log("course:",course)
     setCourseDetails(course); // Pass course data to Coursesdetail
     setIsModalOpen(true);
   };
@@ -166,7 +167,7 @@ const Course = () => {
 
   // Updated openModalDelete function to accept the category
   const openModalDelete = (course) => {
-    setSelectedCourse(course); // Set the selected category to delete
+    setSelectedCourse(course); 
     setIsModalDelete(true); // Open the delete modal
   };
 
@@ -674,7 +675,8 @@ const Course = () => {
           <Coursesdetail
             isOpen={isModalOpen}
             onClose={()=> setIsModalOpen(false)}
-            data={courseDetails} // Pass course data to the modal
+            courseId={courseDetails._id}
+            skls={courseDetails.skills}
           />
         }
       </div>

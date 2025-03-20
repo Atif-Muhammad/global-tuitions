@@ -13,13 +13,27 @@ router.get('/', async (req, res) => {
     const order_val = req.query.order
     try {
         // console.log(await coursesModel.find({}))
-        const courses = await coursesModel.find({deleted: false}).populate('category_id').populate("course_contents").sort({ sort_value: Number(order_val) });
+        const courses = await coursesModel.find({deleted: false}).populate('category_id', "category_name").sort({ sort_value: Number(order_val) });
         // console.log("fff", courses)
         res.status(200).send(courses);
     } catch (error) {
         res.send(error)
     }
 });
+
+router.get('/courseDetails', async(req,res)=>{
+    const courseId = req.query.course;
+    console.log(courseId)
+    try {
+        const contents = await courseContentsModel.find({course_id: courseId}).populate("course_id", "course_name");
+        res.send(contents)
+    } catch (error) {
+        res.send(error)
+    }
+})
+
+
+
 router.get('/getDelCourses', async (req, res) => {
     const order_val = req.query.order
     try {
