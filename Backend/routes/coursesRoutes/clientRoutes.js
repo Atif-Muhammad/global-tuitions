@@ -34,19 +34,20 @@ router.get('/landingCourses', async (req, res)=>{
 });
 
 router.get("/enabled", async (req, res) => {
-  const order_val = req.query.order;
   try {
     const courses = await coursesModel
       .find({ $and: [{ enabled_flag: true }, { deleted: false }] })
       .populate("category_id")
       .populate("course_contents")
-      .sort({ sort_value: Number(order_val) });
-    // console.log(courses)
+      .sort({ sort_value: 1 }); 
+
     res.status(200).send(courses);
   } catch (error) {
     res.send(error);
   }
 });
+
+
 // 3. enabled popular courses
 router.get("/enabled/popular", async (req, res) => {
     const order_val = req.query.order;
