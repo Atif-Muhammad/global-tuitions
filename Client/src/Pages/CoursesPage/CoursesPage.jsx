@@ -130,14 +130,20 @@ const CoursesPage = () => {
     }))
   );
 
-  // Paginate the courses
+  const validCourses = allFilteredCourses
+    .filter(
+      (course) => course.deleted === false && course.enabled_flag === true
+    )
+    .sort((a, b) => a.sort_value - b.sort_value); // Sorting before paginating
+
+  // Step 2: Apply pagination on valid courses
   const indexOfLastCourse = currentPage * coursesPerPage;
   const indexOfFirstCourse = indexOfLastCourse - coursesPerPage;
-  const currentCourses = allFilteredCourses.slice(
+  const currentCourses = validCourses.slice(
     indexOfFirstCourse,
     indexOfLastCourse
   );
-  const totalPages = Math.ceil(allFilteredCourses.length / coursesPerPage);
+  const totalPages = Math.ceil(validCourses.length / coursesPerPage);
 
   return (
     <>
