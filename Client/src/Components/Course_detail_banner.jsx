@@ -170,7 +170,7 @@ const Course_detail_banner = (props) => {
                             : ""}
                         </div>
                         {course?.price ? (
-                          <div> {course?.price}$ per hour</div>
+                          <div> {course?.price}£ per hour</div>
                         ) : (
                           <p>
                             {new Date(
@@ -193,7 +193,7 @@ const Course_detail_banner = (props) => {
                         )}
                         <div>
                           {" "}
-                          {course?.course_duration} hour (approximately)
+                          {course?.course_duration} hours (approximately)
                         </div>
                         {course?.price && <div>Flexible Schedule</div>}
                       </div>

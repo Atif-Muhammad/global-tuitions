@@ -263,7 +263,7 @@ const Enrollment = () => {
                       Free Courses
                     </span>
                   ) : (
-                    `${course?.price}$ / hour`
+                    `${course?.price}£/hour`
                   )}
                 </p>
               </div>

@@ -169,7 +169,7 @@ const Inquiry = () => {
                 </div>
                 <div className="gap-y-2 flex flex-col text-[10px] md:text-[13px] lg:text-[16px] xl:text-[18px] 2xl:text-[22px] font-semibold  leading-[0.9] font-readex">
                   {course?.price ? (
-                    <p>price: {course?.price}£</p>
+                    <p>price: {course?.price}£/hr</p>
                   ) : (
                     <p>Free course</p>
                   )}
