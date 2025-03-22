@@ -243,6 +243,21 @@ const updateCourse = async (data) => {
   }
 };
 
+const updateSkills = async (data) =>{
+  try {
+    const response = await axios.put(
+      `${BASE_URL}/courses/admin/course/update/skillupdate`,
+      { data },
+      { withCredentials: true }
+    );
+    if (response.statusText === "OK") {
+      return response;
+    }
+  } catch (error) {
+    return error;
+  }
+}
+
 // add course
 const addCourse = async (data) => {
   try {
@@ -584,6 +599,7 @@ const APIs = {
   addCategory,
   // update course details
   updateCourseDetails,
+  updateSkills,
   // add course
   addCourse,
   // delete course
