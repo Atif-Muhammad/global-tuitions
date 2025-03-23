@@ -31,7 +31,7 @@ const Coursesdetail = ({ isOpen, onClose, courseId, skls }) => {
     await Config.getCourseDets(courseId)
       .then((res) => {
         if (res.status === 200) {
-          setCourseData(res.data); 
+          setCourseData(res.data);
         }
       })
       .catch((err) => {
@@ -146,14 +146,13 @@ const Coursesdetail = ({ isOpen, onClose, courseId, skls }) => {
   };
 
   const handleChanges = async () => {
-
     const finalData = {
       id: courseId,
       skills: skills,
-      course_contents: courseData,  
+      course_contents: courseData,
     };
-    console.log("courseData:",courseData)
-    console.log("final:",finalData)
+    console.log("courseData:", courseData);
+    console.log("final:", finalData);
 
     Config.updateCourseDetails(finalData)
       .then(async (res) => {
@@ -314,7 +313,8 @@ const Coursesdetail = ({ isOpen, onClose, courseId, skls }) => {
 
                   <div className="space-y-4 font-urbanist">
                     {courseData.length > 0 ? (
-                      courseData
+                      [...courseData]
+                        .sort((a, b) => a.sort_value - b.sort_value)
                         .map((course_content, index) => (
                           <div
                             key={index}

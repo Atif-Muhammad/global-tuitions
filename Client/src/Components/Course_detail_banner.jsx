@@ -245,36 +245,38 @@ const Course_detail_banner = (props) => {
                       What You Will Learn?
                     </p>
                   </div>
-                  {course?.course_contents.map((content, index) => (
-                    <div
-                      key={index}
-                      className={`flex flex-col shadow-lg rounded-md p-5 ${
-                        content.content_description
-                          ? "bg-white"
-                          : "bg-[#d3d9ef]"
-                      }`}
-                    >
+                  {course?.course_contents
+                    .sort((a, b) => a.sort_value - b.sort_value)
+                    .map((content, index) => (
                       <div
-                        className={`font-readex text-[24px] md:text-[30px] lg:text-[40px] xl:text-[50px] tracking-tighter leading-tight`}
+                        key={index}
+                        className={`flex flex-col shadow-lg rounded-md p-5 ${
+                          content.content_description
+                            ? "bg-white"
+                            : "bg-[#d3d9ef]"
+                        }`}
                       >
-                        <p>
-                          {index + 1}. {content.topic}
-                        </p>
-                      </div>
-                      <div className="w-full h-auto mt-3">
-                        <div className="p-4 bg-[#d3d9ef] rounded-2xl">
-                          <p
-                            className="text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] tracking-wide leading-loose"
-                            dangerouslySetInnerHTML={{
-                              __html: DOMPurify.sanitize(
-                                content.content_description
-                              ),
-                            }}
-                          ></p>
+                        <div
+                          className={`font-readex text-[24px] md:text-[30px] lg:text-[40px] xl:text-[50px] tracking-tighter leading-tight`}
+                        >
+                          <p>
+                            {index + 1}. {content.topic}
+                          </p>
+                        </div>
+                        <div className="w-full h-auto mt-3">
+                          <div className="p-4 bg-[#d3d9ef] rounded-2xl">
+                            <p
+                              className="text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] tracking-wide leading-loose"
+                              dangerouslySetInnerHTML={{
+                                __html: DOMPurify.sanitize(
+                                  content.content_description
+                                ),
+                              }}
+                            ></p>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
                 </div>
               </div>
             </div>
