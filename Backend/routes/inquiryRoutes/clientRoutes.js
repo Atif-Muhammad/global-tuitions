@@ -21,6 +21,7 @@ router.post("/postInquiry", async (req, res) => {
   const userJwt = req.cookies.jwtToken;
   // console.log(userJwt)
 
+
   var user_id = null;
 
   if (userJwt) {
@@ -34,6 +35,7 @@ router.post("/postInquiry", async (req, res) => {
     });
   }
   if (course_id) {
+    
     // return res.send("set the inquiry for course")
     const inq_details = {
       inquiry_by: req.body.data.inquiry_by,
@@ -88,6 +90,9 @@ router.post("/postInquiry", async (req, res) => {
       pass: process.env.ADMIN_PASS,
     },
   });
+  if(course_id){
+    course_name = await coursesModel.findOne({_id: course_id}).select("course_name")
+  }
   // create email message
   const mailOptions = {
     from: process.env.ADMIN_EMAIL,
@@ -96,8 +101,8 @@ router.post("/postInquiry", async (req, res) => {
     html: `<p>Dear <strong>${req.body.data.inquiry_by}
     </strong>,</p><p>Thank you for reaching out to <strong>Global Tuitions</strong>. We have received your inquiry and our team will get back to you shortly.</p>
     ${
-      req.body.data.course_name
-        ? `<p><strong>Course Inquiry:</strong> ${req.body.data.course_name}</p>`
+      course_name
+        ? `<p><strong>Course Inquiry:</strong> ${course_name.course_name}</p>`
         : ""
     }
     <p style="font-weight: bold; margin: 0; padding: 0;">What happens next?</p><ul style="padding-left: 20px; margin-top: 5px;"><li>⏳ <strong>Response Time:</strong> We typically respond within 24-48 business hours.</li></ul><p>We appreciate your interest and look forward to assisting you soon!</p><p><strong>Best Regards,</strong></p><p>The <strong>Global Tuitions</strong> Team</p>`,
