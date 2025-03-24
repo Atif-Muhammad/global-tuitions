@@ -642,7 +642,8 @@ const FreeCourse = () => {
           <FreeCoursesdetail
             isOpen={isModalOpen}
             onClose={closeModal}
-            data={courseDetails} // Pass course data to the modal
+            courseId={courseDetails._id}
+            skls={courseDetails.skills}
           />
         )}
       </div>

@@ -31,6 +31,7 @@ const Coursesdetail = ({ isOpen, onClose, courseId, skls }) => {
     await Config.getCourseDets(courseId)
       .then((res) => {
         if (res.status === 200) {
+          console.log(res.data)
           setCourseData(res.data);
         }
       })
@@ -159,8 +160,8 @@ const Coursesdetail = ({ isOpen, onClose, courseId, skls }) => {
       skills: skills,
       course_contents: courseData,
     };
-    console.log("courseData:", courseData);
-    console.log("final:", finalData);
+    // console.log("courseData:", courseData);
+    // console.log("final:", finalData);
 
     Config.updateCourseDetails(finalData)
       .then(async (res) => {
