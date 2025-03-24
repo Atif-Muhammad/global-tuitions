@@ -7,7 +7,7 @@ const categoriesModel = require('../../models/categoriesModel');
 // 1. category by id         
 router.get('/category', async (req, res)=>{
     try {
-        const category = await categoriesModel.findOne({_id: req.query.id});
+        const category = await categoriesModel.findOne({_id: req.query.id})
         res.status(200).send(category)
     } catch (error) {
         res.send(error)
@@ -18,11 +18,11 @@ router.get("/enabled", async (req, res) => {
   const order_val = req.query.order;
   try {
     const enabled_categories = await categoriesModel
-      .find({ enabled_flag: true, deleted: false })
-      .populate({ path: "courses", populate: { path: "course_contents" } })
+      .find({ enabled_flag: true, deleted: false}).select("category_name courses").populate("courses")
       .sort({ sort_value: Number(order_val) });
+      const categories = enabled_categories.filter(category=> category.courses.length > 0 && category.courses.some(course=> course.enabled_flag === true && course.deleted === false))
     // console.log(enabled_categories)
-    res.status(200).send(enabled_categories);
+    res.status(200).send(categories);
   } catch (error) {
     res.send(error);
   }

@@ -24,11 +24,9 @@ const CoursesPage = () => {
     setLoading(true);
     Config.get_enabled_categories()
       .then((res) => {
+        // console.log(res)
         const filteredCategories = res.filter((category) => {
           return (
-            category.courses &&
-            category.courses.filter((course) => course.enabled_flag === true)
-              .length > 0 &&
             category.category_name !== "Free Courses"
           );
         });
