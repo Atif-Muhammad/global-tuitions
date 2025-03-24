@@ -80,7 +80,7 @@ router.post("/signup", async (req, res) => {
               from: process.env.ADMIN_EMAIL,
               to: email,
               subject: "Thank you!",
-              html: `<p>Dear <strong>${req.body.data.student_name}
+              html: `<p>Dear <strong>${name}
               </strong>,</p><p>Thank you for signing up with <strong>Global Tuitions</strong>! 🎉</p><p>We're excited to have you on board. Your account has been successfully created, and you're all set to begin your learning journey with us.</p><p style="font-weight: bold; margin: 0; padding: 0;">Here’s what you can do now:</p><ul style="padding-left: 20px; margin-top: 5px;"><li>🔍 <strong>Explore Courses:</strong> Discover courses across multiple categories and levels.</li><li>✅ <strong>Enroll & Learn:</strong> Enroll in your favorite courses and start learning right away.</li><li>📞 <strong>Need Assistance?</strong> Our support team is here to help you anytime.</li></ul><p>We look forward to seeing you succeed and grow with us.</p><p><strong>Welcome to the Global Tuitions family!</strong></p><p>– The <strong>Global Tuitions</strong> Team</p>`,
             };
 
@@ -152,10 +152,27 @@ router.post("/signin", async (req, res) => {
             const mailOptions = {
               from: process.env.ADMIN_EMAIL,
               to: email,
-              subject: "Thank you!",
-              html: `<p>Dear <strong>${req.body.data.student_name}
-              </strong>,</p><p>Welcome to <strong>Global Tuitions</strong>! 🎉 We're thrilled to have you join our learning community.</p><p>As a member, you now have access to explore our wide range of courses, connect with expert instructors, and take the next step toward your goals.</p><p style="font-weight: bold; margin: 0; padding: 0;">Here’s what you can do next:</p><ul style="padding-left: 20px; margin-top: 5px;"><li>🎓 <strong>Browse Courses:</strong> Find the perfect course to match your goals.</li><li>🗓 <strong>Set Your Preferences:</strong> Choose your preferred study times and learning pace.</li><li>🤝 <strong>Get Support:</strong> Our team is here to help whenever you need!</li></ul><p>Let’s make your learning journey exciting and successful!</p><p><strong>Welcome aboard!</strong></p><p>The <strong>Global Tuitions</strong> Team</p>`,
+              subject: "New Login Alert - Global Tuitions",
+              html: `<p>Dear <strong>${stuDetails.student_name}</strong>,</p>
+            
+              <p>We noticed a new login to your <strong>Global Tuitions</strong> account from a new device.</p>
+            
+              <p>If this wasn't you, please secure your account immediately by updating your password.</p>
+            
+              <p style="font-weight: bold; margin: 0; padding: 0;">Here’s what you can do next:</p>
+              <ul style="padding-left: 20px; margin-top: 5px;">
+                <li>🔍 <strong>Review Account Activity:</strong> Check your recent logins for any unauthorized access.</li>
+                <li>🔑 <strong>Update Your Password:</strong> Change your password if you suspect any suspicious activity.</li>
+                <li>📧 <strong>Contact Support:</strong> Our team is here to help if you need assistance.</li>
+              </ul>
+            
+              <p>Your learning journey is important to us, and we’re committed to keeping your account secure.</p>
+            
+              <p><strong>Stay safe & happy learning!</strong></p>
+            
+              <p>The <strong>Global Tuitions</strong> Team</p>`
             };
+            
 
             try {
               const sentMail = await transporter.sendMail(mailOptions);
