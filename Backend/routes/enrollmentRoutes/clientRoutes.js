@@ -13,9 +13,14 @@ router.post("/enroll", async (req, res) => {
   if (!Email_regex.test(req.body.data.applier_email)) {
     return res.status(404).send("enter valid email");
   }
-  const found = await enrollmentModel.find({ $and: [{ applier_email: req.body.data.applier_email }, { for_course: req.body.data.for_course }] })
+  const found = await enrollmentModel.find({
+    $and: [
+      { applier_email: req.body.data.applier_email },
+      { for_course: req.body.data.for_course },
+    ],
+  });
   if (found.length > 0) {
-    return res.status(409).send("Email already enrolled")
+    return res.status(409).send("Email already enrolled");
   }
 
   try {
@@ -49,7 +54,7 @@ router.post("/enroll", async (req, res) => {
       subject: "Thank you!",
       html: `
       <p>Dear <strong>${req.body.data.applier}</strong>,</p> 
-      <p>Congratulations! You’re now officially enrolled in <strong>${updated_course.course_name}</strong> on <strong>Global Tuitions</strong>. We’re excited to have you on this learning journey! 🚀</p>
+      <p>Congratulations! You’re now officially enrolled in <strong>${updated_course.course_name}</strong> on <strong>Global Tuitions</strong>. We’re excited to have you on this learning journey! </p>
       <p style="font-weight: bold; margin: 0; padding: 0;">Here’s what’s next:</p>
       <ul style="padding-left: 20px; margin-top: 5px;">
         <li>📅 <strong>Class Schedule:</strong> ${req.body.data.preferred_time} | ${req.body.data.preferred_date}</li>
@@ -57,7 +62,7 @@ router.post("/enroll", async (req, res) => {
       </ul>
       <p>Get ready to learn, grow, and achieve your goals. Let’s get started!</p>
       <p><strong>Happy Learning!</strong></p>
-      <p>The <strong>SIXPM Media</strong> Team</p>
+      <p>The <strong>Global Tuition</strong> Team</p>
       `,
     };
 

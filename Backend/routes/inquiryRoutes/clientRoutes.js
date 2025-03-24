@@ -47,7 +47,7 @@ router.post("/postInquiry", async (req, res) => {
 
       await coursesModel.updateOne(
         { _id: inq_details.for_course },
-        { $push: { inquiries: added_inq._id } } 
+        { $push: { inquiries: added_inq._id } }
       );
       await studentModel.updateOne(
         { _id: user_id },
@@ -93,17 +93,24 @@ router.post("/postInquiry", async (req, res) => {
     from: process.env.ADMIN_EMAIL,
     to: req.body.data.email,
     subject: "Thank you!",
-    text: "Thank you for you query, we will get back to you soon. regards SIXPM media",
+    html: `<p>Dear <strong>${req.body.data.inquiry_by}
+    </strong>,</p><p>Thank you for reaching out to <strong>Global Tuitions</strong>. We have received your inquiry and our team will get back to you shortly.</p>
+    ${
+      req.body.data.course_name
+        ? `<p><strong>Course Inquiry:</strong> ${req.body.data.course_name}</p>`
+        : ""
+    }
+    <p style="font-weight: bold; margin: 0; padding: 0;">What happens next?</p><ul style="padding-left: 20px; margin-top: 5px;"><li>⏳ <strong>Response Time:</strong> We typically respond within 24-48 business hours.</li></ul><p>We appreciate your interest and look forward to assisting you soon!</p><p><strong>Best Regards,</strong></p><p>The <strong>Global Tuitions</strong> Team</p>`,
   };
 
   try {
-   const sentMail = await transporter.sendMail(mailOptions);
-  //  console.log(sentMail)
-   if (sentMail.accepted != null) {
-     res.sendStatus(200);
-   } else {
-     res.sendStatus(404)
-   }
+    const sentMail = await transporter.sendMail(mailOptions);
+    //  console.log(sentMail)
+    if (sentMail.accepted != null) {
+      res.sendStatus(200);
+    } else {
+      res.sendStatus(404);
+    }
   } catch (error) {
     console.log(error);
   }
