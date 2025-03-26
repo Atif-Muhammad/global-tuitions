@@ -93,7 +93,7 @@ router.post("/signup", async (req, res) => {
                   .cookie("jwtToken", token, {
                     httpOnly: true,
                     sameSite: "strict",
-                    secure: false,
+                    secure: true,
                   })
                   .send("Successfully logged in-cookies sent");
               } else {
@@ -182,6 +182,7 @@ router.post("/signin", async (req, res) => {
                   .cookie("jwtToken", token, {
                     httpOnly: true,
                     sameSite: "strict",
+                    secure: true
                   })
                   .send("Successfully logged in-cookies sent");
               } else {
@@ -209,7 +210,7 @@ router.post("/logout", (req, res) => {
     path: "/",
     sameSite: "strict",
     httpOnly: true,
-    secure: false,
+    secure: true,
   });
   res.send("successfully logged out--Redirecting to index page");
 });
@@ -424,7 +425,7 @@ router.put("/changeName", async (req, res) => {
       if (err) {
         return res.clearCookie("jwtToken", {
           sameSite: "strict",
-          secure: false,
+          secure: true,
           httpOnly: true,
         });
       }
