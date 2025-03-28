@@ -123,7 +123,7 @@ const Course_detail_banner = (props) => {
                   <div className="lg:w-full leading-relaxed  font-poppins md:text-[16px] xl:text-[18px] 2xl:text-[20px] text-black">
                     <p
                       dangerouslySetInnerHTML={{
-                        __html: DOMPurify.sanitize(course?.course_description),
+                        __html: course?.course_description,
                       }}
                     ></p>
                   </div>
@@ -268,9 +268,8 @@ const Course_detail_banner = (props) => {
                             <p
                               className="text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] tracking-wide leading-loose"
                               dangerouslySetInnerHTML={{
-                                __html: DOMPurify.sanitize(
+                                __html: 
                                   content.content_description
-                                ),
                               }}
                             ></p>
                           </div>

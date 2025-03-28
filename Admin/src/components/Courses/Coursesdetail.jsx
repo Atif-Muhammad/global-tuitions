@@ -358,20 +358,19 @@ const Coursesdetail = ({ isOpen, onClose, courseId, skls }) => {
                                       ? editContent.content_description
                                       : course_content.content_description
                                   }
-                                  onBlur={(value) =>
+                                  onBlur={(value) => {
+                                    // console.log('value', value)
                                     handleInputChange(
                                       value,
                                       "content_description"
                                     )
-                                  }
+                                  }}
                                 />
                               ) : (
                                 <p
                                   className="text-gray-800 px-6 font-urbanist text-[18px]"
                                   dangerouslySetInnerHTML={{
-                                    __html: DOMPurify.sanitize(
-                                      course_content.content_description
-                                    ),
+                                    __html: course_content.content_description
                                   }}
                                 ></p>
                               )}

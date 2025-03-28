@@ -414,7 +414,7 @@ const AddFreeCourses = ({ closeModal }) => {
                         <strong className="text-[1.3rem]">Description:</strong>{" "}
                         <p
                           dangerouslySetInnerHTML={{
-                            __html: DOMPurify.sanitize(item.description),
+                            __html:item.description,
                           }}
                         ></p>
                       </p>

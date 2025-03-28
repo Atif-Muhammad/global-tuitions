@@ -378,9 +378,7 @@ const Coursesdetail = ({ isOpen, onClose, courseId, skls }) => {
                                 <p
                                   className="text-gray-800 px-6 font-urbanist text-[18px]"
                                   dangerouslySetInnerHTML={{
-                                    __html: DOMPurify.sanitize(
-                                      course_content.content_description
-                                    ),
+                                    __html: course_content.content_description,
                                   }}
                                 ></p>
                               )}
