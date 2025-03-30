@@ -108,7 +108,7 @@ const Course_detail_banner = (props) => {
           <div className="bg-custombg py-8 font-readex">
             <div className="px-6 md:px-8 flex justify-center lg:px-10 xl:px-20 2xl:px-28">
               {/* <!-- Main Container --> */}
-              <div className="flex flex-col max-w-[1250px] lg:flex-row gap-8 lg:justify-between justify-center items-center relative">
+              <div className="flex flex-col w-[1250px] lg:flex-row gap-8 lg:justify-between justify-center items-center relative">
                 {/* <!-- HTML for Beginners Section --> */}
                 <div className="lg:w-[45%] md:w-[80%] w-[90%] flex flex-col gap-6">
                   <div className=" font-extrabold  leading-[0.9] text-[50px] md:text-[60px] lg:text-[70px] xl:text-[80px] 2xl:text-[90px] w-full">

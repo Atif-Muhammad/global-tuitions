@@ -170,7 +170,7 @@ const Header = () => {
         course.course_name
           .toLowerCase()
           .trim()
-          .startsWith(e.target.value.toLowerCase().trim())
+          .includes(e.target.value.toLowerCase().trim())
       )
     );
   };
