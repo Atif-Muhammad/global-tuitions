@@ -1,5 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  corePlugins: {
+    preflight: false, // Disables Tailwind's reset
+  },
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -11,6 +14,6 @@ export default {
         urbanist: ['Urbanist', 'sans-serif'],
       },
     },
-    plugins: [],
-  }
+    plugins: [require('@tailwindcss/typography')],
+  },
 }

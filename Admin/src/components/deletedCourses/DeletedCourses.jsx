@@ -12,7 +12,7 @@ import { FaStar } from "react-icons/fa";
 // import AddCourses from "./AddCourses";
 import API_URLS from "../../../config/Config";
 import Config from "../../../config/Config";
-import JoditEditor from "jodit-react";
+// import JoditEditor from "jodit-react";
 import editorConfig from "../EditorConfig";
 import { toast, ToastContainer } from "react-toastify"; 
 
@@ -484,11 +484,11 @@ const DeletedCourses = () => {
                     Description:
                   </label>
 
-                  <JoditEditor
+                  {/* <JoditEditor
                     config={editorConfig}
                     value={editCourse.course_description || ""}
                     onBlur={handleQuillChange} // Use the specific handler for ReactQuill
-                  />
+                  /> */}
                 </div>
 
                 <div className="flex w-full  gap-5">

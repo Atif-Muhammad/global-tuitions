@@ -5,7 +5,8 @@ import { CiEdit } from "react-icons/ci";
 import DOMPurify from "dompurify";
 import "react-quill/dist/quill.snow.css";
 import Config from "../../../config/Config";
-import JoditEditor from "jodit-react";
+// import JoditEditor from "jodit-react";
+import { Mantine } from "../Mantine/Mantine.jsx";
 import editorConfig from "../EditorConfig";
 import { toast, ToastContainer } from "react-toastify";
 import { ConfirmationModal } from "../Courses/ConfirmaationModel";
@@ -31,7 +32,7 @@ const Coursesdetail = ({ isOpen, onClose, courseId, skls }) => {
     await Config.getCourseDets(courseId)
       .then((res) => {
         if (res.status === 200) {
-          console.log(res.data)
+          console.log(res.data);
           setCourseData(res.data);
         }
       })
@@ -142,7 +143,6 @@ const Coursesdetail = ({ isOpen, onClose, courseId, skls }) => {
       ...(Array.isArray(courseData) ? courseData : []),
       newItem,
     ];
-
 
     setCourseData(updatedCourseData);
 
@@ -359,15 +359,14 @@ const Coursesdetail = ({ isOpen, onClose, courseId, skls }) => {
                               </p>
                               {editSection === "course_contents" &&
                               editIndex === index ? (
-                                <JoditEditor
-                                  config={editorConfig}
-                                  value={
+                                <Mantine
+                                  formdata={
                                     editContent.content_description !==
                                     undefined
                                       ? editContent.content_description
                                       : course_content.content_description
                                   }
-                                  onBlur={(value) =>
+                                  handleQuillChange={(value) =>
                                     handleInputChange(
                                       value,
                                       "content_description"
@@ -375,6 +374,21 @@ const Coursesdetail = ({ isOpen, onClose, courseId, skls }) => {
                                   }
                                 />
                               ) : (
+                                // <JoditEditor
+                                //   config={editorConfig}
+                                //   value={
+                                // editContent.content_description !==
+                                // undefined
+                                //   ? editContent.content_description
+                                //   : course_content.content_description
+                                //   }
+                                //   onBlur={(value) =>
+                                //     handleInputChange(
+                                //       value,
+                                //       "content_description"
+                                //     )
+                                //   }
+                                // />
                                 <p
                                   className="text-gray-800 px-6 font-urbanist text-[18px]"
                                   dangerouslySetInnerHTML={{
@@ -530,8 +544,14 @@ const Coursesdetail = ({ isOpen, onClose, courseId, skls }) => {
                   >
                     Description:
                   </label>
+                  <Mantine
+                    formdata={newContent.content_description || ""}
+                    handleQuillChange={(value) =>
+                      handleNewContentChange(value, "content_description")
+                    }
+                  />
 
-                  <JoditEditor
+                  {/* <JoditEditor
                     config={editorConfig}
                     id="description"
                     placeholder="Description"
@@ -540,7 +560,7 @@ const Coursesdetail = ({ isOpen, onClose, courseId, skls }) => {
                       handleNewContentChange(value, "content_description")
                     }
                     className="h-[200px] rounded-lg p-2 w-full mb-4"
-                  />
+                  /> */}
 
                   <div className="relative top-5">
                     {/* Sort Order Input */}

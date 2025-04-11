@@ -7,9 +7,12 @@ import Config from "../../Config/Config";
 import ArrowImg from "./../assets/images/arrow.svg";
 import LineImg from "./../assets/images/linedesign.svg";
 import DetailCourseSkeleton from "../Pages/Skeletons/DetailCourseSkeleton";
+import "../index.css";
 
 const Course_detail_banner = (props) => {
   const [course, setCourse] = useState([]);
+  const [showFullDescription, setShowFullDescription] = useState(false);
+  const [expandedContents, setExpandedContents] = useState({});
 
   const location = useLocation();
   const id = location.state || props.id;
@@ -26,6 +29,8 @@ const Course_detail_banner = (props) => {
   }, [id]);
 
   const handleDownloadPDF = async () => {
+    expandAllContents(); // Add this line to force full expansion before capturing
+    await new Promise((resolve) => setTimeout(resolve, 500));
     const page = pageRef.current;
     const canvas = await html2canvas(page, { scale: 2 });
     const imgData = canvas.toDataURL("image/png");
@@ -96,6 +101,15 @@ const Course_detail_banner = (props) => {
     pdf.save("course-details.pdf");
   };
 
+  const expandAllContents = () => {
+    const allExpanded = {};
+    course?.course_contents?.forEach((_, index) => {
+      allExpanded[index] = true;
+    });
+    setExpandedContents(allExpanded);
+    setShowFullDescription(true);
+  };
+
   const pageRef = useRef();
 
   return (
@@ -120,17 +134,33 @@ const Course_detail_banner = (props) => {
                     />
                   </div>
                   {/* <!-- Description --> */}
-                  <div className="lg:w-full leading-relaxed  font-poppins md:text-[16px] xl:text-[18px] 2xl:text-[20px] text-black">
-                    <p
+                  <div className="text-black mantine-editor-content text-[16px] md:text-[18px] lg:text-[20px]">
+                    <div
                       dangerouslySetInnerHTML={{
-                        __html: course?.course_description,
+                        __html: showFullDescription
+                          ? course?.course_description
+                          : course?.course_description?.split(" ").length > 80
+                          ? course?.course_description
+                              ?.split(" ")
+                              .slice(0, 80)
+                              .join(" ") + "..."
+                          : course?.course_description,
                       }}
-                    ></p>
+                    />
+
+                    {course?.course_description?.split(" ").length > 80 && (
+                      <button
+                        className="text-blue-600 underline ml-2"
+                        onClick={() =>
+                          setShowFullDescription(!showFullDescription)
+                        }
+                      >
+                        {showFullDescription ? "Show Less" : "Show More"}
+                      </button>
+                    )}
                   </div>
-                  <div
-                    class="absolute top-0 xl:top-0 -rotate-12 xl:right-1/3 right-1/3 hidden lg:flex
-"
-                  >
+
+                  <div class="absolute top-0 xl:top-0 -rotate-12 xl:right-1/3 right-1/3 hidden lg:flex">
                     <img src={ArrowImg} alt="" className="" />
                   </div>
                 </div>
@@ -223,7 +253,10 @@ const Course_detail_banner = (props) => {
                         {/* Print Button */}
                         <button
                           className="btnbutton"
-                          onClick={() => window.print()} // Add the onClick handler
+                          onClick={() => {
+                            expandAllContents();
+                            setTimeout(() => window.print(), 500); // Give time to render full content
+                          }}
                         >
                           Print
                         </button>
@@ -250,7 +283,7 @@ const Course_detail_banner = (props) => {
                     .map((content, index) => (
                       <div
                         key={index}
-                        className={`flex flex-col shadow-lg rounded-md p-5 ${
+                        className={`flex flex-col shadow-lg w-full rounded-md p-5 ${
                           content.content_description
                             ? "bg-white"
                             : "bg-[#d3d9ef]"
@@ -264,14 +297,32 @@ const Course_detail_banner = (props) => {
                           </p>
                         </div>
                         <div className="w-full h-auto mt-3">
-                          <div className="p-4 bg-[#d3d9ef] rounded-2xl">
-                            <p
-                              className="text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] tracking-wide leading-loose"
+                          <div className="mantine-editor-content max-w-none p-4 bg-[#d3d9ef] w-full rounded-2xl">
+                            {/* <div> */}
+                            <div
+                              className={`text-[14px]  md:text-[16px] lg:text-[18px] xl:text-[20px] tracking-wide   w-full max-w-none transition-all duration-300 
+                                   
+                                `}
                               dangerouslySetInnerHTML={{
-                                __html: 
-                                  content.content_description
+                                __html: content.content_description,
                               }}
-                            ></p>
+                            />
+                            {/* {content.content_description?.length > 100 && (
+                                <button
+                                  className="text-blue-600 px-5 underline mt-2"
+                                  onClick={() =>
+                                    setExpandedContents((prev) => ({
+                                      ...prev,
+                                      [index]: !prev[index],
+                                    }))
+                                  }
+                                >
+                                  {expandedContents[index]
+                                    ? "See Less"
+                                    : "See More"}
+                                </button>
+                              )} */}
+                            {/* </div> */}
                           </div>
                         </div>
                       </div>

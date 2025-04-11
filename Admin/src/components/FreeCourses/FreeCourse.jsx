@@ -7,7 +7,8 @@ import { FaEye } from "react-icons/fa";
 import { RxCrossCircled } from "react-icons/rx";
 import AddCourses from "./AddFreeCourses";
 import Config from "../../../config/Config";
-import JoditEditor from "jodit-react";
+// import JoditEditor from "jodit-react";
+import { Mantine } from "../Mantine/Mantine";
 import editorConfig from "../EditorConfig";
 import FreeCoursesdetail from "./FreeCoursesdetail";
 import { RxCross1 } from "react-icons/rx";
@@ -496,12 +497,13 @@ const FreeCourse = () => {
                   >
                     Description:
                   </label>
+                  <Mantine formdata={editCourse.course_description || ""} handleQuillChange={handleQuillChange}/>
 
-                  <JoditEditor
+                  {/* <JoditEditor
                     config={editorConfig}
                     value={editCourse.course_description || ""}
                     onBlur={handleQuillChange} // Use the specific handler for ReactQuill
-                  />
+                  /> */}
                 </div>
 
                 <div className="flex w-full gap-5">

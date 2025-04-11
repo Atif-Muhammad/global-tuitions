@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import "react-quill/dist/quill.snow.css";
 import DOMPurify from "dompurify";
 import Config from "../../../config/Config";
-import JoditEditor from "jodit-react";
+// import JoditEditor from "jodit-react";
+import {Mantine} from '../Mantine/Mantine.jsx'
 import editorConfig from "../EditorConfig";
 import { RxCross1 } from "react-icons/rx";
 
@@ -187,8 +188,9 @@ const AddFreeCourses = ({ closeModal }) => {
                   >
                     Description:
                   </label>
+                  <Mantine formdata={courseDescription} handleQuillChange={setCourseDescription}/>
 
-                  <JoditEditor
+                  {/* <JoditEditor
                     config={editorConfig}
                     id="course-description"
                     name="course_description"
@@ -196,7 +198,7 @@ const AddFreeCourses = ({ closeModal }) => {
                     onBlur={setCourseDescription}
                     required
                     placeholder="Enter Course Description"
-                  />
+                  /> */}
                 </div>
                 <div className="flex items-start relative top-6 space-x-4">
                   <div className="mb-4 flex-1">
@@ -466,14 +468,15 @@ const AddFreeCourses = ({ closeModal }) => {
                   >
                     Description:
                   </label>
-                  <JoditEditor
+                  <Mantine formdata={formData.description} handleQuillChange={handleQuillChange}/>
+                  {/* <JoditEditor
                     config={editorConfig}
                     id="description"
                     name="description"
                     value={formData.description}
                     onBlur={handleQuillChange}
                     placeholder="Enter Course Description"
-                  />
+                  /> */}
                 </div>
 
                 <div className=" relative top-4 ">

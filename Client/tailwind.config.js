@@ -27,10 +27,18 @@ export default {
         serif: [...require("tailwindcss/defaultTheme").fontFamily.serif],
         mono: [...require("tailwindcss/defaultTheme").fontFamily.mono],
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            'ol li, ul li': {
+              color: 'black',  // Override color for list items' identifiers
+            },
+          },
+        },
+      },
       
     },
   },
-  plugins: [require("tailwind-scrollbar-hide")],
   plugins: [
     function ({ addComponents }) {
       addComponents({
@@ -67,5 +75,7 @@ export default {
         },
       });
     },
+    require("tailwind-scrollbar-hide"), 
+    require('@tailwindcss/typography')
   ],
 };

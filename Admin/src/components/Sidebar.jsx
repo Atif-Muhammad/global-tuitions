@@ -25,6 +25,7 @@ import DeletedCourses from "./deletedCourses/DeletedCourses";
 import Admin_dashboard from "./dashboard/Admin_dashboard";
 import Offers from "./offers/Offers";
 
+
 const Sidebar = () => {
   const [totalRegs, setTotalRegs] = useState([]);
   const [GInqs, setGInqs] = useState([]);
@@ -241,7 +242,6 @@ const Sidebar = () => {
           </NavLink>
         </ul>
       </div>
-
       <Routes>
         <Route path="/" element={<Admin_dashboard />} />
         <Route path="/Categories" element={<Categories />} />

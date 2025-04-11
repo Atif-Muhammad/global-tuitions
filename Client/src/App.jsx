@@ -1,4 +1,5 @@
 import React, { Suspense, lazy, useEffect } from "react";
+import './index.css'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Footer from "./Pages/Footer/Footer";
 import Loader from "./Pages/Loader/Loader";

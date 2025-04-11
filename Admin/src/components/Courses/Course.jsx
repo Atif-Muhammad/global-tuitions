@@ -10,11 +10,12 @@ import { FaRegStar } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
 import AddCourses from "./AddCourses";
 import Config from "../../../config/Config";
-import JoditEditor from "jodit-react";
+// import JoditEditor from "jodit-react";
 import editorConfig from "../EditorConfig";
 import CourseEnrollment from "./CourseEnrollment";
 import CourseInquiry from "./CourseInquery";
 import { toast, ToastContainer } from "react-toastify";
+import {Mantine} from "../Mantine/Mantine";
 
 const Course = () => {
   const [courses, setCourses] = useState([]);
@@ -538,12 +539,12 @@ const Course = () => {
                   >
                     Description:
                   </label>
-
-                  <JoditEditor
+                  <Mantine formdata={editCourse.course_description} handleQuillChange={handleQuillChange}/>
+                  {/* <JoditEditor
                     config={editorConfig}
                     value={editCourse.course_description || ""}
                     onBlur={handleQuillChange} // Use the specific handler for ReactQuill
-                  />
+                  /> */}
                 </div>
 
                 <div className="flex w-full  gap-5">

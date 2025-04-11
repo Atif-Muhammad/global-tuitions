@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import "react-quill/dist/quill.snow.css";
 import DOMPurify from "dompurify";
 import Config from "../../../config/Config";
-import JoditEditor from "jodit-react";
+// import JoditEditor from "jodit-react";
 import editorConfig from "../EditorConfig";
 import { RxCross1 } from "react-icons/rx";
 import { toast } from "react-toastify";
+import { Mantine } from "../Mantine/Mantine";
 
 const AddCourses = ({ closeModal }) => {
   const [categories, setCategories] = useState([]);
@@ -220,7 +221,8 @@ const AddCourses = ({ closeModal }) => {
                   >
                     Course Description:
                   </label>
-                  <JoditEditor
+                  <Mantine formdata={courseDescription} handleQuillChange={setCourseDescription}/>
+                  {/* <JoditEditor
                     config={editorConfig}
                     id="course-description"
                     name="course_description"
@@ -229,7 +231,7 @@ const AddCourses = ({ closeModal }) => {
                     required
                     placeholder="Enter Course Description"
                     className="block w-full border-2 border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                  />
+                  /> */}
                 </div>
 
                 {/* Course Level, Duration, and Price */}
@@ -433,7 +435,8 @@ const AddCourses = ({ closeModal }) => {
                     >
                       Topic Description:
                     </label>
-                    <JoditEditor
+                    <Mantine formdata={formData.description} handleQuillChange={handleQuillChange}/>
+                    {/* <JoditEditor
                       config={editorConfig}
                       id="description"
                       name="description"
@@ -441,7 +444,7 @@ const AddCourses = ({ closeModal }) => {
                       onBlur={handleQuillChange}
                       placeholder="Enter Content Description"
                       className="block w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                    />
+                    /> */}
                   </div>
 
                   <div className="mt-4 flex gap-5 items-end">
