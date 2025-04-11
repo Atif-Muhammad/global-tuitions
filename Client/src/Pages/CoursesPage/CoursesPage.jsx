@@ -5,6 +5,7 @@ import SkeletonCard from "../Skeletons/SkeletonCard";
 import NoSkeleton from "../Skeletons/NoSkeleton";
 import { Helmet } from "react-helmet-async";
 import Lines from "../../assets/images/Vector 6.jpg";
+import { useSearchParams } from "react-router-dom";
 
 const CoursesPage = () => {
   const [categories, setCategories] = useState([]);
@@ -15,9 +16,14 @@ const CoursesPage = () => {
     intermediate: false,
     advanced: false,
   });
-  const [currentPage, setCurrentPage] = useState(1);
+  // const [currentPage, setCurrentPage] = useState(1);
   const [coursesPerPage] = useState(9);
   const [loading, setLoading] = useState(true);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialPage = parseInt(searchParams.get("page")) || 1;
+  // const [searchParams, setSearchParams] = useSearchParams();
+  // const initialPage = parseInt(searchParams.get("page")) || 1;
+  const [currentPage, setCurrentPage] = useState(initialPage); // ✅ Correct place
 
   // Fetch categories on component mount
   useEffect(() => {
@@ -26,9 +32,7 @@ const CoursesPage = () => {
       .then((res) => {
         // console.log(res)
         const filteredCategories = res.filter((category) => {
-          return (
-            category.category_name !== "Free Courses"
-          );
+          return category.category_name !== "Free Courses";
         });
         setCategories(filteredCategories);
         setLoading(false);
@@ -142,6 +146,21 @@ const CoursesPage = () => {
     indexOfLastCourse
   );
   const totalPages = Math.ceil(validCourses.length / coursesPerPage);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    setSearchParams({ page }); // this sets the page in URL
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  useEffect(() => {
+    const pageFromURL = parseInt(searchParams.get("page")) || 1;
+    setCurrentPage(pageFromURL);
+  }, [searchParams]);
+
 
   return (
     <>
@@ -326,13 +345,7 @@ const CoursesPage = () => {
             {Array.from({ length: totalPages }, (_, index) => (
               <button
                 key={index + 1}
-                onClick={() => {
-                  setCurrentPage(index + 1);
-                  window.scrollTo({
-                    top: 0, // Adjust the position as needed
-                    behavior: "smooth", // Adds a smooth scrolling effect
-                  });
-                }}
+                onClick={() => handlePageChange(index + 1)}
                 className={`px-4 py-2 border ${
                   currentPage === index + 1
                     ? "bg-black text-white font-bold"
