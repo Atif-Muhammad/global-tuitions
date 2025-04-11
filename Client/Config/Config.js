@@ -1,10 +1,10 @@
 import axios from "axios";
 
-// const baseUrl = "https://globaltuitions.co.uk/api";
-// axios.defaults.withCredentials = true;
-
-const baseUrl = "http://localhost:3000/api";
+const baseUrl = "https://globaltuitions.co.uk/api";
 axios.defaults.withCredentials = true;
+
+// const baseUrl = "http://localhost:3000/api";
+// axios.defaults.withCredentials = true;
 
 // get enabled categories
 const get_enabled_categories = async () => {
