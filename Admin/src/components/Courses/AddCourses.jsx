@@ -91,11 +91,11 @@ const AddCourses = ({ closeModal }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log(courseSort)
-    if(courseSort < 0){
+    if (courseSort < 0) {
       toast.error("Sort value must be 0 or a positive number.");
       return;
     }
-    
+
     // Prepare the course data to be submitted
     const newCourse = {
       course_name: courseName,
@@ -117,8 +117,8 @@ const AddCourses = ({ closeModal }) => {
 
     Config.addCourse(combinedData)
       .then((res) => {
-        if(res.status === 200){
-          toast.success("Course Created.")
+        if (res.status === 200) {
+          toast.success("Course Created.");
           setCourseName("");
           setCourseDescription("");
           setCourseSort("");
@@ -133,7 +133,6 @@ const AddCourses = ({ closeModal }) => {
           setStatus("success");
           closeModal(false);
         }
-        
       })
       .catch((err) => {
         console.log(err);
@@ -149,8 +148,8 @@ const AddCourses = ({ closeModal }) => {
 
   return (
     <>
-      <div className="overflow-y-auto backdrop-blur-lg overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full flex">
-        <div className="relative w-[60%] max-w-4xl mx-auto shadow-xl font-urbanist max-h-full bg-gradient-to-t from-gray-100 via-white to-gray-50 rounded-xl">
+      <div className="overflow-y-auto  backdrop-blur-lg overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full flex">
+        <div className="relative w-[60%] font-black max-w-4xl mx-auto shadow-xl font-urbanist max-h-full bg-gradient-to-t from-gray-100 via-white to-gray-50 rounded-xl">
           <form onSubmit={handleSubmit}>
             <div className="relative bg-white rounded-lg shadow-lg dark:bg-gray-700">
               <div className="flex items-center justify-between p-6 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-t-lg">
@@ -173,7 +172,7 @@ const AddCourses = ({ closeModal }) => {
                   <div className="flex-1">
                     <label
                       htmlFor="course-name"
-                      className="block text-lg font-semibold text-gray-50"
+                      className="block text-lg font-semibold text-gray-800"
                     >
                       Course Name:
                     </label>
@@ -190,7 +189,7 @@ const AddCourses = ({ closeModal }) => {
                   <div className="flex-1">
                     <label
                       htmlFor="categories"
-                      className="block text-lg font-semibold text-gray-50"
+                      className="block text-lg font-semibold text-gray-800"
                     >
                       Category:
                     </label>
@@ -217,21 +216,14 @@ const AddCourses = ({ closeModal }) => {
                 <div>
                   <label
                     htmlFor="course-description"
-                    className="text-lg font-semibold text-gray-50"
+                    className="text-lg font-semibold text-gray-800"
                   >
                     Course Description:
                   </label>
-                  <Mantine formdata={courseDescription} handleQuillChange={setCourseDescription}/>
-                  {/* <JoditEditor
-                    config={editorConfig}
-                    id="course-description"
-                    name="course_description"
-                    value={courseDescription}
-                    onBlur={setCourseDescription}
-                    required
-                    placeholder="Enter Course Description"
-                    className="block w-full border-2 border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                  /> */}
+                  <Mantine
+                    formdata={courseDescription}
+                    handleQuillChange={setCourseDescription}
+                  />
                 </div>
 
                 {/* Course Level, Duration, and Price */}
@@ -239,7 +231,7 @@ const AddCourses = ({ closeModal }) => {
                   <div className="flex-1">
                     <label
                       htmlFor="course-level"
-                      className="block text-lg font-semibold text-gray-50"
+                      className="block text-lg font-semibold text-gray-800"
                     >
                       Course Level:
                     </label>
@@ -261,7 +253,7 @@ const AddCourses = ({ closeModal }) => {
                   <div className="flex-1">
                     <label
                       htmlFor="duration"
-                      className="block text-lg font-semibold text-gray-50"
+                      className="block text-lg font-semibold text-gray-800"
                     >
                       Course Duration:
                     </label>
@@ -280,7 +272,7 @@ const AddCourses = ({ closeModal }) => {
                   <div className="flex-1">
                     <label
                       htmlFor="price"
-                      className="block text-lg font-semibold text-gray-50"
+                      className="block text-lg font-semibold text-gray-800"
                     >
                       Course Price:
                     </label>
@@ -302,7 +294,7 @@ const AddCourses = ({ closeModal }) => {
                   <div className="w-1/2">
                     <label
                       htmlFor="course-sort"
-                      className="block text-lg font-semibold text-gray-50"
+                      className="block text-lg font-semibold text-gray-800"
                     >
                       Sort Value:
                     </label>
@@ -320,7 +312,7 @@ const AddCourses = ({ closeModal }) => {
                   <div className="flex items-center space-x-2">
                     <label
                       htmlFor="course-enable"
-                      className="block text-lg font-semibold text-gray-50"
+                      className="block text-lg font-semibold text-gray-800"
                     >
                       Enable:
                     </label>
@@ -339,7 +331,7 @@ const AddCourses = ({ closeModal }) => {
                 <div>
                   <label
                     htmlFor="course-prerequisites"
-                    className="block text-lg font-semibold text-gray-50 mt-8"
+                    className="block text-lg font-semibold text-gray-800 mt-8"
                   >
                     Skills:
                   </label>
@@ -370,7 +362,7 @@ const AddCourses = ({ closeModal }) => {
 
                 {/* Course Content Section */}
                 <div className="mt-10 space-y-4">
-                  <h3 className="text-3xl text-center font-bold text-gray-50">
+                  <h3 className="text-3xl text-center font-bold text-gray-800">
                     Course Contents
                   </h3>
 
@@ -413,7 +405,7 @@ const AddCourses = ({ closeModal }) => {
                     <div className="flex-1">
                       <label
                         htmlFor="name"
-                        className="block text-lg font-semibold text-gray-50"
+                        className="block text-lg font-semibold text-gray-800"
                       >
                         Topic:
                       </label>
@@ -431,27 +423,21 @@ const AddCourses = ({ closeModal }) => {
                   <div>
                     <label
                       htmlFor="description"
-                      className="block text-lg font-semibold text-gray-50"
+                      className="block text-lg font-semibold text-gray-800"
                     >
                       Topic Description:
                     </label>
-                    <Mantine formdata={formData.description} handleQuillChange={handleQuillChange}/>
-                    {/* <JoditEditor
-                      config={editorConfig}
-                      id="description"
-                      name="description"
-                      value={formData.description}
-                      onBlur={handleQuillChange}
-                      placeholder="Enter Content Description"
-                      className="block w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                    /> */}
+                    <Mantine
+                      formdata={formData.description}
+                      handleQuillChange={handleQuillChange}
+                    />
                   </div>
 
                   <div className="mt-4 flex gap-5 items-end">
                     <div className="w-1/2">
                       <label
                         htmlFor="sort"
-                        className="block text-lg font-semibold text-gray-50"
+                        className="block text-lg font-semibold text-gray-800"
                       >
                         Sort Value:
                       </label>
@@ -468,7 +454,7 @@ const AddCourses = ({ closeModal }) => {
                     <div className="flex items-center space-x-2">
                       <label
                         htmlFor="enabled"
-                        className="block text-lg font-semibold text-gray-50"
+                        className="block text-lg font-semibold text-gray-800"
                       >
                         Enable:
                       </label>

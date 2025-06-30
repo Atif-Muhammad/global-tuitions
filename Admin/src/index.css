@@ -89,3 +89,27 @@
 }
 
 
+/* Add to your global CSS or component styles */
+.mantine-editor-content {
+  min-height: 300px;
+  padding: 16px;
+  cursor: text;
+}
+
+/* Ensure the editor container has proper dimensions */
+.prose {
+  width: 100%;
+  height: 100%;
+}
+
+/* Fix for the content editable area */
+.ProseMirror {
+  outline: none;
+  min-height: 300px;
+  padding: 8px;
+}
+
+.ProseMirror-focused {
+  outline: none;
+}
+
