@@ -18,7 +18,7 @@ const crypto = require("crypto");
 
 router.post("/signup", async (req, res) => {
   // todo: generate jwt or session for authentication
-  const { name, email, password, role, remember } = req.body.data;
+  const { name, email, password, role, remember } = req.body?.data;
 
   try {
     const user = await studentModel.find({ student_name: name });
@@ -115,7 +115,7 @@ router.post("/signup", async (req, res) => {
 });
 
 router.post("/signin", async (req, res) => {
-  const { email, password, remember } = req.body.data;
+  const { email, password, remember } = req.body?.data;
   try {
     const stuDetails = await studentModel.findOne({ email: email });
     const passwordDB = stuDetails.password;
@@ -257,7 +257,7 @@ router.get("/questions", async (req, res) => {
 });
 
 router.post("/feedback", async (req, res) => {
-  const { student_id, course_id, responses, rating, message } = req.body.data;
+  const { student_id, course_id, responses, rating, message } = req.body?.data;
   const data = {
     student_id: student_id,
     for_course: course_id,
@@ -330,7 +330,7 @@ router.post("/sendCode", async (req, res) => {
 
 router.post("/confirmCode", async (req, res) => {
   try {
-    const code = req.body.code;
+    const code = req.body?.code;
     // console.log(code)
     const secretKey = process.env.SECRET_KEY;
     const jwtToken = req.cookies.jwtToken;
@@ -353,7 +353,7 @@ router.post("/confirmCode", async (req, res) => {
 
 router.put("/changePass", async (req, res) => {
   try {
-    const pass = req.body.password;
+    const pass = req.body?.password;
     // console.log(req.cookies.jwtToken)
     const jwtToken = req.cookies.jwtToken;
     const secretKey = process.env.SECRET_KEY;
@@ -388,7 +388,7 @@ router.put("/changePass", async (req, res) => {
                   from: process.env.ADMIN_EMAIL,
                   to: result.email,
                   subject: "Password Changed",
-                  html: `<p>Dear <strong>${req.body.data.student_name}
+                  html: `<p>Dear <strong>${req.body?.data?.student_name}
                   </strong>,</p><p>This is to confirm that your password has been successfully changed on <strong>Global Tuitions</strong>.</p><p>For any questions, feel free to reach out to our support team.</p><p>Thank you,</p><p><strong>Global Tuitions Team</strong></p>`,
                 };
 
@@ -419,7 +419,7 @@ router.put("/changeName", async (req, res) => {
   try {
     const secretKey = process.env.SECRET_KEY;
     const jwtToken = req.cookies.jwtToken;
-    const user_name = req.body.name;
+    const user_name = req.body?.name;
 
     jwt.verify(jwtToken, secretKey, async (err, result) => {
       if (err) {
@@ -447,7 +447,7 @@ router.put("/changeName", async (req, res) => {
           from: process.env.ADMIN_EMAIL,
           to: result.email,
           subject: "Username Changed",
-          html: `<p>Dear <strong>${req.body.data.student_name}
+          html: `<p>Dear <strong>${req.body?.data?.student_name}
           </strong>,</p><p>Your username has been successfully updated on <strong>Global Tuitions</strong>.</p><p>For any questions, feel free to reach out to our support team.</p><p>Thank you,</p><p><strong>Global Tuitions Team</strong></p>`,
         };
 

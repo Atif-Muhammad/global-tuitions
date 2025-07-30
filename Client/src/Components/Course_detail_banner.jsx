@@ -16,7 +16,7 @@ const Course_detail_banner = (props) => {
 
   const location = useLocation();
   const id = location.state || props.id;
-  // console.log("from state: ", id);
+  console.log("from state: ", id);
 
   useEffect(() => {
     Config.get_enabled_contents(id.id)
@@ -29,8 +29,13 @@ const Course_detail_banner = (props) => {
   }, [id]);
 
   const handleDownloadPDF = async () => {
-    expandAllContents(); // Add this line to force full expansion before capturing
+    expandAllContents();
     await new Promise((resolve) => setTimeout(resolve, 500));
+
+    // Hide buttons before capturing
+    const buttons = document.querySelector(".button-container");
+    buttons?.classList.add("hide-for-pdf");
+
     const page = pageRef.current;
     const canvas = await html2canvas(page, { scale: 2 });
     const imgData = canvas.toDataURL("image/png");
@@ -42,22 +47,17 @@ const Course_detail_banner = (props) => {
     const imgWidth = pdfWidth;
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-    const websiteURL = "https://globaltuitions.co.uk/";
-    pdf.setTextColor(0, 0, 255);
-    pdf.textWithLink("globaltuitions.co.uk", 10, 10, {
-      url: websiteURL,
-    });
+    const links = [
+      { text: "Global Tuition", url: "https://globaltuitions.co.uk/" },
+      { text: "Courses", url: "https://globaltuitions.co.uk/courses" },
+    ];
 
-    const textWidth = pdf.getTextWidth("globaltuitions.co.uk");
-    pdf.setDrawColor(0, 0, 255); // Blue color for underline
-    pdf.line(10, 12, 10 + textWidth, 12); // (startX, startY, endX, endY)
-
-    let yPosition = 20; // Initial Y position after website link
+    let yPosition = 0;
     let remainingHeight = imgHeight;
     let sourceY = 0;
 
     while (remainingHeight > 0) {
-      const heightToPrint = Math.min(remainingHeight, pdfHeight - yPosition); // Current page height limit
+      const heightToPrint = Math.min(remainingHeight, pdfHeight - 20);
 
       const canvasSection = document.createElement("canvas");
       const ctx = canvasSection.getContext("2d");
@@ -75,6 +75,7 @@ const Course_detail_banner = (props) => {
         canvas.width,
         canvasSection.height
       );
+
       const sectionImgData = canvasSection.toDataURL("image/png");
 
       pdf.addImage(
@@ -86,19 +87,46 @@ const Course_detail_banner = (props) => {
         heightToPrint
       );
 
+      // === Draw background section at the bottom ===
+      const footerHeight = 12;
+      const footerY = pdfHeight - footerHeight;
+
+      pdf.setFillColor("#A4DCAA"); // Greenish background
+      pdf.rect(0, footerY, pdfWidth, footerHeight, "F");
+
+      // === Draw simple text links on top of background ===
+      pdf.setFontSize(10);
+      pdf.setTextColor(0, 0, 255); // Blue text
+      pdf.setFont("helvetica", "normal");
+
+      const spaceBetween = 10;
+      let totalTextWidth = 0;
+
+      links.forEach((link, i) => {
+        totalTextWidth += pdf.getTextWidth(link.text);
+        if (i !== links.length - 1) totalTextWidth += spaceBetween;
+      });
+
+      let currentX = (pdfWidth - totalTextWidth) / 2;
+      const textY = footerY + 8;
+
+      links.forEach((link) => {
+        pdf.textWithLink(link.text, currentX, textY, { url: link.url });
+        currentX += pdf.getTextWidth(link.text) + spaceBetween;
+      });
+
       remainingHeight -= heightToPrint;
       sourceY += canvasSection.height;
 
       if (remainingHeight > 0) {
         pdf.addPage();
-        pdf.textWithLink("globaltuitions.co.uk", 10, 10, {
-          url: websiteURL,
-        });
-        yPosition = 20;
       }
     }
 
     pdf.save("course-details.pdf");
+
+    // Restore buttons after PDF generation
+    buttons?.classList.remove("hide-for-pdf");
   };
 
   const expandAllContents = () => {
@@ -119,8 +147,8 @@ const Course_detail_banner = (props) => {
       ) : (
         <div ref={pageRef}>
           {/* <!-- Banner Section - Course Detail --> */}
-          <div className="bg-custombg py-8 font-readex">
-            <div className="px-6 md:px-8 flex justify-center lg:px-10 xl:px-20 2xl:px-28">
+          <div className="py-8 bg-custombg font-readex">
+            <div className="flex justify-center px-6 md:px-8 lg:px-10 xl:px-20 2xl:px-28">
               {/* <!-- Main Container --> */}
               <div className="flex flex-col w-[1250px] lg:flex-row gap-8 lg:justify-between justify-center items-center relative">
                 {/* <!-- HTML for Beginners Section --> */}
@@ -150,7 +178,7 @@ const Course_detail_banner = (props) => {
 
                     {course?.course_description?.split(" ").length > 80 && (
                       <button
-                        className="text-blue-600 underline ml-2"
+                        className="ml-2 text-base font-semibold text-blue-500 underline"
                         onClick={() =>
                           setShowFullDescription(!showFullDescription)
                         }
@@ -229,7 +257,7 @@ const Course_detail_banner = (props) => {
                       </div>
 
                       {/* <!-- Action Buttons --> */}
-                      <div className="flex flex-row  md:gap-2 md:justify-between mt-4">
+                      <div className="flex flex-row mt-4 md:gap-2 md:justify-between button-container">
                         <Link
                           to="/avail"
                           state={{ course }}
@@ -250,12 +278,11 @@ const Course_detail_banner = (props) => {
                         >
                           PDF
                         </button>
-                        {/* Print Button */}
                         <button
                           className="btnbutton"
                           onClick={() => {
                             expandAllContents();
-                            setTimeout(() => window.print(), 500); // Give time to render full content
+                            setTimeout(() => window.print(), 500);
                           }}
                         >
                           Print
@@ -270,7 +297,7 @@ const Course_detail_banner = (props) => {
 
           <div>
             {/* <!-- What You Will Learn Section --> */}
-            <div className="w-full font-urbanist h-auto bg-gray-50 py-10">
+            <div className="w-full h-auto py-10 font-urbanist bg-gray-50">
               <div className="max-w-[1700px] mx-auto px-5 lg:px-10">
                 <div className="flex flex-col gap-10">
                   <div>
@@ -307,22 +334,6 @@ const Course_detail_banner = (props) => {
                                 __html: content.content_description,
                               }}
                             />
-                            {/* {content.content_description?.length > 100 && (
-                                <button
-                                  className="text-blue-600 px-5 underline mt-2"
-                                  onClick={() =>
-                                    setExpandedContents((prev) => ({
-                                      ...prev,
-                                      [index]: !prev[index],
-                                    }))
-                                  }
-                                >
-                                  {expandedContents[index]
-                                    ? "See Less"
-                                    : "See More"}
-                                </button>
-                              )} */}
-                            {/* </div> */}
                           </div>
                         </div>
                       </div>
@@ -333,14 +344,14 @@ const Course_detail_banner = (props) => {
 
             {/* <!-- Skills You Get Section --> */}
             {course.skills?.length > 0 && (
-              <div className="w-full h-auto bg-gray-100 py-10">
+              <div className="w-full h-auto py-10 bg-gray-100">
                 <div className="max-w-[1700px] font-urbanist mx-auto px-5 lg:px-10">
                   <div className="mb-6">
                     <p className="font-readex text-[28px] md:text-[34px] lg:text-[45px] xl:text-[55px] 2xl:text-[65px] tracking-tighter leading-tight">
                       Skills You Get
                     </p>
                   </div>
-                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 justify-center items-center">
+                  <div className="grid items-center justify-center grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                     {course.skills?.map((skill, index) => (
                       <div
                         key={index}

@@ -149,7 +149,7 @@ const AddCourses = ({ closeModal }) => {
   return (
     <>
       <div className="overflow-y-auto  backdrop-blur-lg overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full flex">
-        <div className="relative w-[60%] font-black max-w-4xl mx-auto shadow-xl font-urbanist max-h-full bg-gradient-to-t from-gray-100 via-white to-gray-50 rounded-xl">
+        <div className="relative w-[60%] max-w-4xl mx-auto shadow-xl font-urbanist max-h-full bg-gradient-to-t from-gray-100 via-white to-gray-50 rounded-xl">
           <form onSubmit={handleSubmit}>
             <div className="relative bg-white rounded-lg shadow-lg dark:bg-gray-700">
               <div className="flex items-center justify-between p-6 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-t-lg">
@@ -183,7 +183,7 @@ const AddCourses = ({ closeModal }) => {
                       value={courseName}
                       onChange={(e) => setCourseName(e.target.value)}
                       required
-                      className="block w-full rounded-lg border-2 border-gray-300 py-3 px-4 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      className=" w-full rounded-lg border-2 border-gray-300 py-3 px-4 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     />
                   </div>
                   <div className="flex-1">

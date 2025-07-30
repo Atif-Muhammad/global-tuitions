@@ -17,6 +17,8 @@ import Underline from "@tiptap/extension-underline";
 import Strike from "@tiptap/extension-strike";
 import Heading from "@tiptap/extension-heading";
 import { Button, Menu } from "@mantine/core";
+import TextStyle from "@tiptap/extension-text-style";
+import { FontFamily } from "@tiptap/extension-font-family";
 
 export function Mantine({ formdata, handleQuillChange }) {
   const CustomBulletList = BulletList.extend({
@@ -79,6 +81,10 @@ export function Mantine({ formdata, handleQuillChange }) {
       CustomBulletList,
       CustomOrderedList,
       ListItem,
+      TextStyle,
+      FontFamily.configure({
+        types: ["textStyle"],
+      }),
     ],
     content: formdata || "",
     onUpdate: ({ editor }) => {
@@ -136,6 +142,17 @@ export function Mantine({ formdata, handleQuillChange }) {
     return editor.isActive(type, options) ? "bg-black text-white" : "";
   };
 
+  const isFontActive = (font) => {
+    return editor.isActive("textStyle", { fontFamily: font })
+      ? "bg-black text-white"
+      : "";
+  };
+
+  // Function to set font family
+  const setFontFamily = (font) => {
+    editor.chain().focus().setFontFamily(font).run();
+  };
+
   // Remove the autofocus useEffect since we don't want automatic focusing
   // Keep the content synchronization effect
   useEffect(() => {
@@ -171,6 +188,36 @@ export function Mantine({ formdata, handleQuillChange }) {
       >
         {/* Toolbar */}
         <MantineRichTextEditor.Toolbar className="flex flex-wrap gap-x-1 px-1 justify-center bg-gray-200 py-2 rounded-t-xl shadow-sm">
+          {/* /* Font Family Dropdown */}
+          <div className="relative">
+            <Menu shadow="md" width={180}>
+              <Menu.Target>
+                <Button size="xs" className={`border p-2 rounded-md`}>
+                  Font
+                </Button>
+              </Menu.Target>
+              <Menu.Dropdown className="absolute top-full left-4 px-4 z-50 bg-white shadow-md rounded-md flex flex-col">
+                <Menu.Item
+                  onClick={() => setFontFamily("")}
+                  className="py-1 border-b hover:bg-gray-100 transition-all duration-300 text-left font-sans"
+                >
+                  Default (Sans-serif)
+                </Menu.Item>
+                <Menu.Item
+                  onClick={() => setFontFamily("Urbanist")}
+                  className="py-1 border-b hover:bg-gray-100 transition-all duration-300 text-left font-urbanist"
+                >
+                  Urbanist
+                </Menu.Item>
+                <Menu.Item
+                  onClick={() => setFontFamily("monospace")}
+                  className="py-1 border-b hover:bg-gray-100 transition-all duration-300 text-left font-mono"
+                >
+                  Monospace
+                </Menu.Item>
+              </Menu.Dropdown>
+            </Menu>
+          </div>
           {[
             MantineRichTextEditor.Bold,
             MantineRichTextEditor.Italic,
@@ -186,7 +233,6 @@ export function Mantine({ formdata, handleQuillChange }) {
               )}`}
             />
           ))}
-
           {[1, 2, 3].map((level) => (
             <Button
               key={level}
@@ -204,7 +250,6 @@ export function Mantine({ formdata, handleQuillChange }) {
               H{level}
             </Button>
           ))}
-
           <div className="relative">
             <Menu shadow="md" width={150}>
               <Menu.Target>
@@ -252,7 +297,6 @@ export function Mantine({ formdata, handleQuillChange }) {
               </Menu.Dropdown>
             </Menu>
           </div>
-
           <div className="relative">
             <Menu shadow="md" width={150}>
               <Menu.Target>
@@ -294,11 +338,9 @@ export function Mantine({ formdata, handleQuillChange }) {
               </Menu.Dropdown>
             </Menu>
           </div>
-
           {/* Subscript & Superscript */}
           <MantineRichTextEditor.Subscript className="border p-2 rounded-md hover:bg-gray-300" />
           <MantineRichTextEditor.Superscript className="border p-2 rounded-md hover:bg-gray-300" />
-
           {/* Text Alignment */}
           {[
             MantineRichTextEditor.AlignLeft,
@@ -313,7 +355,6 @@ export function Mantine({ formdata, handleQuillChange }) {
               )}`}
             />
           ))}
-
           {/* Undo & Redo */}
           <MantineRichTextEditor.Undo className="border p-2 rounded-md hover:bg-gray-300" />
           <MantineRichTextEditor.Redo className="border p-2 rounded-md hover:bg-gray-300" />

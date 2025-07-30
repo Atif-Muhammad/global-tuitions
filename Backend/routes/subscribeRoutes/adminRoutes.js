@@ -4,8 +4,8 @@ const subscription = require("../../models/subscribeModel");
 const nodemailer = require("nodemailer");
 
 router.post("/reply", async (req, res) => {
-  const emails = req.body.payload.emails;
-  const message = req.body.payload.msg;
+  const emails = req.body?.payload.emails;
+  const message = req.body?.payload.msg;
   // console.log(emails)
   // console.log(message)
   // send an instant email to user

@@ -7,7 +7,7 @@ const router = express.Router();
 
 // 1. course by id
 router.get("/course", async (req, res) => {
-  const course_id = req.query.id;
+  const course_id = req.query?.id;
   try {
     const courses = await coursesModel.findOne({ _id: course_id });
     res.status(200).send(courses);
@@ -62,7 +62,7 @@ router.get("/enabled", async (req, res) => {
 
 // 3. enabled popular courses
 router.get("/enabled/popular", async (req, res) => {
-  const order_val = req.query.order;
+  const order_val = req.query?.order;
   try {
     const courses = await coursesModel
       .find({ enabled_flag: true, popular: true })
@@ -75,7 +75,7 @@ router.get("/enabled/popular", async (req, res) => {
 });
 
 router.get("/course/enabled/content", async (req, res) => {
-  const course_id = req.query.id;
+  const course_id = req.query?.id;
   try {
     const contents = await coursesModel
       .findOne({ _id: course_id })

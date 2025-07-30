@@ -10,13 +10,13 @@ router.post("/enroll", async (req, res) => {
   // console.log(req.body.data)
   const Email_regex =
     /[a-zA-Z\d]+[\._]*[a-zA-Z\d]+@(gmail\.com|yahoo\.com|outlook\.com)$/;
-  if (!Email_regex.test(req.body.data.applier_email)) {
+  if (!Email_regex.test(req.body?.data?.applier_email)) {
     return res.status(404).send("enter valid email");
   }
   const found = await enrollmentModel.find({
     $and: [
-      { applier_email: req.body.data.applier_email },
-      { for_course: req.body.data.for_course },
+      { applier_email: req.body?.data?.applier_email },
+      { for_course: req.body?.data?.for_course },
     ],
   });
   if (found.length > 0) {
@@ -25,7 +25,7 @@ router.post("/enroll", async (req, res) => {
 
   try {
     // create enrollment
-    const created_enrollment = await enrollmentModel.create(req.body.data);
+    const created_enrollment = await enrollmentModel.create(req.body?.data);
     // console.log(created_enrollment)
 
     // update the student model
@@ -50,14 +50,14 @@ router.post("/enroll", async (req, res) => {
     // console.log(updated_course)
     const mailOptions = {
       from: process.env.ADMIN_EMAIL,
-      to: req.body.data.applier_email,
+      to: req.body?.data?.applier_email,
       subject: "Thank you!",
       html: `
-      <p>Dear <strong>${req.body.data.applier}</strong>,</p> 
+      <p>Dear <strong>${req.body?.data?.applier}</strong>,</p> 
       <p>Congratulations! You’re now officially enrolled in <strong>${updated_course.course_name}</strong> on <strong>Global Tuitions</strong>. We’re excited to have you on this learning journey! </p>
       <p style="font-weight: bold; margin: 0; padding: 0;">Here’s what’s next:</p>
       <ul style="padding-left: 20px; margin-top: 5px;">
-        <li>📅 <strong>Class Schedule:</strong> ${req.body.data.preferred_time} | ${req.body.data.preferred_date}</li>
+        <li>📅 <strong>Class Schedule:</strong> ${req.body?.data?.preferred_time} | ${req.body?.data?.preferred_date}</li>
         <li>🤝 <strong>Need Help?</strong> Our support team is here for you!</li>
       </ul>
       <p>Get ready to learn, grow, and achieve your goals. Let’s get started!</p>

@@ -7,11 +7,11 @@ router.post("/subscribe", async (req, res) => {
 
     try {
         // find if an email has already subscribed
-        const found = await subscription.find({ email: req.body.data.email });
+        const found = await subscription.find({ email: req.body?.data?.email });
         if (found.length > 0) {
             return res.status(409).send("already subscribed")
         }
-        await subscription.create(req.body.data);
+        await subscription.create(req.body?.data);
         // send an instant email to user
         // create transporter
         const transporter = nodemailer.createTransport({
@@ -24,10 +24,10 @@ router.post("/subscribe", async (req, res) => {
         
         // create email message
         const mailOptions = {
-            from: process.env.ADMIN_EMAIL,
-            to: req.body.data.email,
-            subject: "You’re Subscribed! Get Ready for Exclusive Updates",
-            html: `
+          from: process.env.ADMIN_EMAIL,
+          to: req.body?.data?.email,
+          subject: "You’re Subscribed! Get Ready for Exclusive Updates",
+          html: `
             <h2>Dear Student,</h2>
             <p>
             Thank you for subscribing to <strong>Global Tuitions</strong>! 🎉 You’re now part of our learning community, and we’re excited to keep you updated with the latest courses, expert insights, and special offers.

@@ -6,6 +6,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.hide-for-pdf {
+  display: none !important;
+}
+
 /* Custom Button Class */
 .btn-custom {
   @apply inline-block text-center self-start py-2 px-4 xl:px-5 w-full bg-black 
@@ -178,7 +182,6 @@
   box-shadow: 0 25px 50px -12px #72458f;
 }
 
-
 .mantine-editor-content h1 {
   font-size: 2rem;
   font-weight: bold;
@@ -202,11 +205,9 @@
   /* list-style-type: disc; */
 }
 
-
-
 .mantine-editor-content ul[data-style="checked"] > li {
-  display: flex; 
-  align-items: center; 
+  display: flex;
+  align-items: center;
 }
 
 .mantine-editor-content ul[data-style="checked"] > li::before {
@@ -215,8 +216,8 @@
   color: green;
   font-weight: bold;
   display: inline-block;
-  width: 1em; 
-  text-align: center; 
+  width: 1em;
+  text-align: center;
 }
 
 .mantine-editor-content ul[data-style="dashed"] {
@@ -224,19 +225,18 @@
   padding-left: 1.5rem;
 }
 
-
 .mantine-editor-content ul[data-style="dashed"] > li::before {
   content: "-";
   margin-right: 5px;
   font-weight: bold;
-  display: inline-block; 
-  width: 1em; 
-  text-align: center; 
+  display: inline-block;
+  width: 1em;
+  text-align: center;
 }
 
 .mantine-editor-content ul[data-style="dashed"] > li {
-  display: flex; 
-  align-items: center; 
+  display: flex;
+  align-items: center;
 }
 
 .mantine-editor-content ul[data-style="checked"] {
@@ -250,20 +250,16 @@
 }
 
 .mantine-editor-content ul[data-style="arrow"] > li {
-  display: flex; 
-  align-items: center; 
+  display: flex;
+  align-items: center;
 }
 
 .mantine-editor-content ul[data-style="arrow"] > li::before {
-  content: "→"; 
+  content: "→";
   margin-right: 8px;
   color: rgb(0, 0, 0);
   font-weight: bold;
-  display: inline-block; 
+  display: inline-block;
   width: 1em;
-  text-align: center; 
+  text-align: center;
 }
-
-
-
-

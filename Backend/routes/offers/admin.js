@@ -5,7 +5,7 @@ const offers = require("../../models/offersModel")
 
 router.post('/postOffer', async (req, res)=>{
     try {
-        const offer =  await offers.create(req.body.data)
+        const offer = await offers.create(req.body?.data);
         if(offer){
             res.send(offer)
         }
@@ -29,8 +29,8 @@ router.get('/getOffers', async (req, res)=>{
 router.put('/editOffer', async (req, res)=>{
     try {
         // console.log(req.body)
-        const id = req.body.data._id
-        const edited = await offers.updateOne({_id: id}, req.body.data)
+        const id = req.body?.data?._id;
+        const edited = await offers.updateOne({ _id: id }, req.body?.data);
         if(edited.modifiedCount > 0){
             res.sendStatus(200)
         }

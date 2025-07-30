@@ -13,11 +13,11 @@ const { default: mongoose } = require("mongoose");
 router.post("/postInquiry", async (req, res) => {
   const Email_regex =
     /[a-zA-Z\d]+[\._]*[a-zA-Z\d]+@(gmail\.com|yahoo\.com|outlook\.com)$/;
-  if (!Email_regex.test(req.body.data.email)) {
+  if (!Email_regex.test(req.body?.data?.email)) {
     return res.status(404).send("enter valid email");
   }
   // console.log(req.body)
-  const course_id = req.body.data.for_course;
+  const course_id = req.body?.data?.for_course;
   const userJwt = req.cookies.jwtToken;
   // console.log(userJwt)
 
@@ -38,10 +38,10 @@ router.post("/postInquiry", async (req, res) => {
     
     // return res.send("set the inquiry for course")
     const inq_details = {
-      inquiry_by: req.body.data.inquiry_by,
-      email: req.body.data.email,
+      inquiry_by: req.body?.data?.inquiry_by,
+      email: req.body?.data?.email,
       for_course: course_id,
-      inquiry: req.body.data.inquiry,
+      inquiry: req.body?.data?.inquiry,
       inquiry_by_id: user_id,
     };
     try {
@@ -61,10 +61,10 @@ router.post("/postInquiry", async (req, res) => {
     }
   } else {
     const inq_details = {
-      inquiry_by: req.body.data.inquiry_by,
-      email: req.body.data.email,
-      phone: req.body.data.phone,
-      inquiry: req.body.data.inquiry,
+      inquiry_by: req.body?.data?.inquiry_by,
+      email: req.body?.data?.email,
+      phone: req.body?.data?.phone,
+      inquiry: req.body?.data?.inquiry,
       inquiry_by_id: user_id,
     };
     // console.log(inq_details)
@@ -96,9 +96,9 @@ router.post("/postInquiry", async (req, res) => {
   // create email message
   const mailOptions = {
     from: process.env.ADMIN_EMAIL,
-    to: req.body.data.email,
+    to: req.body?.data?.email,
     subject: "Thank you!",
-    html: `<p>Dear <strong>${req.body.data.inquiry_by}
+    html: `<p>Dear <strong>${req.body?.data?.inquiry_by}
     </strong>,</p><p>Thank you for reaching out to <strong>Global Tuitions</strong>. We have received your inquiry and our team will get back to you shortly.</p>
     ${
       course_name

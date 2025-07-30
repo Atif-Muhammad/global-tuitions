@@ -9,7 +9,7 @@ const coursesModel = require('../../models/coursesModel')
 // route: /categories?order=-1 -----> (-1 desc & 1 asc)
 router.get('/', async (req, res) => {
     
-    const order_val = req.query.order;
+    const order_val = req.query?.order;
     try {
         const categories = await categoriesModel.find({deleted: false}).sort({ sort_value: Number(order_val) });
         res.status(200).send(categories)
@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/enabled', async (req, res)=>{     
-    const order_val = req.query.order;                       
+    const order_val = req.query?.order;                       
     try {
         const enabled_categories = await categoriesModel.find({$and:[{enabled_flag: true}, {deleted: false}]}).populate('courses').sort({sort_value: Number(order_val)});
         res.status(200).send(enabled_categories);
@@ -32,7 +32,7 @@ router.get('/enabled', async (req, res)=>{
 router.post('/addCategory', async (req, res) => {
     // console.log(req.body.data)
     // check whether a category name already exist
-    const cat_name = req.body.data.category_name;
+    const cat_name = req.body?.data.category_name;
     
     const found_category = await categoriesModel.find({ $and:[
         {category_name: cat_name}, {deleted: false}
@@ -41,7 +41,7 @@ router.post('/addCategory', async (req, res) => {
         return res.status(409).send("category already exists");
     }
     try {
-        const added_category = await categoriesModel.create(req.body.data);
+        const added_category = await categoriesModel.create(req.body?.data);
         res.status(200).send(added_category);
     } catch (error) {
         res.send(error);
@@ -51,7 +51,7 @@ router.post('/addCategory', async (req, res) => {
 // post free category
 router.post('/freeCourses', async (req, res)=>{
     // console.log(req.body)
-    const cat_name = await req.body.category_name;
+    const cat_name = await req.body?.category_name;
     const found_category = await categoriesModel.find({
         category_name: cat_name,
     });
@@ -79,12 +79,12 @@ router.get('/freeCategory', async (req, res)=>{
 
 // 4. update categories
 router.put('/category/update', async (req, res) => {
-    const id_of_update = req.body.data._id;
+    const id_of_update = req.body?.data._id;
     const updated_data = {
-        category_name: req.body.data.category_name,
-        enabled_flag: req.body.data.enabled_flag,
-        sort_value: req.body.data.sort_value,
-    }
+      category_name: req.body?.data?.category_name,
+      enabled_flag: req.body?.data?.enabled_flag,
+      sort_value: req.body?.data?.sort_value,
+    };
     try {
         const updated = await categoriesModel.updateOne({ _id: id_of_update }, updated_data);
         res.status(200).send(updated)
@@ -95,7 +95,7 @@ router.put('/category/update', async (req, res) => {
 
 // 5. delete category by id
 router.put('/category/removeCategory', async (req, res) => {
-    const cat_id = req.body.id
+    const cat_id = req.body?.id;
     try {
         const category = await categoriesModel.findOne({_id: cat_id});
         if(category != null){
@@ -112,7 +112,7 @@ router.put('/category/removeCategory', async (req, res) => {
 });
 // 5. delete category by id
 router.delete('/category/delCategory', async (req, res) => {
-    const cat_id = req.query.id
+    const cat_id = req.query?.id;
     try {
         const category = await categoriesModel.findOne({_id: cat_id});
         if(category != null){
@@ -129,7 +129,7 @@ router.delete('/category/delCategory', async (req, res) => {
 });
 
 router.put('/category/recover', async (req, res)=>{
-    const cat_id = req.body.id;
+    const cat_id = req.body?.id;
     try {
         const category = await categoriesModel.findOne({_id: cat_id});
         if(category != null){

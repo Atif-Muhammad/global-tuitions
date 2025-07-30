@@ -11,7 +11,7 @@ const router = express.Router();
 // 1. all courses----- asc or desc
 // route: /courses?order=-1
 router.get('/', async (req, res) => {
-    const order_val = req.query.order
+    const order_val = req.query?.order;
     try {
         // console.log(await coursesModel.find({}))
         const courses = await coursesModel.find({ deleted: false }).populate('category_id', "category_name").sort({ sort_value: Number(order_val) });
@@ -23,7 +23,7 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/courseDetails', async (req, res) => {
-    const courseId = req.query.course;
+    const courseId = req.query?.course;
     // console.log(courseId)
     try {
         const contents = await courseContentsModel.find({ course_id: courseId }).populate("course_id", "course_name");
@@ -36,7 +36,7 @@ router.get('/courseDetails', async (req, res) => {
 
 
 router.get('/getDelCourses', async (req, res) => {
-    const order_val = req.query.order
+    const order_val = req.query?.order;
     try {
         // console.log(await coursesModel.find({}))
         const courses = await coursesModel.find({ deleted: true }).populate('category_id').populate("course_contents").sort({ sort_value: Number(order_val) });
@@ -49,7 +49,7 @@ router.get('/getDelCourses', async (req, res) => {
 
 // 2. All enabled courses --- asc and desc
 router.get('/enabled', async (req, res) => {
-    const order_val = req.query.order;
+    const order_val = req.query?.order;
     try {
         const courses = await coursesModel.find({ $and: [{ enabled_flag: true }, { deleted: false }] }).populate('category_id', 'category_name').sort({ sort_value: Number(order_val) });
         res.status(200).send(courses);
@@ -61,7 +61,7 @@ router.get('/enabled', async (req, res) => {
 // 2. add course
 router.post('/addCourse', async (req, res) => {
     // check whether the course already exist?
-    const { newCourse, includedItems } = req.body.data;
+    const { newCourse, includedItems } = req.body?.data;
     // Validate input
     // if (!newCourse || !courseDetails) {
     //     return res.status(400).send("Invalid request. Missing course or course details.");
@@ -115,7 +115,7 @@ router.post('/addCourse', async (req, res) => {
 
 // 3. update course popularity
 router.put('/course/update/popular', async (req, res) => {
-    const course_id = req.body.id;
+    const course_id = req.body?.id;
     try {
         const course = await coursesModel.findOne({ _id: course_id });
         if (course) {
@@ -131,7 +131,7 @@ router.put('/course/update/popular', async (req, res) => {
 })
 
 router.put('/course/update/skillUpdate', async (req, res) => {
-    const { courseId, skls } = req.body.data;
+    const { courseId, skls } = req.body?.data;
     // console.log(courseId)
     try {
         await coursesModel.findOneAndUpdate({ _id: courseId }, { skills: skls });
@@ -148,17 +148,17 @@ router.put('/course/update', async (req, res) => {
     const id_of_update = req.body.data._id;
 
     const updated_data = {
-        course_name: req.body.data.course_name,
-        enabled_flag: req.body.data.enabled_flag,
-        sort_value: req.body.data.sort_value,
-        date: req.body.data.date && req.body.data.date,
-        time: req.body.data.time && req.body.data.time,
-        price: req.body.data.price && req.body.data.price,
-        course_description: req.body.data.course_description,
-        rating: req.body.data.rating && req.body.data.rating,
-        course_level: req.body.data.course_level,
-        course_duration: req.body.data.course_duration,
-        category_id: req.body.data.category_id
+        course_name: req.body?.data?.course_name,
+        enabled_flag: req.body?.data?.enabled_flag,
+        sort_value: req.body?.data?.sort_value,
+        date: req.body?.data?.date && req.body?.data?.date,
+        time: req.body?.data?.time && req.body?.data?.time,
+        price: req.body?.data?.price && req.body?.data?.price,
+        course_description: req.body?.data?.course_description,
+        rating: req.body?.data?.rating && req.body?.data?.rating,
+        course_level: req?.body?.data.course_level,
+        course_duration: req.body?.data?.course_duration,
+        category_id: req.body?.data?.category_id
     };
 
 
@@ -179,9 +179,9 @@ router.put('/course/update', async (req, res) => {
 // 5. update
 router.put("/course/detailsupdate", async (req, res) => {
 
-    const skills = req.body.data.skills;
-const course_contents = req.body.data.course_contents;
-const courseId = new mongoose.Types.ObjectId(req.body.data.id);
+    const skills = req.body?.data?.skills;
+const course_contents = req.body?.data?.course_contents;
+const courseId = new mongoose.Types.ObjectId(req.body?.data?.id);
 
 try {
     // Extract incoming content IDs from request body
@@ -252,7 +252,7 @@ try {
 // 6. delete course
 router.delete('/course/delCourse', async (req, res) => {
 
-    const course_id = req.query.id;
+    const course_id = req.query?.id;
     if (!course_id) {
         return res.status(400).send({ error: "Course ID is required." });
     }
@@ -275,7 +275,7 @@ router.delete('/course/delCourse', async (req, res) => {
     }
 });
 router.put('/course/remCourse', async (req, res) => {
-    const course_id = req.body.id;
+    const course_id = req.body?.id;
     if (!course_id) {
         return res.status(400).send({ error: "Course ID is required." });
     }
@@ -298,7 +298,7 @@ router.put('/course/remCourse', async (req, res) => {
     }
 });
 router.put('/course/recover', async (req, res) => {
-    const course_id = req.body.id;
+    const course_id = req.body?.id;
     try {
         const course = await coursesModel.findOne({ _id: course_id });
         if (course != null) {

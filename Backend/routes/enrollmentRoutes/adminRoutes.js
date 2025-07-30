@@ -16,7 +16,9 @@ router.get('/', async (req, res) => {
 router.get('/course/enrollments', async (req, res) => {
 
     try {
-        const data = await enrollmentModel.find({for_course: req.query.id}).populate("for_course", "course_name");
+        const data = await enrollmentModel
+          .find({ for_course: req.query?.id })
+          .populate("for_course", "course_name");
         res.status(200).send(data)
     } catch (error) {
         res.send(error);
@@ -27,10 +29,10 @@ router.get('/course/enrollments', async (req, res) => {
 router.post('/enrollmentReply', async (req, res) => {
     // console.log(req.body)
     try {
-        const enrollment = await enrollmentModel.find({ _id: req.body.data.id });
+        const enrollment = await enrollmentModel.find({ _id: req.body?.data?.id });
 
         if (enrollment) {
-            await enrollmentModel.updateOne({_id: req.body.data.id}, {viewed_flag: true})
+            await enrollmentModel.updateOne({_id: req.body?.data?.id}, {viewed_flag: true})
             // send an instant email to user
             // create transporter
             const transporter = nodemailer.createTransport({
@@ -43,16 +45,16 @@ router.post('/enrollmentReply', async (req, res) => {
             // create email message
             const mailOptions = {
                 from: process.env.ADMIN_EMAIL,
-                to: req.body.data.email,
+                to: req.body?.data?.email,
                 subject: "Regarding your Enrollment",
-                text: req.body.data.msg,
+                text: req.body?.data?.msg,
             };
 
             const sentMail = await transporter.sendMail(mailOptions);
             // console.log(sentMail)
             if (sentMail.accepted != null) {
                 // update inquiry collection for reply
-                enrollment[0].Reply = req.body.data.msg;
+                enrollment[0].Reply = req.body?.data?.msg;
                 enrollment[0].replied_flag = !enrollment[0].replied_flag; 
                 await enrollment[0].save();
                 res.sendStatus(200);
@@ -68,10 +70,15 @@ router.post('/enrollmentReply', async (req, res) => {
 router.put('/approval', async (req, res) => {
     // console.log(req.body)
     try {
-        const enrollment = await enrollmentModel.find({ _id: req.body.id }).populate("for_course");
+        const enrollment = await enrollmentModel
+          .find({ _id: req.body?.id })
+          .populate("for_course");
         // console.log("dsad",enrollment)
         if (enrollment) {
-            await enrollmentModel.updateOne({_id: req.body.id}, {viewed_flag: true})
+            await enrollmentModel.updateOne(
+              { _id: req.body?.id },
+              { viewed_flag: true }
+            );
             const student = await studentModel.find({email: enrollment[0].applier_email})
             // send an instant email to user
             // create transporter
@@ -128,9 +135,14 @@ router.put('/approval', async (req, res) => {
 
 router.put('/rejection', async(req, res)=>{
     try {
-        const enrollment = await enrollmentModel.find({ _id: req.body.id }).populate("for_course");
+        const enrollment = await enrollmentModel
+          .find({ _id: req.body?.id })
+          .populate("for_course");
         if (enrollment) {
-            await enrollmentModel.updateOne({_id: req.body.id}, {viewed_flag: true})
+            await enrollmentModel.updateOne(
+              { _id: req.body?.id },
+              { viewed_flag: true }
+            );
             const student = await studentModel.find({email: enrollment[0].applier_email})
             // console.log(enrollment)
             // send an instant email to user

@@ -1,5 +1,5 @@
 import React, { Suspense, lazy, useEffect } from "react";
-import './index.css'
+import "./index.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Footer from "./Pages/Footer/Footer";
 import Loader from "./Pages/Loader/Loader";
@@ -45,7 +45,10 @@ function App() {
                   <Route path="/" element={<Index />} />
                   <Route path="*" element={<NotfoundPage />} />
                   <Route path="/courses" element={<CoursesPage />} />
-                  <Route path="/Course_detail/:id" element={<Course_detail />} />
+                  <Route
+                    path="/Course_detail/:id"
+                    element={<Course_detail />}
+                  />
                   <Route path="/inquiry" element={<Inquiry />} />
                   <Route path="/freeCourses" element={<FreeCoursesBanner />} />
                   <Route path="/offers" element={<Offers />} />

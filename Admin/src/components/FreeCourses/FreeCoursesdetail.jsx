@@ -1,15 +1,11 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
-import DOMPurify from "dompurify";
 import "react-quill/dist/quill.snow.css";
 import Config from "../../../config/Config";
-// import JoditEditor from "jodit-react";
-import { Mantine } from "../Mantine/Mantine.jsx";
-import editorConfig from "../EditorConfig";
 import { toast, ToastContainer } from "react-toastify";
 import { ConfirmationModal } from "../Courses/ConfirmaationModel";
+import { Mantine } from "../Mantine/Mantine";
 
 const Coursesdetail = ({ isOpen, onClose, courseId, skls }) => {
   const [courseData, setCourseData] = useState([]);
@@ -32,7 +28,6 @@ const Coursesdetail = ({ isOpen, onClose, courseId, skls }) => {
     await Config.getCourseDets(courseId)
       .then((res) => {
         if (res.status === 200) {
-          console.log(res.data);
           setCourseData(res.data);
         }
       })
@@ -70,11 +65,7 @@ const Coursesdetail = ({ isOpen, onClose, courseId, skls }) => {
 
   const handleAddcourse_include = () => {
     if (newcourse_include.trim()) {
-      setSkills((prev) => [
-        ...(Array.isArray(prev) ? prev : []),
-        newcourse_include,
-      ]);
-
+      setSkills((prev) => [...prev, newcourse_include]);
       setNewcourse_include("");
       setIsAddIncludeInputVisible(false);
     }
@@ -113,7 +104,11 @@ const Coursesdetail = ({ isOpen, onClose, courseId, skls }) => {
     if (editSection === "skills") {
       skills[editIndex] = editContent.skills;
     }
-    if (editSection === "course_contents") {
+    if (
+      editSection === "course_contents" &&
+      editIndex !== null &&
+      editIndex < courseData.length
+    ) {
       const updatedContents = [...courseData];
       updatedContents[editIndex] = {
         ...updatedContents[editIndex],
@@ -121,6 +116,7 @@ const Coursesdetail = ({ isOpen, onClose, courseId, skls }) => {
       };
       setCourseData(updatedContents);
     }
+
     setEditIndex(null);
     setEditSection("");
   };
@@ -139,17 +135,21 @@ const Coursesdetail = ({ isOpen, onClose, courseId, skls }) => {
       sort_value: parseInt(newContent.sort_value, 10),
     };
 
-    const updatedCourseData = [
-      ...(Array.isArray(courseData) ? courseData : []),
-      newItem,
-    ];
+    const updatedCourseData = [...courseData, newItem];
 
     setCourseData(updatedCourseData);
 
     // Debugging logs:
     console.log("Course data after addition:", updatedCourseData);
 
-    setNewContent({});
+    setNewContent({
+      topic: "",
+      content_description: "",
+      duration: "",
+      enabled_flag: true,
+      sort_value: "",
+    });
+
     setIsAddContentModalOpen(false);
     toast.success("Content Added");
   };
@@ -160,8 +160,8 @@ const Coursesdetail = ({ isOpen, onClose, courseId, skls }) => {
       skills: skills,
       course_contents: courseData,
     };
-    // console.log("courseData:", courseData);
-    // console.log("final:", finalData);
+    console.log("courseData:", courseData);
+    console.log("final:", finalData);
 
     Config.updateCourseDetails(finalData)
       .then(async (res) => {
@@ -323,24 +323,25 @@ const Coursesdetail = ({ isOpen, onClose, courseId, skls }) => {
                   <div className="space-y-4 font-urbanist">
                     {courseData.length > 0 ? (
                       [...courseData]
+                        .map((content, index) => ({
+                          ...content,
+                          originalIndex: index,
+                        }))
                         .sort((a, b) => a.sort_value - b.sort_value)
-                        .map((course_content, index) => (
-                          <div
-                            key={index}
-                            className=" border-black/40 py-2  border px-4"
-                          >
-                            <div>
-                              <p className="text-[20px]  font-bold text-black">
-                                Topic:
-                              </p>
+                        .map((course_content) => {
+                          const index = course_content.originalIndex;
+                          return (
+                            <div
+                              key={index}
+                              className=" border-black/40 py-2 rounded-lg  border px-4"
+                            >
+                              {/* ...inside use index for edit check and editContent values... */}
                               {editSection === "course_contents" &&
                               editIndex === index ? (
                                 <input
                                   type="text"
                                   value={
-                                    editContent.topic !== undefined
-                                      ? editContent.topic
-                                      : course_content.topic
+                                    editContent.topic ?? course_content.topic
                                   }
                                   onChange={(e) =>
                                     handleInputChange(e, "topic")
@@ -352,139 +353,131 @@ const Coursesdetail = ({ isOpen, onClose, courseId, skls }) => {
                                   {course_content.topic}
                                 </p>
                               )}
-                            </div>
-                            <div>
-                              <p className="text-[20px]   font-bold text-black">
-                                Description:
-                              </p>
-                              {editSection === "course_contents" &&
-                              editIndex === index ? (
-                                <Mantine
-                                  formdata={
-                                    editContent.content_description !==
-                                    undefined
-                                      ? editContent.content_description
-                                      : course_content.content_description
-                                  }
-                                  handleQuillChange={(value) =>
-                                    handleInputChange(
-                                      value,
-                                      "content_description"
-                                    )
-                                  }
-                                />
-                              ) : (
-                                // <JoditEditor
-                                //   config={editorConfig}
-                                //   value={
-                                // editContent.content_description !==
-                                // undefined
-                                //   ? editContent.content_description
-                                //   : course_content.content_description
-                                //   }
-                                //   onBlur={(value) =>
-                                //     handleInputChange(
-                                //       value,
-                                //       "content_description"
-                                //     )
-                                //   }
-                                // />
-                                <p
-                                  className="text-gray-800 px-6 font-urbanist text-[18px]"
-                                  dangerouslySetInnerHTML={{
-                                    __html: course_content.content_description,
+                              <div className="mantine-editor-content">
+                                <p className="text-[20px] font-bold text-black">
+                                  Description:
+                                </p>
+                                {editSection === "course_contents" &&
+                                editIndex === index ? (
+                                  <Mantine
+                                    formdata={
+                                      editContent.content_description !==
+                                      undefined
+                                        ? editContent.content_description
+                                        : course_content.content_description
+                                    }
+                                    handleQuillChange={(value) => {
+                                      // console.log('value', value)
+                                      handleInputChange(
+                                        value,
+                                        "content_description"
+                                      );
+                                    }}
+                                  />
+                                ) : (
+                                  <p
+                                    className="text-gray-800 px-6 font-urbanist text-[18px]"
+                                    dangerouslySetInnerHTML={{
+                                      __html:
+                                        course_content?.content_description,
+                                    }}
+                                  ></p>
+                                )}
+                                {/* {console.log(course_content?.content_description)} */}
+                              </div>
+
+                              <div>
+                                <span className="text-[20px]  font-bold text-black">
+                                  Enabled:
+                                </span>
+                                {editSection === "course_contents" &&
+                                editIndex === index ? (
+                                  <select
+                                    value={
+                                      editContent.enabled_flag !== undefined
+                                        ? editContent.enabled_flag
+                                        : course_content.enabled_flag
+                                    }
+                                    onChange={(e) =>
+                                      handleInputChange(e, "enabled_flag")
+                                    }
+                                    className="border border-gray-400 rounded-lg  p-2 w-full"
+                                  >
+                                    <option value={true}>True</option>
+                                    <option value={false}>False</option>
+                                  </select>
+                                ) : (
+                                  <span className="text-gray-800 ml-3 font-urbanist text-[18px]">
+                                    {course_content.enabled_flag === true
+                                      ? "true"
+                                      : "false"}
+                                  </span>
+                                )}
+                              </div>
+
+                              <div>
+                                <span className="text-[20px]  font-bold text-black">
+                                  Sort value:
+                                </span>
+                                {editSection === "course_contents" &&
+                                editIndex === index ? (
+                                  <input
+                                    type="number"
+                                    value={
+                                      editContent.sort_value !== undefined
+                                        ? editContent.sort_value
+                                        : course_content.sort_value
+                                    }
+                                    onChange={(e) =>
+                                      handleInputChange(e, "sort_value")
+                                    }
+                                    className="border border-gray-400 rounded-lg  p-2 w-full"
+                                  />
+                                ) : (
+                                  <span className="text-gray-800 ml-3 font-urbanist text-[18px]">
+                                    {course_content.sort_value}
+                                  </span>
+                                )}
+                              </div>
+
+                              <div className="w-full mb-2 flex mt-3 gap-4 font-poppins justify-end">
+                                {editSection === "course_contents" &&
+                                editIndex === index ? (
+                                  <button
+                                    onClick={handleSaveClick}
+                                    className="outline-none px-8 py-2 border rounded-full bg-green-500 text-zinc-100"
+                                  >
+                                    Save
+                                  </button>
+                                ) : (
+                                  <button
+                                    onClick={() =>
+                                      handleEditContent(
+                                        index,
+                                        courseData[index]
+                                      )
+                                    }
+                                    className="outline-none px-3 duration-150 text-[22px] py-2 border rounded-lg  text-zinc-900 hover:bg-black hover:text-white "
+                                  >
+                                    <CiEdit />
+                                  </button>
+                                )}
+                                <button
+                                  onClick={() => {
+                                    setDeleteTarget({
+                                      section: "course_contents",
+                                      index,
+                                    });
+                                    setIsConfirmModalOpen(true);
                                   }}
-                                ></p>
-                              )}
-                            </div>
-
-                            <div>
-                              <span className="text-[20px]  font-bold text-black">
-                                Enabled:
-                              </span>
-                              {editSection === "course_contents" &&
-                              editIndex === index ? (
-                                <select
-                                  value={
-                                    editContent.enabled_flag !== undefined
-                                      ? editContent.enabled_flag
-                                      : course_content.enabled_flag
-                                  }
-                                  onChange={(e) =>
-                                    handleInputChange(e, "enabled_flag")
-                                  }
-                                  className="border border-gray-400 rounded-lg  p-2 w-full"
+                                  className="text-white px-3 bg-red-500 rounded-lg text-[20px] py-2 ml-2"
                                 >
-                                  <option value={true}>True</option>
-                                  <option value={false}>False</option>
-                                </select>
-                              ) : (
-                                <span className="text-gray-800 ml-3 font-urbanist text-[18px]">
-                                  {course_content.enabled_flag === true
-                                    ? "true"
-                                    : "false"}
-                                </span>
-                              )}
-                            </div>
-
-                            <div>
-                              <span className="text-[20px]  font-bold text-black">
-                                Sort value:
-                              </span>
-                              {editSection === "course_contents" &&
-                              editIndex === index ? (
-                                <input
-                                  type="number"
-                                  value={
-                                    editContent.sort_value !== undefined
-                                      ? editContent.sort_value
-                                      : course_content.sort_value
-                                  }
-                                  onChange={(e) =>
-                                    handleInputChange(e, "sort_value")
-                                  }
-                                  className="border border-gray-400 rounded-lg  p-2 w-full"
-                                />
-                              ) : (
-                                <span className="text-gray-800 ml-3 font-urbanist text-[18px]">
-                                  {course_content.sort_value}
-                                </span>
-                              )}
-                            </div>
-                            <div className="w-full mb-2 flex mt-3 gap-4 font-poppins justify-end">
-                              {editSection === "course_contents" &&
-                              editIndex === index ? (
-                                <button
-                                  onClick={handleSaveClick}
-                                  className="outline-none px-8 py-2 border rounded-full bg-green-500 text-zinc-100"
-                                >
-                                  Save
+                                  <MdDelete />
                                 </button>
-                              ) : (
-                                <button
-                                  onClick={() =>
-                                    handleEditContent(index, course_content)
-                                  }
-                                  className="outline-none px-3 duration-150 text-[22px] py-2 border rounded-lg  text-zinc-900 hover:bg-black hover:text-white "
-                                >
-                                  <CiEdit />
-                                </button>
-                              )}
-                              <button
-                                onClick={() => {
-                                  setDeleteTarget({
-                                    section: "course_contents",
-                                    index,
-                                  });
-                                  setIsConfirmModalOpen(true);
-                                }}
-                                className="text-white px-3 bg-red-500 rounded-lg text-[20px] py-2 ml-2"
-                              >
-                                <MdDelete />
-                              </button>
+                              </div>
                             </div>
-                          </div>
-                        ))
+                          );
+                        })
                     ) : (
                       <p className="text-center text-gray-600">
                         No course content available.
@@ -514,11 +507,9 @@ const Coursesdetail = ({ isOpen, onClose, courseId, skls }) => {
                   >
                     &#x2715;
                   </button>
-
                   <h2 className="text-2xl text-center font-bold mb-4 text-gray-800">
                     Add New Course Content
                   </h2>
-
                   {/* Topic Input */}
                   <label
                     htmlFor="topic"
@@ -536,7 +527,6 @@ const Coursesdetail = ({ isOpen, onClose, courseId, skls }) => {
                     }
                     className="border border-gray-400 rounded-lg p-2 w-full mb-4"
                   />
-
                   {/* Description Input */}
                   <label
                     htmlFor="description"
@@ -550,17 +540,6 @@ const Coursesdetail = ({ isOpen, onClose, courseId, skls }) => {
                       handleNewContentChange(value, "content_description")
                     }
                   />
-
-                  {/* <JoditEditor
-                    config={editorConfig}
-                    id="description"
-                    placeholder="Description"
-                    value={newContent.content_description || ""}
-                    onBlur={(value) =>
-                      handleNewContentChange(value, "content_description")
-                    }
-                    className="h-[200px] rounded-lg p-2 w-full mb-4"
-                  /> */}
 
                   <div className="relative top-5">
                     {/* Sort Order Input */}
