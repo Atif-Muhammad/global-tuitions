@@ -37,7 +37,7 @@
    w-full max-w-[1450px] mx-auto;
   }
   .main-cards {
-    @apply w-full h-auto py-8 justify-center items-center;
+    @apply items-center justify-center w-full h-auto py-8;
   }
 
   /* full screen carsda start */
@@ -48,16 +48,16 @@
   /* find courses section start  */
 
   .find-main {
-    @apply w-full h-auto py-5 px-8;
+    @apply w-full h-auto px-8 py-5;
   }
   .find-main2 {
-    @apply flex md:flex-row flex-col justify-between items-center;
+    @apply flex flex-col items-center justify-between md:flex-row;
   }
   .find-img-div {
-    @apply md:w-1/2 w-full flex justify-center px-10;
+    @apply flex justify-center w-full px-10 md:w-1/2;
   }
   .find-img {
-    @apply w-full  object-cover;
+    @apply object-cover w-full;
   }
   .find-div-2 {
     @apply md:w-[55%] w-full lg:px-20 md:px-16 px-9 flex items-center   not applyed;
@@ -66,7 +66,7 @@
     @apply md:w-[55%] w-full lg:px-20 md:px-16 px-9 flex items-center;
   }
   .find-div-2-main {
-    @apply flex flex-col gap-5 md:justify-center justify-start;
+    @apply flex flex-col justify-start gap-5 md:justify-center;
   }
   .find-div-heading {
     @apply font-extrabold font-readex xl:text-[60px] 2xl:text-[80px] lg:text-[50px] md:text-[35px] text-[30px];
@@ -125,54 +125,51 @@
   background-color: #f0f0f0; /* Light background color for track */
 }
 
-.redCard {
-  display: flex;
-  padding: 2rem;
-  flex-direction: row;
-  border-radius: 0.5rem;
-  width: auto;
-  min-width: 100%;
-  background-image: linear-gradient(to top right, #ef4444, #ef7833);
-  background-color: #ef4444;
-  box-shadow: 0 25px 50px -12px #ef4444;
-  height: 90%;
-}
-
-.whiteCard {
-  display: flex;
-  padding: 2rem;
-  flex-direction: row;
-  border-radius: 0.5rem;
-  width: auto;
-  min-width: 100%;
-  background-image: linear-gradient(to top right, #fff, #b1b1b1);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  height: 90%;
-}
-
-.limeCard {
-  display: flex;
-  padding: 2rem;
-  flex-direction: row;
-  border-radius: 0.5rem;
-  width: auto;
-  min-width: 100%;
-  background-image: linear-gradient(to top right, #67e8f6, #a0e640);
-  box-shadow: 0 25px 50px -12px #67e8f6;
-  height: 90%;
-}
-
+.redCard,
+.whiteCard,
+.limeCard,
 .blueCard {
   display: flex;
   padding: 2rem;
-  flex-direction: row;
+  flex-direction: column; /* default for mobile */
   border-radius: 0.5rem;
   width: auto;
   min-width: 100%;
+  height: 90%;
+  justify-content: center;
+}
+
+.redCard {
+  background-image: linear-gradient(to top right, #ef4444, #ef7833);
+  background-color: #ef4444;
+  box-shadow: 0 25px 50px -12px #ef4444;
+}
+
+.whiteCard {
+  background-image: linear-gradient(to top right, #fff, #b1b1b1);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.limeCard {
+  background-image: linear-gradient(to top right, #67e8f6, #a0e640);
+  box-shadow: 0 25px 50px -12px #67e8f6;
+}
+
+.blueCard {
   background-image: linear-gradient(to top right, #084a8c, #72458f);
   box-shadow: 0 25px 50px -12px #084a8c;
-  height: 90%;
 }
+
+/* Media query for medium screens and up (e.g., 768px) */
+@media (min-width: 768px) {
+  .redCard,
+  .whiteCard,
+  .limeCard,
+  .blueCard {
+    flex-direction: row;
+  }
+}
+
 
 .blueCardText {
   color: white;
